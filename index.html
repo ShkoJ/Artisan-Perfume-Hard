@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Perfumes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="Artisan Perfumes Logo" class="logo">
+            </div>
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active" data-filter="all">All</a></li>
+                    <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
+                    <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search perfumes..." aria-label="Search perfumes">
+                </div>
+                <button class="cart-btn" aria-label="Open cart">
+                    🛒
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="perfume-catalog" id="perfume-catalog">
+                </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Artisan Perfumes. All rights reserved.</p>
+                <div class="about-us-section">
+                    <h4>About Us</h4>
+                    <p>Your one-stop shop for luxury made affordable. We craft exquisite fragrances for every personality.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="welcome-modal" class="modal-backdrop">
+        <div class="modal welcome-modal">
+            <img src="logo.png" alt="Artisan Perfumes Logo" class="modal-logo">
+            <h2 class="modal-title">Welcome to Artisan Perfumes</h2>
+            <p class="modal-subtitle">Your one-stop shop to affordable luxury.</p>
+            <div class="modal-actions">
+                <button id="browse-btn" class="modal-btn">Browse our selection</button>
+                <button id="help-me-choose-btn" class="modal-btn ghost-btn">Help me choose</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="product-modal" class="modal-backdrop">
+        <div class="modal product-modal">
+            <button class="modal-close-btn" aria-label="Close product view">&times;</button>
+            <div class="product-modal-body">
+                <img id="modal-image" src="" alt="Perfume" class="product-modal-img">
+                <div class="product-details">
+                    <h3 id="modal-name" class="product-modal-name"></h3>
+                    <p id="modal-description" class="product-modal-description"></p>
+                    <div class="product-qualities">
+                        <div class="quality-item">
+                            <span id="modal-quality" class="quality-label"></span>
+                        </div>
+                        <div class="quality-item">
+                            <span id="modal-sillage" class="quality-label"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-modal-footer">
+                <p id="modal-price" class="product-modal-price"></p>
+                <button id="order-now-btn" class="modal-btn">Order Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="order-modal" class="modal-backdrop">
+        <div class="modal order-modal">
+            <button class="modal-close-btn" aria-label="Close order form">&times;</button>
+            <h2 class="modal-title">Your Order</h2>
+            <div class="order-summary-item">
+                <h4 id="order-summary-name"></h4>
+                <div class="quantity-control">
+                    <button class="quantity-btn minus-btn" aria-label="Decrease quantity">-</button>
+                    <span id="order-quantity" class="quantity-value">1</span>
+                    <button class="quantity-btn plus-btn" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+            <p class="delivery-note">Delivery is only available for Erbil for now, but we will be in your city soon!</p>
+            <form id="order-form" class="order-form">
+                <input type="text" id="order-name" placeholder="Your Name" required>
+                <input type="tel" id="order-phone" placeholder="Your Phone Number" required>
+                <div class="form-group">
+                    <label for="order-city">City</label>
+                    <select id="order-city" required>
+                        <option value="Erbil">Erbil</option>
+                        <option value="" disabled>Other Cities (Coming Soon)</option>
+                    </select>
+                </div>
+                <button type="submit" class="modal-btn place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal confirmation-modal">
+            <span class="green-tick">✔️</span>
+            <h2 class="modal-title">Order Confirmed</h2>
+            <p>Thank you for your purchase. Our team will contact you shortly.</p>
+            <button class="modal-btn close-confirm-btn">Take me home</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
