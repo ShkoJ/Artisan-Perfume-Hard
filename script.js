@@ -1,11 +1,8 @@
-// --- STATE MANAGEMENT ---
-let currentPerfumes = [];
-let selectedPerfume = null;
-let orderQuantity = 1;
-let currentQuizStep = 0;
-let quizAnswers = {};
-
-// --- PRODUCT DATA (Updated with IQD prices and 'profile' for quiz mapping) ---
+// =========================================================================
+// --- FRAGRANCE DATA & EASY MANIPULATION ---
+// To add or remove fragrances, simply edit the objects in this array.
+// To use a custom image, replace the 'image' URL with your image path.
+// =========================================================================
 const initialPerfumes = [
     { id: 1, name: "Midnight Bloom", priceIQD: 130000, category: "women", notes: "Dark Berries, Jasmine, Vanilla", image: "https://placehold.co/200x280/F0F0F0/000000?text=Midnight+Bloom", description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.", longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral" },
     { id: 2, name: "Desert Sand", priceIQD: 115000, category: "men", notes: "Amber, Cedarwood, Spice", image: "https://placehold.co/200x280/F0F0F0/000000?text=Desert+Sand", description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.", longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody" },
@@ -14,7 +11,14 @@ const initialPerfumes = [
     { id: 5, name: "Spiced Vetiver", priceIQD: 140000, category: "men", notes: "Vetiver, Nutmeg, Black Pepper", image: "https://placehold.co/200x280/F0F0F0/000000?text=Spiced+Vetiver", description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.", longevity: "Long-lasting (8h+)", sillage: "Medium", profile: "Anytime_Woody" },
     { id: 6, name: "Lace & Lilac", priceIQD: 110000, category: "women", notes: "Lilac, Iris, Vanilla Powder", image: "https://placehold.co/200x280/F0F0F0/000000?text=Lace+&+Lilac", description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.", longevity: "Moderate (4-6h)", sillage: "Light", profile: "Daytime_Floral" },
 ];
-currentPerfumes = [...initialPerfumes];
+
+// --- STATE MANAGEMENT ---
+let currentPerfumes = [...initialPerfumes];
+let selectedPerfume = null;
+let orderQuantity = 1;
+let currentQuizStep = 0;
+let quizAnswers = {};
+
 
 // --- QUIZ DATA (Mapping logic) ---
 const quizQuestions = [
@@ -57,11 +61,12 @@ const elements = {
 // --- CORE UI FUNCTIONS ---
 
 /**
- * Formats a number to Iraqi Dinar (IQD) format.
+ * Formats a number to English comma-separated format followed by "IQD".
+ * E.g., 130000 -> "130,000 IQD"
  */
 function formatCurrency(amount) {
-    // Uses 'ar-IQ' locale for IQD currency symbol and formatting
-    return new Intl.NumberFormat('ar-IQ', { style: 'currency', currency: 'IQD', minimumFractionDigits: 0 }).format(amount);
+    const formattedNumber = new Intl.NumberFormat('en-US', { minimumFractionDigits: 0 }).format(amount);
+    return `${formattedNumber} IQD`;
 }
 
 /**
@@ -79,10 +84,9 @@ function renderCatalog(perfumesToRender) {
         card.classList.add('perfume-card');
         card.setAttribute('data-id', perfume.id);
         card.innerHTML = `
-            <img src="${perfume.image}" alt="${perfume.name} Perfume Bottle" class="perfume-card-img" 
+            <img src="${perfume.image}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
                 onerror="this.onerror=null; this.src='https://placehold.co/200x280/F0F0F0/000000?text=Image';" />
             <div class="perfume-card-content">
-                <h3 class="perfume-card-name">${perfume.name}</h3>
                 <p class="perfume-card-notes">${perfume.notes}</p>
                 <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
             </div>
@@ -147,7 +151,7 @@ elements.navLinks.forEach(link => {
     });
 });
 
-// Search Functionality (Now includes notes!)
+// Search Functionality (Includes notes)
 elements.searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
     elements.navLinks.forEach(l => l.classList.remove('active')); // Deactivate filter buttons
@@ -165,7 +169,6 @@ elements.searchInput.addEventListener('input', (e) => {
 // Modal Close Buttons 
 $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        // Determine which modal to close
         const modalId = e.target.getAttribute('data-modal') || e.target.closest('.modal-backdrop').id;
         closeModal(modalId);
         if (modalId === 'quiz-modal') resetQuiz();
@@ -250,9 +253,7 @@ function renderQuizStep() {
     elements.quizNextBtn.style.display = 'inline-block';
     
     if (isFinalStep) {
-        // We handle results display within the next click, not here.
         elements.quizNextBtn.textContent = 'See Results';
-        // Allow user to go back from the results trigger screen
         elements.quizPrevBtn.style.display = 'inline-block'; 
         return;
     }
