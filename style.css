@@ -5,7 +5,7 @@
     --light-text-color: #f9f9f9;
     --bg-color: #F9F9F9;
     --card-bg-color: #FFFFFF;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
     --subtle-gray: #888;
 }
 
@@ -32,7 +32,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem; /* Better mobile padding */
+    padding: 0 1rem;
 }
 
 /* Header & Nav */
@@ -62,13 +62,13 @@ body {
 .header-right {
     display: flex;
     align-items: center;
-    order: 1; /* Puts right side elements first on mobile */
+    order: 1; 
     gap: 0.75rem;
 }
 
 .navigation {
     width: 100%;
-    order: 2; /* Puts navigation below logo/search on mobile */
+    order: 2; 
     margin-top: 1rem;
 }
 
@@ -108,7 +108,7 @@ body {
     background: none;
     padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
-    width: 100px; /* Smaller default width on mobile */
+    width: 100px; 
     transition: width 0.3s ease;
     outline: none;
 }
@@ -116,24 +116,9 @@ body {
     width: 150px;
 }
 
-.cart-btn {
-    background: var(--secondary-color);
-    border: none;
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* Perfume Catalog */
 .perfume-catalog {
     display: grid;
-    /* Responsive grid: min of 160px per column */
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
     gap: 1.5rem;
     padding: 2rem 0;
@@ -146,26 +131,27 @@ body {
     box-shadow: 0 4px 12px var(--shadow-color);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Smoother animation */
 }
 .perfume-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px var(--shadow-color);
+    transform: translateY(-8px); /* Slightly more lift */
+    box-shadow: 0 10px 25px var(--shadow-color); /* Nicer shadow */
 }
 
 .perfume-card-img {
     width: 100%;
-    height: 180px;
-    object-fit: contain; 
+    height: 180px; /* Fixed image height for uniform cards */
+    object-fit: contain; /* Ensures the image fits without cropping or stretching */
     border-bottom: 1px solid #eee;
-    background-color: #F0F0F0; /* Light background for images - NO placeholder color design */
+    background-color: #F0F0F0;
 }
 
 .perfume-card-content {
-    padding: 1rem 0.75rem; /* Fixed padding */
+    padding: 1rem 0.75rem; 
 }
 
 .perfume-card-name {
+    /* Kept for modal but removed from card render in JS */
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     margin-bottom: 0.4rem;
@@ -174,7 +160,7 @@ body {
 
 .perfume-card-notes {
     font-size: 0.8rem;
-    color: var(--subtle-gray); /* Subtle Scent Notes */
+    color: var(--subtle-gray);
     margin-bottom: 0.75rem;
     white-space: nowrap;
     overflow: hidden;
@@ -215,7 +201,7 @@ body {
     max-width: 95%;
     width: 450px;
     position: relative;
-    padding: 1.5rem; /* Increased padding */
+    padding: 1.5rem; 
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
     opacity: 0;
@@ -257,19 +243,20 @@ body {
 /* Product Modal specific adjustments */
 .product-modal {
     max-width: 95%;
-    width: 750px; /* Wider for desktop view */
-    padding: 0; /* Remove padding from modal itself, add to body/footer */
+    width: 750px; 
+    padding: 0; 
 }
 
 .product-modal-body {
     padding: 1.5rem; 
-    display: block; /* Default block for mobile */
+    display: block; 
     text-align: center;
 }
 
 .product-modal-img {
     width: 80%;
     height: 250px;
+    object-fit: contain; /* Fixed for product detail image */
     margin: 0 auto 1.5rem auto;
 }
 
@@ -286,7 +273,7 @@ body {
 
 .product-modal-notes {
     font-size: 0.9rem;
-    color: var(--subtle-gray); /* Subtle note styling */
+    color: var(--subtle-gray); 
     margin-bottom: 1rem;
     font-style: italic;
 }
@@ -300,7 +287,7 @@ body {
 .product-qualities {
     display: flex;
     gap: 1rem;
-    justify-content: center; /* Center on mobile */
+    justify-content: center; 
     margin: 1rem 0;
     font-size: 0.9rem;
 }
@@ -354,6 +341,10 @@ body {
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+.quantity-btn:hover {
+    background-color: #ddd;
 }
 .delivery-note {
     font-size: 0.85rem;
@@ -367,6 +358,11 @@ body {
     margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
+    transition: border-color 0.2s;
+}
+.order-form input:focus, .order-form select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
 }
 .order-form label {
     display: block;
@@ -399,6 +395,7 @@ body {
     border-color: var(--secondary-color);
     background-color: #FFFBEA;
     font-weight: 600;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
 }
 .quiz-controls {
     display: flex;
@@ -420,10 +417,11 @@ body {
     margin-bottom: 0.75rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
 }
 .quiz-result-card:hover {
     background-color: #f0f2f5;
+    transform: translateY(-2px);
 }
 .quiz-result-card h4 {
     color: var(--primary-color);
@@ -472,7 +470,7 @@ body {
         width: auto;
         order: 0;
         margin-top: 0;
-        flex-grow: 1; /* Allows navigation to take up space */
+        flex-grow: 1; 
         padding: 0 2rem;
     }
     .nav-list {
@@ -518,6 +516,7 @@ body {
         width: 40%;
         min-width: 200px;
         height: 280px;
+        object-fit: contain;
         margin: 0;
     }
     .product-details {
