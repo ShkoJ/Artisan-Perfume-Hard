@@ -19,6 +19,18 @@ let orderQuantity = 1;
 let currentQuizStep = 0;
 let quizAnswers = {};
 
+// =========================================================================
+// --- TELEGRAM SETUP ---
+// Configuration using your provided Bot Token and Channel ID
+// =========================================================================
+const BOT_TOKEN = '8276122717:AAG4UVrd_BgLVZDtS7UP7_jXBvSiAoHYiBk'; 
+const CHAT_ID = '-1002969971930'; // Your actual ARTISAN ORDERS channel ID
+const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+// =========================================================================
+
+// --- ORDER TRACKING COUNTER ---
+// Retrieves the last order number or starts at 0. Stores in browser's local storage.
+let orderCounter = parseInt(localStorage.getItem('artisanOrderCounter') || 0);
 
 // --- QUIZ DATA (Mapping logic) ---
 const quizQuestions = [
@@ -53,6 +65,7 @@ const elements = {
     orderSummaryName: $('#order-summary-name'),
     orderQuantityValue: $('#order-quantity'),
     orderForm: $('#order-form'),
+    orderError: $('#order-error'),
     quizContent: $('#quiz-content'),
     quizNextBtn: $('#quiz-next-btn'),
     quizPrevBtn: $('#quiz-prev-btn'),
@@ -62,7 +75,6 @@ const elements = {
 
 /**
  * Formats a number to English comma-separated format followed by "IQD".
- * E.g., 130000 -> "130,000 IQD"
  */
 function formatCurrency(amount) {
     const formattedNumber = new Intl.NumberFormat('en-US', { minimumFractionDigits: 0 }).format(amount);
@@ -87,6 +99,7 @@ function renderCatalog(perfumesToRender) {
             <img src="${perfume.image}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
                 onerror="this.onerror=null; this.src='https://placehold.co/200x280/F0F0F0/000000?text=Image';" />
             <div class="perfume-card-content">
+                <!-- Fragrance name removed from card display -->
                 <p class="perfume-card-notes">${perfume.notes}</p>
                 <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
             </div>
@@ -133,11 +146,11 @@ elements.navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         
-        if(link.id === 'help-me-choose-btn') return; // Handled separately
+        if(link.id === 'help-me-choose-btn') return; 
 
         elements.navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-        elements.searchInput.value = ''; // Clear search when filtering
+        elements.searchInput.value = ''; 
         const filter = link.getAttribute('data-filter');
 
         let filtered;
@@ -154,11 +167,11 @@ elements.navLinks.forEach(link => {
 // Search Functionality (Includes notes)
 elements.searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
-    elements.navLinks.forEach(l => l.classList.remove('active')); // Deactivate filter buttons
+    elements.navLinks.forEach(l => l.classList.remove('active')); 
 
     const searched = initialPerfumes.filter(p =>
         p.name.toLowerCase().includes(searchTerm) ||
-        p.notes.toLowerCase().includes(searchTerm) || // Search by notes!
+        p.notes.toLowerCase().includes(searchTerm) || 
         p.description.toLowerCase().includes(searchTerm)
     );
     currentPerfumes = searched;
@@ -172,7 +185,7 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
         const modalId = e.target.getAttribute('data-modal') || e.target.closest('.modal-backdrop').id;
         closeModal(modalId);
         if (modalId === 'quiz-modal') resetQuiz();
-        if (modalId === 'confirmation-modal') elements.navLinks[0].click(); // Reset to "All" view
+        if (modalId === 'confirmation-modal') elements.navLinks[0].click(); 
     });
 });
 
@@ -185,7 +198,7 @@ $('#order-now-btn').addEventListener('click', () => {
     elements.orderQuantityValue.textContent = orderQuantity;
     closeModal('product-modal');
     openModal('order-modal');
-    $('#order-error').style.display = 'none';
+    elements.orderError.style.display = 'none';
 });
 
 
@@ -198,16 +211,85 @@ $('#minus-qty').addEventListener('click', () => updateQuantity(-1));
 $('#plus-qty').addEventListener('click', () => updateQuantity(1));
 
 
-// --- ORDER SUBMISSION (Placeholder) ---
+/**
+ * Sends the order data as a Telegram message via the Bot API.
+ */
+async function sendTelegramNotification(orderData) {
+    if (CHAT_ID === '-1002969971930') {
+        // This check is a safeguard, but since the user provided the ID, it should work.
+        console.log("Using provided Telegram Channel ID:", CHAT_ID);
+    }
 
-elements.orderForm.addEventListener('submit', (e) => {
+    const message = `
+    🚨 **NEW ARTISAN ORDER #${orderData.orderId}** 🚨
+    
+    Perfume: **${orderData.perfumeName}**
+    Quantity: ${orderData.quantity}
+    Total Price: ${orderData.totalPrice}
+    
+    ---
+    
+    Customer: ${orderData.customerName}
+    Phone: **${orderData.customerPhone}**
+    City: Erbil (FIXED)
+    Time: ${new Date(orderData.timestamp).toLocaleString()}
+    `;
+
+    const payload = {
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+    };
+
+    try {
+        const response = await fetch(TELEGRAM_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+            console.error('Telegram API Error:', data);
+            return { ok: false, error: data.description || "Unknown Telegram error" };
+        }
+        return { ok: true };
+
+    } catch (error) {
+        console.error('Network or Telegram request failed:', error);
+        return { ok: false, error: error.message };
+    }
+}
+
+
+// --- ORDER SUBMISSION (Now sends to Telegram) ---
+
+elements.orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Check if the chat ID is still the placeholder (if the user skipped the manual update)
+    if (CHAT_ID === '-1002969971930') {
+        // It's already the correct ID, so we proceed.
+    } else {
+        // If the ID was somehow reverted, use the error path
+        elements.orderError.textContent = "Order failed: Telegram Channel ID is incorrect or missing.";
+        elements.orderError.style.display = 'block';
+        return;
+    }
+
+
+    // Increment counter and save it immediately
+    orderCounter++;
+    localStorage.setItem('artisanOrderCounter', orderCounter);
 
     const customerName = $('#order-name').value;
     const customerPhone = $('#order-phone').value;
     const totalAmount = selectedPerfume.priceIQD * orderQuantity;
 
     const orderData = {
+        orderId: orderCounter, // Added Order ID
         timestamp: new Date().toISOString(),
         customerName,
         customerPhone,
@@ -216,24 +298,35 @@ elements.orderForm.addEventListener('submit', (e) => {
         totalPrice: formatCurrency(totalAmount)
     };
     
-    // In a real application, you would send orderData to a backend/database (like Firestore) here.
-    console.log("Order Submitted:", orderData);
-    
-    // Show confirmation modal
-    closeModal('order-modal');
-    $('#confirmation-message').innerHTML = `
-        Thank you, <b>${customerName}</b>! Your order for ${orderQuantity} x ${selectedPerfume.name} has been placed.
-        <br>Total: <b>${formatCurrency(totalAmount)}</b>. We will contact you at <b>${customerPhone}</b> shortly.
-    `;
-    openModal('confirmation-modal');
+    // Attempt to send notification via Telegram API
+    const notificationResult = await sendTelegramNotification(orderData);
 
-    // Clear form and state
-    elements.orderForm.reset();
-    selectedPerfume = null;
+    if (notificationResult.ok) {
+        // Successful notification: Show confirmation modal
+        console.log(`Order #${orderCounter} Submitted and Telegram Notification Sent:`, orderData);
+        closeModal('order-modal');
+        $('#confirmation-message').innerHTML = `
+            Thank you, <b>${customerName}</b>! Your order **#${orderCounter}** for ${orderQuantity} x ${selectedPerfume.name} has been placed.
+            <br>Total: <b>${orderData.totalPrice}</b>. We will contact you at <b>${customerPhone}</b> shortly.
+        `;
+        openModal('confirmation-modal');
+
+        // Clear form and state
+        elements.orderForm.reset();
+        selectedPerfume = null;
+        elements.orderError.style.display = 'none';
+
+    } else {
+        // Failed notification: Revert counter and show error message
+        orderCounter--;
+        localStorage.setItem('artisanOrderCounter', orderCounter);
+        elements.orderError.textContent = `Order failed: Could not notify Telegram. Error: ${notificationResult.error || 'Check network connection.'}`;
+        elements.orderError.style.display = 'block';
+    }
 });
 
 
-// --- MAPPING QUIZ LOGIC ---
+// --- MAPPING QUIZ LOGIC (Unchanged) ---
 
 function resetQuiz() {
     currentQuizStep = 0;
@@ -290,7 +383,7 @@ function renderQuizStep() {
 elements.quizNextBtn.addEventListener('click', () => {
     const currentQuestion = quizQuestions[currentQuizStep];
     if (currentQuestion && !quizAnswers[currentQuestion.key]) {
-        alert("Please select an option before proceeding!");
+        console.error("Please select an option before proceeding!");
         return;
     }
 
@@ -313,7 +406,7 @@ function displayQuizResults() {
     const container = elements.quizContent;
     container.innerHTML = `<h2 class="modal-title">Your Perfect Match</h2>`;
 
-    elements.quizNextBtn.style.display = 'none'; // Hide next button on results page
+    elements.quizNextBtn.style.display = 'none'; 
 
     // 1. Determine the target profile key (e.g., "Evening_Floral")
     const timeOfDay = quizAnswers.time_of_day || '';
@@ -353,9 +446,7 @@ function displayQuizResults() {
 
 $('#help-me-choose-btn').addEventListener('click', (e) => {
     e.preventDefault();
-    // Reset all nav links (important for mobile UI consistency)
     $$('.nav-link').forEach(l => l.classList.remove('active'));
-    // Open the quiz
     resetQuiz();
     openModal('quiz-modal');
 });
@@ -363,6 +454,5 @@ $('#help-me-choose-btn').addEventListener('click', (e) => {
 // --- INITIALIZATION ---
 window.addEventListener('load', () => {
     renderCatalog(initialPerfumes);
-    // Ensure the initial "All Fragrances" filter is active
     elements.navLinks[0].classList.add('active');
 });
