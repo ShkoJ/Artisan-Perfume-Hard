@@ -1,495 +1,644 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
 :root {
-    --primary-color: #0A192F;
-    --secondary-color: #FFC107;
-    --text-color: #333;
-    --light-text-color: #f9f9f9;
-    --bg-color: #F9F9F9;
-    --card-bg-color: #FFFFFF;
-    --shadow-color: rgba(0, 0, 0, 0.15);
-    --green-tick-color: #2ECC71;
+    --primary-color: #0A192F;
+    --secondary-color: #FFC107;
+    --text-color: #333;
+    --light-text-color: #f9f9f9;
+    --bg-color: #F9F9F9;
+    --card-bg-color: #FFFFFF;
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    --green-tick-color: #2ECC71;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* Increased padding */
 }
 
 /* Header */
 .header {
-    background-color: var(--card-bg-color);
-    box-shadow: 0 2px 10px var(--shadow-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 1px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-content {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1.5rem; /* Reduced vertical padding for mobile */
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0; /* Vertical padding controlled by container */
 }
 
 .logo-container {
-    height: 40px;
+    height: 45px; /* Slightly larger logo */
 }
 
 .logo {
-    height: 100%;
+    height: 100%;
 }
 
+/* Mobile navigation */
 .navigation {
-    width: 100%; /* Full width on mobile */
-    order: 2; /* Puts navigation below logo/search on mobile */
-    margin-top: 0.5rem;
+    width: 100%; 
+    order: 2; 
+    margin-top: 1rem; /* More space below header elements */
 }
 
 .nav-list {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-    justify-content: space-around; /* Spreads links out on mobile */
-    padding: 0.5rem 0;
-    border-top: 1px solid #eee;
+    display: flex;
+    list-style: none;
+    gap: 0.5rem; 
+    justify-content: space-between; 
+    padding: 0.5rem 0;
+    border-top: 1px solid #eee;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    font-size: 0.95rem; /* Slightly smaller for mobile */
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    font-size: 0.9rem; 
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap; /* Prevent "Help me Choose" from wrapping too much */
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--secondary-color);
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 2px;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
-    order: 1; /* Puts search/cart next to logo on mobile */
-    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    order: 1; 
+    gap: 0.75rem;
 }
 
 .search-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 0.2rem 0.5rem;
-    background-color: #f0f2f5;
-    margin-right: 0; /* Removed margin for better mobile fit */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0 0.5rem;
+    background-color: #f0f2f5;
 }
 
 #search-input {
-    border: none;
-    background: none;
-    padding: 0.5rem;
-    font-size: 0.9rem;
-    width: 100px; /* Smaller default width for mobile */
-    transition: width 0.3s ease;
-    outline: none;
-}
-
-#search-input::placeholder {
-    color: #888;
+    border: none;
+    background: none;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    width: 120px; 
+    transition: width 0.3s ease;
+    outline: none;
 }
 
 #search-input:focus {
-    width: 150px; /* Expands on focus */
+    width: 160px;
 }
 
 .cart-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    position: relative;
-    padding: 0.5rem;
-    transition: transform 0.3s ease;
+    background: var(--secondary-color);
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .cart-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
-.cart-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 50%;
-    transform: translate(25%, -25%);
-}
 
 /* Perfume Catalog */
 .perfume-catalog {
-    /* Adjusted minmax for better mobile grid */
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-    gap: 1rem; /* Smaller gap for mobile */
-    padding: 1.5rem 0;
+    display: grid;
+    /* Improved grid for 2 columns on mobile, 3 on tablet, 4 on desktop */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 0;
 }
 
 .perfume-card {
-    background-color: var(--card-bg-color);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.3s ease;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .perfume-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 8px 25px var(--shadow-color);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .perfume-card-img {
-    width: 100%;
-    height: 150px; /* Reduced height for mobile */
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.perfume-card:hover .perfume-card-img {
-    transform: scale(1.05);
+    width: 100%;
+    height: 180px; 
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
 }
 
 .perfume-card-content {
-    padding: 0.75rem;
+    padding: 1rem 0.75rem;
 }
 
 .perfume-card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; /* Adjusted for mobile */
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
 }
 
 .perfume-card-price {
-    font-weight: 500;
-    color: var(--secondary-color);
+    font-weight: 700;
+    color: var(--secondary-color);
 }
 
-/* Modals */
+.empty-message {
+    grid-column: 1 / -1; /* Center message across all columns */
+    text-align: center;
+    padding: 3rem;
+    color: #888;
+    font-size: 1.1rem;
+}
+
+
+/* Modals (General) */
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 2000;
+    /* ... (unchanged modal backdrop styles) ... */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 2000;
 }
 
 .modal-backdrop.active {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .modal {
-    background-color: var(--card-bg-color);
-    border-radius: 10px;
-    max-width: 95%; /* Wider on mobile */
-    width: 500px;
-    position: relative;
-    padding: 1.5rem; /* Reduced padding for mobile */
-    transform: scale(0.95);
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
-    opacity: 0;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    max-width: 95%;
+    width: 450px; /* Adjusted width */
+    position: relative;
+    padding: 1.5rem;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
+    opacity: 0;
 }
 
 .modal-backdrop.active .modal {
-    transform: scale(1);
-    opacity: 1;
+    transform: scale(1);
+    opacity: 1;
 }
 
 .modal-close-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem; /* Closer to corner on mobile */
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
+    /* ... (unchanged close button styles) ... */
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem; 
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
 .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    text-align: center;
-}
-
-.modal-subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 1.5rem; /* Reduced margin */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; /* Slightly larger title */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
 }
 
 .modal-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
 }
 
 .modal-btn:hover {
-    background-color: #27496d;
-}
-
-.modal-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    background-color: #27496d;
 }
 
 .ghost-btn {
-    background: none;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 
 .ghost-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--primary-color);
+    color: white;
 }
 
+
 /* Product Modal */
+.product-modal {
+    width: 700px; /* Wider for desktop product view */
+}
+
 .product-modal-body {
-    padding: 1rem;
-    overflow-y: auto;
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
 }
 
 .product-modal-img {
-    width: 100%;
-    height: 200px; /* Adjusted height for mobile */
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .product-details {
-    text-align: center;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.product-modal-name {
+    font-size: 2rem;
+}
+
+.product-modal-description {
+    color: #555;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
 }
 
 .product-qualities {
-    flex-wrap: wrap; /* Allows qualities to wrap on small screens */
-    justify-content: center;
-    margin-top: 1rem;
+    display: flex;
+    gap: 1rem; 
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.quality-label {
+    background-color: #eee;
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
 .product-modal-footer {
-    padding: 1rem;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    gap: 1rem;
 }
 
-/* Order Modal */
-.order-modal {
-    padding: 1.5rem;
-}
-
-/* Footer */
-.footer {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: 1.5rem 0; /* Reduced padding for mobile */
-    margin-top: auto;
-}
-
-.footer-content {
-    text-align: center;
-}
-
-.about-us-section {
-    margin-top: 1rem;
-}
-
-.about-us-section h4 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 0.5rem;
-}
-
-/* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
-@media (min-width: 768px) {
-    /* Header adjustments for desktop */
-    .header-content {
-        padding: 1rem 2rem;
-        flex-wrap: nowrap; /* Prevent wrapping on desktop */
-    }
-
-    .navigation {
-        width: auto;
-        order: 0; /* Returns navigation to center */
-        margin-top: 0;
-    }
-
-    .nav-list {
-        padding: 0;
-        border-top: none;
-        gap: 2.5rem; /* Wider spacing */
-    }
-    
-    .nav-link {
-        font-size: 1rem;
-    }
-
-    .header-right {
-        order: 0;
-        gap: 1rem;
-    }
-    
-    #search-input {
-        width: 150px; /* Desktop default width */
-    }
-
-    #search-input:focus {
-        width: 250px; /* Desktop expanded width */
-    }
-
-    /* Catalog adjustments for desktop */
-    .perfume-catalog {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Larger cards */
-        gap: 2rem;
-        padding: 2.5rem 0;
-    }
-
-    .perfume-card-img {
-        height: 200px;
-    }
-
-    /* Modal adjustments for desktop */
-    .modal {
-        max-width: 600px;
-        padding: 2rem;
-    }
-
-    .product-modal-body {
-        padding: 2rem;
-        display: flex;
-        gap: 1.5rem;
-        align-items: flex-start;
-    }
-    
-    .product-modal-img {
-        width: 40%;
-        min-width: 200px;
-        height: 250px;
-    }
-    
-    .product-details {
-        width: 60%;
-        text-align: left;
-    }
-    
-    .product-modal-name, .product-modal-description {
-        text-align: left;
-    }
-    
-    .product-qualities {
-        justify-content: flex-start;
-    }
-    
-    .product-modal-footer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem 2rem;
-    }
-
-    .product-modal-price {
-        text-align: left;
-    }
-
-    .product-modal-footer .modal-btn {
-        width: auto;
-    }
-
-    /* Footer adjustments for desktop */
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-    }
-
-    .about-us-section {
-        margin-top: 0;
-        text-align: right;
-    }
-
+.product-modal-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 
-/* All previous styles stay the same. Add this new section for the search bar. */
+/* Order Modal (Form and Quantity) */
+.order-form input, .order-form select {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
 
+.order-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #ddd;
+}
+
+.order-summary-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    background: var(--secondary-color);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.quantity-btn:hover {
+    background: #ffdf7e;
+}
+
+.quantity-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.delivery-note {
+    text-align: center;
+    color: #e74c3c;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    border: 1px solid #f9dcdc;
+    background-color: #fef0f0;
+    border-radius: 5px;
+}
+
+/* Form Group for City Select */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .order-form label {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.9rem;
 }
 
 .order-form select {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    background-color: white;
-    appearance: none; /* Removes default dropdown arrow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+/* Confirmation Modal */
+.confirmation-modal .green-tick {
+    font-size: 4rem;
+    color: var(--green-tick-color);
+    display: block;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.confirmation-modal p {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.confirmation-modal .modal-btn {
+    background-color: var(--green-tick-color);
+}
+
+.confirmation-modal .modal-btn:hover {
+    background-color: #27ae60;
+}
+
+
+/* Quiz Modal Styles (New) */
+.quiz-modal {
+    width: 550px;
+}
+
+#quiz-content {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-question {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.quiz-option-btn {
+    padding: 0.8rem;
+    background-color: var(--bg-color);
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.quiz-option-btn:hover {
+    background-color: #eee;
+}
+
+.quiz-option-btn.selected {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.quiz-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.quiz-controls .modal-btn {
+    width: 48%;
+}
+
+
+/* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 2rem;
+    }
+    /* Header adjustments for desktop */
+    .header-content {
+        flex-wrap: nowrap; 
+        padding: 1rem 0;
+    }
+
+    .navigation {
+        width: auto;
+        order: 0; 
+        margin-top: 0;
+    }
+
+    .nav-list {
+        padding: 0;
+        border-top: none;
+        gap: 1.5rem; 
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.25rem 0;
+    }
+
+    .header-right {
+        order: 0;
+        gap: 1rem;
+    }
+    
+    #search-input {
+        width: 150px; 
+    }
+
+    #search-input:focus {
+        width: 200px; 
+    }
+
+    /* Catalog adjustments for desktop - 3 columns at 768px */
+    .perfume-catalog {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 2rem;
+        padding: 3rem 0;
+    }
+
+    /* Larger screens get 4 columns */
+    @media (min-width: 1024px) {
+        .perfume-catalog {
+            grid-template-columns: repeat(4, 1fr); 
+        }
+    }
+
+    .perfume-card-img {
+        height: 220px;
+    }
+
+    /* Product Modal desktop layout */
+    .product-modal-body {
+        padding: 2rem;
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    
+    .product-modal-img {
+        width: 40%;
+        min-width: 200px;
+        height: 280px;
+    }
+    
+    .product-details {
+        width: 60%;
+        text-align: left;
+        padding-top: 0;
+    }
+    
+    .product-modal-name, .product-modal-description {
+        text-align: left;
+    }
+    
+    .product-qualities {
+        justify-content: flex-start;
+    }
+    
+    .product-modal-footer {
+        flex-direction: row;
+        padding: 1.5rem 2rem;
+    }
+
+    .product-modal-price {
+        text-align: left;
+    }
+
+    .product-modal-footer .modal-btn {
+        width: auto;
+    }
+
+    /* Footer adjustments for desktop */
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .about-us-section {
+        margin-top: 0;
+        text-align: right;
+    }
 }
