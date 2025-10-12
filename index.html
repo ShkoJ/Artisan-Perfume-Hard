@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artisan Perfumes</title>
-    <!-- Linking the separate CSS file -->
     <link rel="stylesheet" href="style.css" />
-    <!-- Fonts: Playfair Display for headers, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -37,7 +35,6 @@
                         aria-label="Search perfumes by name or note"
                     />
                 </div>
-                <!-- Cart is decorative for now -->
                 <button class="cart-btn" aria-label="Open cart">🛒</button>
             </div>
         </div>
@@ -45,7 +42,6 @@
 
     <main class="main-content">
         <div class="container">
-            <!-- Fragrance cards will be rendered here by JavaScript -->
             <section class="perfume-catalog" id="perfume-catalog">
             </section>
         </div>
@@ -57,18 +53,13 @@
         </div>
     </footer>
 
-    <!-- Modals -->
-
-    <!-- Product Modal (Detail View) -->
     <div id="product-modal" class="modal-backdrop">
         <div class="modal product-modal">
             <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
             <div class="product-modal-body">
-                <!-- Image placeholder, JS will load the source -->
                 <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
                 <div class="product-details">
                     <h3 id="modal-name" class="product-modal-name"></h3>
-                    <!-- Notes are subtle here -->
                     <p id="modal-notes" class="product-modal-notes"></p>
                     <div class="product-qualities">
                         <div class="quality-item">
@@ -88,7 +79,6 @@
         </div>
     </div>
 
-    <!-- Order Modal (Form) -->
     <div id="order-modal" class="modal-backdrop">
         <div class="modal order-modal">
             <button class="modal-close-btn" aria-label="Close order form" data-modal="order-modal">&times;</button>
@@ -117,15 +107,13 @@
         </div>
     </div>
 
-    <!-- Quiz Modal (New Mapping Logic) -->
     <div id="quiz-modal" class="modal-backdrop">
         <div class="modal quiz-modal">
             <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
             <h2 class="modal-title">Find Your Perfect Scent</h2>
             <form id="quiz-form">
                 <div id="quiz-content">
-                    <!-- Quiz questions/results rendered here by JS -->
-                </div>
+                    </div>
                 <div class="quiz-controls">
                     <button
                         type="button"
@@ -141,7 +129,6 @@
         </div>
     </div>
 
-    <!-- Confirmation Modal -->
     <div id="confirmation-modal" class="modal-backdrop">
         <div class="modal confirmation-modal">
             <span class="green-tick">✔️</span>
@@ -151,7 +138,6 @@
         </div>
     </div>
 
-    <!-- Linking the separate JavaScript file -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
