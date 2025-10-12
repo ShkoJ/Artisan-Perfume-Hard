@@ -1,56 +1,42 @@
-// --- FIREBASE IMPORTS (REQUIRED FOR PERSISTENT DATA/ORDERS) ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import {
-    getAuth,
-    signInAnonymously,
-    signInWithCustomToken,
-    onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    serverTimestamp,
-    onSnapshot,
-    query,
-    doc,
-    setDoc,
-    setLogLevel
-} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-// Firebase Configuration and Globals
-setLogLevel('Debug');
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-
-let app;
-let db;
-let auth;
-let userId = null;
-
-// State Management
+// --- STATE MANAGEMENT ---
 let currentPerfumes = [];
 let selectedPerfume = null;
 let orderQuantity = 1;
 let currentQuizStep = 0;
 let quizAnswers = {};
 
-// API Key for Gemini (Leave as empty string for Canvas environment)
-const API_KEY = "";
-const API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/";
-const MODEL_NAME = "gemini-2.5-flash-preview-05-20";
-
-// --- PRODUCT DATA (Add new products here) ---
+// --- PRODUCT DATA (Updated with IQD prices and 'profile' for quiz mapping) ---
 const initialPerfumes = [
-    { id: 1, name: "Midnight Bloom", price: 89.99, category: "women", image: "https://placehold.co/400x400/0A192F/FFC107?text=Midnight%20Bloom", description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.", quality: "Long-lasting (8h+)", sillage: "Heavy" },
-    { id: 2, name: "Desert Sand", price: 79.99, category: "men", image: "https://placehold.co/400x400/FFC107/0A192F?text=Desert%20Sand", description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.", quality: "Moderate (4-6h)", sillage: "Medium" },
-    { id: 3, name: "Ocean Breeze", price: 65.50, category: "women", image: "https://placehold.co/400x400/00AABB/FFFFFF?text=Ocean%20Breeze", description: "Fresh and aquatic with notes of sea salt and citrus. Ideal for daytime freshness and a clean, invigorating feeling.", quality: "Short-lived (2-4h)", sillage: "Light" },
-    { id: 4, name: "Smoked Leather", price: 105.00, category: "men", image: "https://placehold.co/400x400/8B4513/FFFFFF?text=Smoked%20Leather", description: "Intense scent of tanned leather, smoky vetiver, and cardamom. Bold and distinctive, for the confident modern man.", quality: "Very Long-lasting (10h+)", sillage: "Heavy" },
-    { id: 5, name: "Spiced Vetiver", price: 95.00, category: "men", image: "https://placehold.co/400x400/5C7C5C/FFFFFF?text=Spiced%20Vetiver", description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.", quality: "Long-lasting (8h+)", sillage: "Medium" },
-    { id: 6, name: "Lace & Lilac", price: 75.00, category: "women", image: "https://placehold.co/400x400/A020F0/FFFFFF?text=Lace%20%26%20Lilac", description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.", quality: "Moderate (4-6h)", sillage: "Light" },
+    { id: 1, name: "Midnight Bloom", priceIQD: 130000, category: "women", notes: "Dark Berries, Jasmine, Vanilla", image: "https://placehold.co/200x280/F0F0F0/000000?text=Midnight+Bloom", description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.", longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral" },
+    { id: 2, name: "Desert Sand", priceIQD: 115000, category: "men", notes: "Amber, Cedarwood, Spice", image: "https://placehold.co/200x280/F0F0F0/000000?text=Desert+Sand", description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.", longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody" },
+    { id: 3, name: "Ocean Breeze", priceIQD: 95000, category: "women", notes: "Sea Salt, Citrus, White Musk", image: "https://placehold.co/200x280/F0F0F0/000000?text=Ocean+Breeze", description: "Fresh and aquatic with notes of sea salt and citrus. Ideal for daytime freshness and a clean, invigorating feeling.", longevity: "Short-lived (2-4h)", sillage: "Light", profile: "Daytime_Aquatic" },
+    { id: 4, name: "Smoked Leather", priceIQD: 155000, category: "men", notes: "Leather, Vetiver, Cardamom", image: "https://placehold.co/200x280/F0F0F0/000000?text=Smoked+Leather", description: "Intense scent of tanned leather, smoky vetiver, and cardamom. Bold and distinctive, for the confident modern man.", longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody" },
+    { id: 5, name: "Spiced Vetiver", priceIQD: 140000, category: "men", notes: "Vetiver, Nutmeg, Black Pepper", image: "https://placehold.co/200x280/F0F0F0/000000?text=Spiced+Vetiver", description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.", longevity: "Long-lasting (8h+)", sillage: "Medium", profile: "Anytime_Woody" },
+    { id: 6, name: "Lace & Lilac", priceIQD: 110000, category: "women", notes: "Lilac, Iris, Vanilla Powder", image: "https://placehold.co/200x280/F0F0F0/000000?text=Lace+&+Lilac", description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.", longevity: "Moderate (4-6h)", sillage: "Light", profile: "Daytime_Floral" },
 ];
 currentPerfumes = [...initialPerfumes];
 
+// --- QUIZ DATA (Mapping logic) ---
+const quizQuestions = [
+    {
+        question: "What time of day suits your preferred fragrance intensity?",
+        key: "time_of_day",
+        options: [
+            { text: "Daytime (Light, Fresh)", value: "Daytime", profiles: ["Daytime_Woody", "Daytime_Aquatic", "Daytime_Floral"] },
+            { text: "Evening (Rich, Intense)", value: "Evening", profiles: ["Evening_Floral", "Evening_Woody"] },
+            { text: "Anytime (Versatile, Moderate)", value: "Anytime", profiles: ["Anytime_Woody"] }
+        ]
+    },
+    {
+        question: "Which primary scent profile are you drawn to?",
+        key: "scent_profile",
+        options: [
+            { text: "Citrus/Aquatic (Clean, Zesty)", value: "Aquatic", profiles: ["Daytime_Aquatic"] },
+            { text: "Woody/Spicy (Earthy, Warm)", value: "Woody", profiles: ["Daytime_Woody", "Evening_Woody", "Anytime_Woody"] },
+            { text: "Floral/Sweet (Romantic, Soft)", value: "Floral", profiles: ["Evening_Floral", "Daytime_Floral"] }
+        ]
+    }
+];
 
 // --- UI ELEMENT GETTERS ---
 const $ = (selector) => document.querySelector(selector);
@@ -60,67 +46,31 @@ const elements = {
     catalog: $('#perfume-catalog'),
     navLinks: $$('.nav-link'),
     searchInput: $('#search-input'),
-    productModal: $('#product-modal'),
-    orderModal: $('#order-modal'),
-    quizModal: $('#quiz-modal'),
-    confirmationModal: $('#confirmation-modal'),
     orderSummaryName: $('#order-summary-name'),
     orderQuantityValue: $('#order-quantity'),
     orderForm: $('#order-form'),
     quizContent: $('#quiz-content'),
     quizNextBtn: $('#quiz-next-btn'),
     quizPrevBtn: $('#quiz-prev-btn'),
-    quizSubmitBtn: $('#quiz-submit-btn'),
-    orderError: $('#order-error')
 };
-
-
-// --- FIREBASE INITIALIZATION AND AUTH ---
-if (Object.keys(firebaseConfig).length > 0) {
-    app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    auth = getAuth(app);
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            userId = user.uid;
-        } else {
-            try {
-                // Sign in anonymously if no user is signed in
-                const anonUser = await signInAnonymously(auth);
-                userId = anonUser.user.uid;
-            } catch (error) {
-                console.error("Anonymous sign-in failed:", error);
-                // Fallback to a random ID if Firebase fails entirely
-                userId = crypto.randomUUID();
-            }
-        }
-        console.log("Firebase initialized. User ID:", userId);
-
-        // Try to use custom token if available (Canvas environment)
-        if (typeof __initial_auth_token !== 'undefined' && !user) {
-            try {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } catch (error) {
-                console.error("Custom token sign-in failed, continuing anonymously.", error);
-            }
-        }
-    });
-} else {
-    console.error("Firebase config is missing.");
-    userId = crypto.randomUUID();
-}
 
 // --- CORE UI FUNCTIONS ---
 
 /**
+ * Formats a number to Iraqi Dinar (IQD) format.
+ */
+function formatCurrency(amount) {
+    // Uses 'ar-IQ' locale for IQD currency symbol and formatting
+    return new Intl.NumberFormat('ar-IQ', { style: 'currency', currency: 'IQD', minimumFractionDigits: 0 }).format(amount);
+}
+
+/**
  * Renders the current list of perfumes to the catalog section.
- * @param {Array} perfumesToRender - The array of perfume objects.
  */
 function renderCatalog(perfumesToRender) {
     elements.catalog.innerHTML = '';
     if (perfumesToRender.length === 0) {
-        elements.catalog.innerHTML = `<p class="empty-message">No fragrances found matching your criteria. Try adjusting your search or filter.</p>`;
+        elements.catalog.innerHTML = `<p class="empty-message" style="text-align: center; color: #555; padding: 40px;">No fragrances found matching your search. Try different keywords or filters.</p>`;
         return;
     }
 
@@ -129,10 +79,12 @@ function renderCatalog(perfumesToRender) {
         card.classList.add('perfume-card');
         card.setAttribute('data-id', perfume.id);
         card.innerHTML = `
-            <img src="${perfume.image}" alt="${perfume.name} Perfume Bottle" class="perfume-card-img" onerror="this.onerror=null; this.src='https://placehold.co/400x400/999/fff?text=Image+Not+Found';" />
+            <img src="${perfume.image}" alt="${perfume.name} Perfume Bottle" class="perfume-card-img" 
+                onerror="this.onerror=null; this.src='https://placehold.co/200x280/F0F0F0/000000?text=Image';" />
             <div class="perfume-card-content">
                 <h3 class="perfume-card-name">${perfume.name}</h3>
-                <p class="perfume-card-price">$${perfume.price.toFixed(2)}</p>
+                <p class="perfume-card-notes">${perfume.notes}</p>
+                <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
             </div>
         `;
         card.addEventListener('click', () => openProductModal(perfume));
@@ -142,7 +94,6 @@ function renderCatalog(perfumesToRender) {
 
 /**
  * Opens a specific modal.
- * @param {string} modalId - The ID of the modal to open (e.g., 'product-modal').
  */
 function openModal(modalId) {
     document.getElementById(modalId)?.classList.add('active');
@@ -150,7 +101,6 @@ function openModal(modalId) {
 
 /**
  * Closes a specific modal.
- * @param {string} modalId - The ID of the modal to close.
  */
 function closeModal(modalId) {
     document.getElementById(modalId)?.classList.remove('active');
@@ -158,31 +108,18 @@ function closeModal(modalId) {
 
 /**
  * Populates and opens the product detail modal.
- * @param {Object} perfume - The selected perfume object.
  */
 function openProductModal(perfume) {
     selectedPerfume = perfume;
     $('#modal-image').src = perfume.image;
     $('#modal-image').alt = `${perfume.name} Perfume Bottle`;
     $('#modal-name').textContent = perfume.name;
+    $('#modal-notes').textContent = `Top Notes: ${perfume.notes}`; 
     $('#modal-description').textContent = perfume.description;
-    $('#modal-quality').textContent = `Longevity: ${perfume.quality}`;
+    $('#modal-longevity').textContent = `Longevity: ${perfume.longevity}`;
     $('#modal-sillage').textContent = `Sillage: ${perfume.sillage}`;
-    $('#modal-price').textContent = `$${perfume.price.toFixed(2)}`;
+    $('#modal-price').textContent = formatCurrency(perfume.priceIQD);
     openModal('product-modal');
-}
-
-/**
- * Populates and opens the order form modal.
- */
-function openOrderModal() {
-    if (!selectedPerfume) return;
-    orderQuantity = 1;
-    elements.orderSummaryName.textContent = selectedPerfume.name;
-    elements.orderQuantityValue.textContent = orderQuantity;
-    closeModal('product-modal');
-    openModal('order-modal');
-    elements.orderError.style.display = 'none';
 }
 
 // --- EVENT HANDLERS ---
@@ -191,6 +128,9 @@ function openOrderModal() {
 elements.navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
+        
+        if(link.id === 'help-me-choose-btn') return; // Handled separately
+
         elements.navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         elements.searchInput.value = ''; // Clear search when filtering
@@ -199,7 +139,7 @@ elements.navLinks.forEach(link => {
         let filtered;
         if (filter === 'all') {
             filtered = initialPerfumes;
-        } else if (filter === 'men' || filter === 'women') {
+        } else {
             filtered = initialPerfumes.filter(p => p.category === filter);
         }
         currentPerfumes = filtered;
@@ -207,13 +147,14 @@ elements.navLinks.forEach(link => {
     });
 });
 
-// Search Functionality
+// Search Functionality (Now includes notes!)
 elements.searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
     elements.navLinks.forEach(l => l.classList.remove('active')); // Deactivate filter buttons
 
     const searched = initialPerfumes.filter(p =>
         p.name.toLowerCase().includes(searchTerm) ||
+        p.notes.toLowerCase().includes(searchTerm) || // Search by notes!
         p.description.toLowerCase().includes(searchTerm)
     );
     currentPerfumes = searched;
@@ -221,26 +162,28 @@ elements.searchInput.addEventListener('input', (e) => {
 });
 
 
-// Modal Close Buttons (Handles all modals)
-$$('.modal-close-btn').forEach(btn => {
+// Modal Close Buttons 
+$$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
+        // Determine which modal to close
         const modalId = e.target.getAttribute('data-modal') || e.target.closest('.modal-backdrop').id;
         closeModal(modalId);
-        // Reset quiz if closed
         if (modalId === 'quiz-modal') resetQuiz();
-    });
-});
-$$('.close-confirm-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        closeModal('confirmation-modal');
-        // Reset to default filter
-        elements.navLinks[0].click();
+        if (modalId === 'confirmation-modal') elements.navLinks[0].click(); // Reset to "All" view
     });
 });
 
 
 // Product Modal to Order Modal flow
-$('#order-now-btn').addEventListener('click', openOrderModal);
+$('#order-now-btn').addEventListener('click', () => {
+    if (!selectedPerfume) return;
+    orderQuantity = 1;
+    elements.orderSummaryName.textContent = selectedPerfume.name;
+    elements.orderQuantityValue.textContent = orderQuantity;
+    closeModal('product-modal');
+    openModal('order-modal');
+    $('#order-error').style.display = 'none';
+});
 
 
 // Order Quantity Control
@@ -252,112 +195,69 @@ $('#minus-qty').addEventListener('click', () => updateQuantity(-1));
 $('#plus-qty').addEventListener('click', () => updateQuantity(1));
 
 
-// --- ORDER SUBMISSION (FIRESTORE) ---
+// --- ORDER SUBMISSION (Placeholder) ---
 
-elements.orderForm.addEventListener('submit', async (e) => {
+elements.orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (!selectedPerfume || !userId) {
-        console.error("Order attempted without selected perfume or user ID.");
-        elements.orderError.style.display = 'block';
-        return;
-    }
 
     const customerName = $('#order-name').value;
     const customerPhone = $('#order-phone').value;
-    const customerCity = $('#order-city').value;
+    const totalAmount = selectedPerfume.priceIQD * orderQuantity;
 
     const orderData = {
-        appId: appId,
-        timestamp: serverTimestamp(),
+        timestamp: new Date().toISOString(),
         customerName,
         customerPhone,
-        customerCity,
-        perfumeId: selectedPerfume.id,
         perfumeName: selectedPerfume.name,
         quantity: orderQuantity,
-        totalPrice: (selectedPerfume.price * orderQuantity).toFixed(2),
-        status: 'New'
+        totalPrice: formatCurrency(totalAmount)
     };
+    
+    // In a real application, you would send orderData to a backend/database (like Firestore) here.
+    console.log("Order Submitted:", orderData);
+    
+    // Show confirmation modal
+    closeModal('order-modal');
+    $('#confirmation-message').innerHTML = `
+        Thank you, <b>${customerName}</b>! Your order for ${orderQuantity} x ${selectedPerfume.name} has been placed.
+        <br>Total: <b>${formatCurrency(totalAmount)}</b>. We will contact you at <b>${customerPhone}</b> shortly.
+    `;
+    openModal('confirmation-modal');
 
-    const ordersCollectionPath = `/artifacts/${appId}/users/${userId}/orders`;
-
-    try {
-        // Save the order to Firestore
-        await addDoc(collection(db, ordersCollectionPath), orderData);
-        console.log("Order placed successfully:", orderData);
-
-        // Show confirmation modal
-        closeModal('order-modal');
-        $('#confirmation-message').innerHTML = `
-            Thank you, <b>${customerName}</b>! Your order for ${orderQuantity} x ${selectedPerfume.name} has been placed.
-            <br>Our team will contact you at <b>${customerPhone}</b> shortly.
-        `;
-        openModal('confirmation-modal');
-
-        // Clear form
-        elements.orderForm.reset();
-        selectedPerfume = null;
-        orderQuantity = 1;
-
-    } catch (error) {
-        console.error("Error placing order:", error);
-        elements.orderError.textContent = "Failed to place order. Check console for details.";
-        elements.orderError.style.display = 'block';
-    }
+    // Clear form and state
+    elements.orderForm.reset();
+    selectedPerfume = null;
 });
 
 
-// --- QUIZ DATA & LOGIC (LLM INTEGRATION) ---
-
-const quizQuestions = [
-    {
-        question: "What time of day do you primarily wear perfume?",
-        key: "time_of_day",
-        options: ["Daytime (Fresh, Light)", "Evening (Rich, Heavy)", "Anytime (Versatile)"]
-    },
-    {
-        question: "Which scent profile do you prefer?",
-        key: "scent_profile",
-        options: ["Citrus/Aquatic (Clean, Zesty)", "Woody/Spicy (Earthy, Warm)", "Floral/Sweet (Romantic, Soft)"]
-    },
-    {
-        question: "What is your main personality trait when choosing a fragrance?",
-        key: "personality",
-        options: ["Subtle and Elegant", "Bold and Confident", "Relaxed and Easygoing"]
-    }
-];
+// --- MAPPING QUIZ LOGIC ---
 
 function resetQuiz() {
     currentQuizStep = 0;
     quizAnswers = {};
-    elements.quizSubmitBtn.style.display = 'none';
-    elements.quizNextBtn.style.display = 'block';
     renderQuizStep();
 }
 
 function renderQuizStep() {
     const container = elements.quizContent;
     container.innerHTML = '';
+    
     const questionData = quizQuestions[currentQuizStep];
+    const isFinalStep = currentQuizStep === quizQuestions.length;
 
-    if (!questionData) {
-        // Show final result (or loading spinner)
-        container.innerHTML = `<div class="loading-spinner"></div><p style="text-align:center; margin-top: 15px;">Analyzing your preferences...</p>`;
-        runPerfumeQuiz();
+    elements.quizPrevBtn.style.display = currentQuizStep > 0 && !isFinalStep ? 'inline-block' : 'none';
+    elements.quizNextBtn.textContent = isFinalStep ? 'See Results' : 'Next';
+    elements.quizNextBtn.style.display = 'inline-block';
+    
+    if (isFinalStep) {
+        // We handle results display within the next click, not here.
+        elements.quizNextBtn.textContent = 'See Results';
+        // Allow user to go back from the results trigger screen
+        elements.quizPrevBtn.style.display = 'inline-block'; 
         return;
     }
 
-    // Update button visibility
-    elements.quizPrevBtn.style.display = currentQuizStep > 0 ? 'inline-block' : 'none';
-    elements.quizNextBtn.style.display = 'inline-block';
-    elements.quizSubmitBtn.style.display = 'none';
-
-    if (currentQuizStep === quizQuestions.length - 1) {
-        elements.quizNextBtn.style.display = 'none';
-        elements.quizSubmitBtn.style.display = 'inline-block';
-    }
-
-    // Render content
+    // --- QUESTION STEP ---
     const questionElement = document.createElement('p');
     questionElement.classList.add('quiz-question');
     questionElement.textContent = `Q${currentQuizStep + 1}: ${questionData.question}`;
@@ -370,15 +270,14 @@ function renderQuizStep() {
         const button = document.createElement('button');
         button.type = 'button';
         button.classList.add('quiz-option-btn');
-        button.textContent = option;
-        button.setAttribute('data-value', option);
-        if (quizAnswers[questionData.key] === option) {
+        button.textContent = option.text;
+        
+        if (quizAnswers[questionData.key] === option.value) {
             button.classList.add('selected');
         }
 
         button.addEventListener('click', () => {
-            // Select logic
-            quizAnswers[questionData.key] = option;
+            quizAnswers[questionData.key] = option.value;
             optionsDiv.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
         });
@@ -388,12 +287,20 @@ function renderQuizStep() {
 }
 
 elements.quizNextBtn.addEventListener('click', () => {
-    const currentKey = quizQuestions[currentQuizStep].key;
-    if (!quizAnswers[currentKey]) {
-        return; // Prevent moving forward without selection
+    const currentQuestion = quizQuestions[currentQuizStep];
+    if (currentQuestion && !quizAnswers[currentQuestion.key]) {
+        alert("Please select an option before proceeding!");
+        return;
     }
-    currentQuizStep++;
-    renderQuizStep();
+
+    if (currentQuizStep < quizQuestions.length) {
+        currentQuizStep++;
+        renderQuizStep();
+    } 
+    
+    if (currentQuizStep === quizQuestions.length) {
+        displayQuizResults();
+    }
 });
 
 elements.quizPrevBtn.addEventListener('click', () => {
@@ -401,106 +308,60 @@ elements.quizPrevBtn.addEventListener('click', () => {
     renderQuizStep();
 });
 
-elements.quizSubmitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const currentKey = quizQuestions[currentQuizStep].key;
-    if (!quizAnswers[currentKey]) {
-        return; // Prevent submitting without last selection
+function displayQuizResults() {
+    const container = elements.quizContent;
+    container.innerHTML = `<h2 class="modal-title">Your Perfect Match</h2>`;
+
+    elements.quizNextBtn.style.display = 'none'; // Hide next button on results page
+
+    // 1. Determine the target profile key (e.g., "Evening_Floral")
+    const timeOfDay = quizAnswers.time_of_day || '';
+    const scentProfile = quizAnswers.scent_profile || '';
+    const targetProfile = `${timeOfDay}_${scentProfile}`;
+
+    // 2. Filter perfumes for a direct match
+    let matchedPerfumes = initialPerfumes.filter(p => p.profile.includes(targetProfile));
+
+    // Fallback logic for better user experience if no perfect match is found
+    if (matchedPerfumes.length === 0) {
+        matchedPerfumes = initialPerfumes.filter(p => p.profile.includes(scentProfile));
+        container.innerHTML += `<p style="text-align:center; color:#e74c3c; font-size:0.85rem;">No perfect match found, showing suggestions based on your profile type.</p>`;
     }
-    currentQuizStep++; // Move to the result step
-    renderQuizStep();
-});
+    
+    // 3. Render the results
+    if (matchedPerfumes.length > 0) {
+        matchedPerfumes.forEach(p => {
+            const resultCard = document.createElement('div');
+            resultCard.classList.add('quiz-result-card');
+            resultCard.innerHTML = `
+                <h4>${p.name}</h4>
+                <p>(${p.notes}) - ${p.description.substring(0, 70)}...</p>
+                <p style="font-weight: bold; margin-top: 5px;">${formatCurrency(p.priceIQD)}</p>
+            `;
+            // Clicking the result card opens the product details
+            resultCard.addEventListener('click', () => {
+                closeModal('quiz-modal');
+                openProductModal(p);
+            });
+            container.appendChild(resultCard);
+        });
+    } else {
+        container.innerHTML += `<p style="text-align:center;">We couldn't find a direct match, but please browse our full catalog to discover a scent you love!</p>`;
+    }
+}
 
 $('#help-me-choose-btn').addEventListener('click', (e) => {
     e.preventDefault();
+    // Reset all nav links (important for mobile UI consistency)
+    $$('.nav-link').forEach(l => l.classList.remove('active'));
+    // Open the quiz
     resetQuiz();
     openModal('quiz-modal');
 });
 
-// --- GEMINI LLM API CALL FOR QUIZ RECOMMENDATION ---
-
-async function runPerfumeQuiz() {
-    let retryCount = 0;
-    const maxRetries = 3;
-
-    // Prepare the list of available perfumes for the model
-    const perfumeList = initialPerfumes.map(p => {
-        return `Name: ${p.name} | Category: ${p.category} | Description: ${p.description}`;
-    }).join('\n');
-
-    const systemPrompt = `You are a professional, luxury perfume sommelier. Your goal is to recommend the single best-fitting perfume from the provided list based on the user's quiz answers. Write a concise, 100-word personalized description explaining why that specific perfume is a perfect match for the user's expressed preferences and personality. Do not mention the perfume list itself.`;
-
-    const userQuery = `The user completed the quiz with the following answers: ${JSON.stringify(quizAnswers)}. \n\nBased on these answers, recommend the single best match from the following list of perfumes: \n\n--- Available Perfumes ---\n${perfumeList}`;
-
-    const payload = {
-        contents: [{ parts: [{ text: userQuery }] }],
-        tools: [{ "google_search": {} }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-    };
-
-    while (retryCount < maxRetries) {
-        try {
-            const response = await fetch(`${API_URL_BASE}${MODEL_NAME}:generateContent?key=${API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                // Check for rate limiting or other recoverable errors
-                if (response.status === 429) {
-                    throw new Error('Rate limit exceeded');
-                }
-                throw new Error(`API call failed with status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-            if (text) {
-                displayQuizResults(text);
-                return;
-            } else {
-                throw new Error('Received empty response text from Gemini.');
-            }
-        } catch (error) {
-            retryCount++;
-            console.error(`Gemini API call failed (Attempt ${retryCount}):`, error);
-            if (retryCount >= maxRetries) {
-                displayQuizError("I'm sorry, I couldn't process your request right now. Please try again later.");
-                return;
-            }
-            // Exponential backoff
-            await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount) * 1000));
-        }
-    }
-}
-
-function displayQuizResults(resultText) {
-    elements.quizContent.innerHTML = `
-        <h2 class="modal-title">Your Perfect Match</h2>
-        <div class="quiz-result">
-            <p>${resultText.replace(/\n/g, '<br>')}</p>
-        </div>
-        <button type="button" class="modal-btn" onclick="document.getElementById('quiz-modal').classList.remove('active');">Got it!</button>
-    `;
-    elements.quizControls.style.display = 'none';
-}
-
-function displayQuizError(message) {
-     elements.quizContent.innerHTML = `
-        <h2 class="modal-title" style="color: #e74c3c;">Quiz Error</h2>
-        <div class="quiz-result">
-            <p style="color: #e74c3c;">${message}</p>
-        </div>
-        <button type="button" class="modal-btn" onclick="document.getElementById('quiz-modal').classList.remove('active');">Close</button>
-    `;
-    elements.quizControls.style.display = 'none';
-}
-
 // --- INITIALIZATION ---
 window.addEventListener('load', () => {
     renderCatalog(initialPerfumes);
-    // Ensure the initial filter is active
+    // Ensure the initial "All Fragrances" filter is active
     elements.navLinks[0].classList.add('active');
 });
