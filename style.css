@@ -48,9 +48,10 @@ body {
 
 .header-content {
     display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem; /* Reduced vertical padding for mobile */
 }
 
 .logo-container {
@@ -62,13 +63,18 @@ body {
 }
 
 .navigation {
-    display: flex;
+    width: 100%; /* Full width on mobile */
+    order: 2; /* Puts navigation below logo/search on mobile */
+    margin-top: 0.5rem;
 }
 
 .nav-list {
     display: flex;
     list-style: none;
     gap: 1.5rem;
+    justify-content: space-around; /* Spreads links out on mobile */
+    padding: 0.5rem 0;
+    border-top: 1px solid #eee;
 }
 
 .nav-link {
@@ -76,12 +82,48 @@ body {
     color: var(--primary-color);
     font-weight: 500;
     transition: color 0.3s ease;
+    font-size: 0.95rem; /* Slightly smaller for mobile */
 }
 
 .nav-link:hover, .nav-link.active {
     color: var(--secondary-color);
     border-bottom: 2px solid var(--secondary-color);
     padding-bottom: 2px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    order: 1; /* Puts search/cart next to logo on mobile */
+    gap: 0.5rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
+    background-color: #f0f2f5;
+    margin-right: 0; /* Removed margin for better mobile fit */
+}
+
+#search-input {
+    border: none;
+    background: none;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    width: 100px; /* Smaller default width for mobile */
+    transition: width 0.3s ease;
+    outline: none;
+}
+
+#search-input::placeholder {
+    color: #888;
+}
+
+#search-input:focus {
+    width: 150px; /* Expands on focus */
 }
 
 .cart-btn {
@@ -113,10 +155,10 @@ body {
 
 /* Perfume Catalog */
 .perfume-catalog {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem 0;
+    /* Adjusted minmax for better mobile grid */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    gap: 1rem; /* Smaller gap for mobile */
+    padding: 1.5rem 0;
 }
 
 .perfume-card {
@@ -136,7 +178,7 @@ body {
 
 .perfume-card-img {
     width: 100%;
-    height: 200px;
+    height: 150px; /* Reduced height for mobile */
     object-fit: cover;
     transition: transform 0.3s ease;
 }
@@ -146,12 +188,12 @@ body {
 }
 
 .perfume-card-content {
-    padding: 1rem;
+    padding: 0.75rem;
 }
 
 .perfume-card-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Adjusted for mobile */
     margin-bottom: 0.5rem;
     color: var(--primary-color);
 }
@@ -186,10 +228,10 @@ body {
 .modal {
     background-color: var(--card-bg-color);
     border-radius: 10px;
-    max-width: 90%;
+    max-width: 95%; /* Wider on mobile */
     width: 500px;
     position: relative;
-    padding: 2rem;
+    padding: 1.5rem; /* Reduced padding for mobile */
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
     opacity: 0;
@@ -202,13 +244,14 @@ body {
 
 .modal-close-btn {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.5rem;
+    right: 0.5rem; /* Closer to corner on mobile */
     background: none;
     border: none;
     font-size: 2rem;
     color: var(--text-color);
     cursor: pointer;
+    padding: 0.5rem;
 }
 
 .modal-title {
@@ -222,7 +265,7 @@ body {
 .modal-subtitle {
     text-align: center;
     color: #666;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced margin */
 }
 
 .modal-btn {
@@ -260,164 +303,41 @@ body {
 }
 
 /* Product Modal */
-.product-modal {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
-}
-
 .product-modal-body {
-    padding: 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 
 .product-modal-img {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 1rem;
+    height: 200px; /* Adjusted height for mobile */
 }
 
-.product-modal-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--primary-color);
+.product-details {
     text-align: center;
-    margin-bottom: 1rem;
-}
-
-.product-modal-description {
-    color: #555;
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 1rem;
 }
 
 .product-qualities {
-    display: flex;
+    flex-wrap: wrap; /* Allows qualities to wrap on small screens */
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.quality-item {
-    background-color: var(--bg-color);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 500;
-    color: var(--primary-color);
-    font-size: 0.9rem;
+    margin-top: 1rem;
 }
 
 .product-modal-footer {
-    position: sticky;
-    bottom: 0;
-    background-color: var(--card-bg-color);
-    padding: 1rem 2rem;
-    border-top: 1px solid #eee;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.product-modal-price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--secondary-color);
-    text-align: center;
+    padding: 1rem;
+    gap: 0.75rem;
 }
 
 /* Order Modal */
 .order-modal {
-    padding: 2rem;
-}
-
-.order-summary-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.order-summary-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-}
-
-.quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--bg-color);
-    border-radius: 5px;
-    padding: 0.2rem;
-}
-
-.quantity-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-.quantity-value {
-    width: 20px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.delivery-note {
-    font-size: 0.9rem;
-    color: #777;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.order-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.order-form input {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-}
-
-/* Confirmation Modal */
-.confirmation-modal {
-    text-align: center;
-}
-
-.green-tick {
-    font-size: 4rem;
-    color: var(--green-tick-color);
-    display: block;
-    margin-bottom: 1rem;
-    animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.close-confirm-btn {
-    background-color: var(--primary-color);
+    padding: 1.5rem;
 }
 
 /* Footer */
 .footer {
     background-color: var(--primary-color);
     color: var(--light-text-color);
-    padding: 2rem 0;
+    padding: 1.5rem 0; /* Reduced padding for mobile */
     margin-top: auto;
 }
 
@@ -434,68 +354,118 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Responsive Styles */
+/* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
 @media (min-width: 768px) {
-    .perfume-catalog {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .modal {
-        max-width: 600px;
-    }
-
+    /* Header adjustments for desktop */
     .header-content {
         padding: 1rem 2rem;
+        flex-wrap: nowrap; /* Prevent wrapping on desktop */
     }
-}
 
+    .navigation {
+        width: auto;
+        order: 0; /* Returns navigation to center */
+        margin-top: 0;
+    }
+
+    .nav-list {
+        padding: 0;
+        border-top: none;
+        gap: 2.5rem; /* Wider spacing */
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+    }
+
+    .header-right {
+        order: 0;
+        gap: 1rem;
+    }
+    
+    #search-input {
+        width: 150px; /* Desktop default width */
+    }
+
+    #search-input:focus {
+        width: 250px; /* Desktop expanded width */
+    }
+
+    /* Catalog adjustments for desktop */
+    .perfume-catalog {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Larger cards */
+        gap: 2rem;
+        padding: 2.5rem 0;
+    }
+
+    .perfume-card-img {
+        height: 200px;
+    }
+
+    /* Modal adjustments for desktop */
+    .modal {
+        max-width: 600px;
+        padding: 2rem;
+    }
+
+    .product-modal-body {
+        padding: 2rem;
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+    
+    .product-modal-img {
+        width: 40%;
+        min-width: 200px;
+        height: 250px;
+    }
+    
+    .product-details {
+        width: 60%;
+        text-align: left;
+    }
+    
+    .product-modal-name, .product-modal-description {
+        text-align: left;
+    }
+    
+    .product-qualities {
+        justify-content: flex-start;
+    }
+    
+    .product-modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+    }
+
+    .product-modal-price {
+        text-align: left;
+    }
+
+    .product-modal-footer .modal-btn {
+        width: auto;
+    }
+
+    /* Footer adjustments for desktop */
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .about-us-section {
+        margin-top: 0;
+        text-align: right;
+    }
+
+}
 
 
 /* All previous styles stay the same. Add this new section for the search bar. */
-
-.search-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 0.2rem 0.5rem;
-    background-color: #f0f2f5;
-    margin-right: 1rem;
-}
-
-#search-input {
-    border: none;
-    background: none;
-    padding: 0.5rem;
-    font-size: 0.9rem;
-    width: 150px;
-    transition: width 0.3s ease;
-    outline: none;
-}
-
-#search-input::placeholder {
-    color: #888;
-}
-
-#search-input:focus {
-    width: 200px; /* Expands on focus */
-}
-
-/* Update header-right to accommodate the search bar */
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-/* Media query for larger screens */
-@media (min-width: 768px) {
-    #search-input {
-        width: 250px;
-    }
-}
-
-
-/* All previous styles stay the same. Add this new section. */
 
 .form-group {
     display: flex;
