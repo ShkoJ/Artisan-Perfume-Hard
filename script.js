@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ------------------- Mock Data -------------------
+    // ------------------- Mock Data (EDIT HERE TO ADD FRAGRANCES) -------------------
     const perfumes = [
+        // --- Placeholder 1: Oud Al Sultan (Men) ---
         {
             id: 'p1',
             name: 'Oud Al Sultan',
-            price: 75000,
+            price: 75000, // Price in IQD
             category: 'men',
             description: 'A rich and powerful blend of classic oud with a hint of spicy notes, perfect for a strong statement. A true embodiment of masculinity and luxury.',
             quality: 'Long Lasting',
             sillage: 'Strong',
             image: 'https://source.unsplash.com/400x400/?perfume,oud,men',
         },
+        // --- Placeholder 2: Rose & Vanilla (Women) ---
         {
             id: 'p2',
             name: 'Rose & Vanilla',
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sillage: 'Moderate',
             image: 'https://source.unsplash.com/400x400/?perfume,rose,vanilla',
         },
+        // --- Placeholder 3: Aqua Serenity (Men) ---
         {
             id: 'p3',
             name: 'Aqua Serenity',
@@ -31,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sillage: 'Light',
             image: 'https://source.unsplash.com/400x400/?perfume,aqua,fresh',
         },
+        // --- Placeholder 4: Midnight Jasmine (Women) ---
         {
             id: 'p4',
             name: 'Midnight Jasmine',
@@ -41,6 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
             sillage: 'Heavy',
             image: 'https://source.unsplash.com/400x400/?perfume,jasmine,night',
         },
+        // --- PLACEHOLDER FOR FUTURE FRAGRANCE: Simply copy the structure above and change the data ---
+        /*
+        {
+            id: 'p5', 
+            name: 'New Fragrance Name',
+            price: 50000, // New Price
+            category: 'men', // or 'women'
+            description: 'A detailed description of the new fragrance...',
+            quality: 'Best Seller',
+            sillage: 'Moderate',
+            image: 'https://your-image-url.jpg', // Replace with your image URL
+        },
+        */
     ];
 
     let currentPerfume = null;
@@ -84,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderPerfumeCards = (filteredPerfumes) => {
         perfumeCatalog.innerHTML = '';
         if (filteredPerfumes.length === 0) {
-            perfumeCatalog.innerHTML = '<p class="empty-message">No perfumes found.</p>';
+            // Added class for styling empty state
+            perfumeCatalog.innerHTML = '<p class="empty-message">No perfumes found matching your criteria.</p>'; 
             return;
         }
 
@@ -143,7 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Real-time search
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
-        const filteredPerfumes = perfumes.filter(p => 
+        // Keep the active filter when searching
+        const activeFilter = document.querySelector('.nav-link.active').dataset.filter;
+        const basePerfumes = activeFilter === 'all' ? perfumes : perfumes.filter(p => p.category === activeFilter);
+        
+        const filteredPerfumes = basePerfumes.filter(p => 
             p.name.toLowerCase().includes(query) || 
             p.description.toLowerCase().includes(query)
         );
@@ -175,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     orderModalCloseBtn.addEventListener('click', () => closeModal(orderModal));
     closeConfirmBtn.addEventListener('click', () => {
         closeModal(confirmationModal);
+        // Reset state
         currentPerfume = null;
         currentQuantity = 1;
         orderQuantitySpan.textContent = currentQuantity;
@@ -185,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     orderNowBtn.addEventListener('click', () => {
         if (currentPerfume) {
             orderSummaryName.textContent = currentPerfume.name;
+            orderQuantitySpan.textContent = currentQuantity; // Ensure quantity is 1 when opening from product view
             closeModal(productModal);
             openModal(orderModal);
         }
@@ -225,6 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
             totalPrice: currentPerfume.price * currentQuantity
         };
         
+        // Disable button to prevent double submission
+        const submitBtn = orderForm.querySelector('.place-order-btn');
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
+
         try {
             const response = await fetch(TELEGRAM_APP_SCRIPT_URL, {
                 method: 'POST',
@@ -236,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Network response was not ok');
             }
 
-            const data = await response.json();
-            console.log('Success:', data);
+            // const data = await response.json(); // Uncomment if your script returns data
+            // console.log('Success:', data);
 
             closeModal(orderModal);
             openModal(confirmationModal);
@@ -245,6 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
             alert('There was an error placing your order. Please try again.');
+        } finally {
+            submitBtn.textContent = 'Place Order';
+            submitBtn.disabled = false;
         }
     });
 
@@ -252,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal-backdrop')) {
             const activeModal = document.querySelector('.modal-backdrop.active');
-            if (activeModal) {
+            if (activeModal && activeModal.id !== 'welcome-modal') { // Keep welcome modal open unless manually closed
                 closeModal(activeModal);
             }
         }
