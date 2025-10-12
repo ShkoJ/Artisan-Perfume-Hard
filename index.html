@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artisan Perfumes</title>
-    <!-- Links to the separate CSS file -->
+    <!-- Linking the separate CSS file -->
     <link rel="stylesheet" href="style.css" />
-    <!-- Font Links -->
+    <!-- Fonts: Playfair Display for headers, Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,9 +22,9 @@
             </div>
             <nav class="navigation">
                 <ul class="nav-list">
-                    <li><a href="#" class="nav-link active" data-filter="all">All</a></li>
-                    <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
-                    <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
+                    <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
+                    <li><a href="#" class="nav-link" data-filter="men">For Men</a></li>
+                    <li><a href="#" class="nav-link" data-filter="women">For Women</a></li>
                     <li><a href="#" class="nav-link" id="help-me-choose-btn">❓ Help me Choose</a></li>
                 </ul>
             </nav>
@@ -33,10 +33,11 @@
                     <input
                         type="text"
                         id="search-input"
-                        placeholder="Search perfumes..."
-                        aria-label="Search perfumes"
+                        placeholder="Search name or notes..."
+                        aria-label="Search perfumes by name or note"
                     />
                 </div>
+                <!-- Cart is decorative for now -->
                 <button class="cart-btn" aria-label="Open cart">🛒</button>
             </div>
         </div>
@@ -44,21 +45,15 @@
 
     <main class="main-content">
         <div class="container">
+            <!-- Fragrance cards will be rendered here by JavaScript -->
             <section class="perfume-catalog" id="perfume-catalog">
-                <!-- Perfume cards will be rendered here by JavaScript -->
             </section>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Artisan Perfumes. All rights reserved.</p>
-                <div class="about-us-section">
-                    <h4>About Us</h4>
-                    <p>Your one-stop shop for luxury made affordable. We craft exquisite fragrances for every personality.</p>
-                </div>
-            </div>
+            <p>&copy; 2025 Artisan Perfumes. Crafted in Erbil.</p>
         </div>
     </footer>
 
@@ -69,23 +64,26 @@
         <div class="modal product-modal">
             <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
             <div class="product-modal-body">
-                <img id="modal-image" src="" alt="Perfume" class="product-modal-img" />
+                <!-- Image placeholder, JS will load the source -->
+                <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
                 <div class="product-details">
                     <h3 id="modal-name" class="product-modal-name"></h3>
-                    <p id="modal-description" class="product-modal-description"></p>
+                    <!-- Notes are subtle here -->
+                    <p id="modal-notes" class="product-modal-notes"></p>
                     <div class="product-qualities">
                         <div class="quality-item">
-                            <span id="modal-quality" class="quality-label"></span>
+                            <span id="modal-longevity" class="quality-label"></span>
                         </div>
                         <div class="quality-item">
                             <span id="modal-sillage" class="quality-label"></span>
                         </div>
                     </div>
+                    <p id="modal-description" class="product-modal-description"></p>
+                    <div class="product-modal-footer">
+                        <p id="modal-price" class="product-modal-price"></p>
+                        <button id="order-now-btn" class="modal-btn">Order Now</button>
+                    </div>
                 </div>
-            </div>
-            <div class="product-modal-footer">
-                <p id="modal-price" class="product-modal-price"></p>
-                <button id="order-now-btn" class="modal-btn">Order Now</button>
             </div>
         </div>
     </div>
@@ -94,7 +92,7 @@
     <div id="order-modal" class="modal-backdrop">
         <div class="modal order-modal">
             <button class="modal-close-btn" aria-label="Close order form" data-modal="order-modal">&times;</button>
-            <h2 class="modal-title">Your Order</h2>
+            <h2 class="modal-title">Confirm Your Order</h2>
             <div class="order-summary-item">
                 <h4 id="order-summary-name"></h4>
                 <div class="quantity-control">
@@ -103,31 +101,30 @@
                     <button class="quantity-btn plus-btn" aria-label="Increase quantity" id="plus-qty">+</button>
                 </div>
             </div>
-            <p class="delivery-note">Delivery is only available for Erbil for now, but we will be in your city soon!</p>
+            <p class="delivery-note">Delivery is currently available only for Erbil.</p>
             <form id="order-form" class="order-form">
-                <input type="text" id="order-name" placeholder="Your Name" required />
-                <input type="tel" id="order-phone" placeholder="Your Phone Number" required />
+                <input type="text" id="order-name" placeholder="Your Full Name" required />
+                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 0770XXXXXXX)" required />
                 <div class="form-group">
-                    <label for="order-city">City</label>
+                    <label for="order-city">City (Erbil Only)</label>
                     <select id="order-city" required>
                         <option value="Erbil">Erbil</option>
-                        <option value="" disabled>Other Cities (Coming Soon)</option>
                     </select>
                 </div>
                 <button type="submit" class="modal-btn place-order-btn">Place Order</button>
-                <p id="order-error" style="color: red; text-align: center; margin-top: 10px; display: none;">Error placing order. Please try again.</p>
+                <p id="order-error" class="error-message" style="display: none;">Could not place order. Please check inputs.</p>
             </form>
         </div>
     </div>
 
-    <!-- Quiz Modal -->
+    <!-- Quiz Modal (New Mapping Logic) -->
     <div id="quiz-modal" class="modal-backdrop">
         <div class="modal quiz-modal">
             <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
             <h2 class="modal-title">Find Your Perfect Scent</h2>
             <form id="quiz-form">
                 <div id="quiz-content">
-                    <!-- Quiz questions/results rendered here -->
+                    <!-- Quiz questions/results rendered here by JS -->
                 </div>
                 <div class="quiz-controls">
                     <button
@@ -139,14 +136,6 @@
                         Previous
                     </button>
                     <button type="button" id="quiz-next-btn" class="modal-btn">Next</button>
-                    <button
-                        type="button"
-                        id="quiz-submit-btn"
-                        class="modal-btn"
-                        style="display: none;"
-                    >
-                        Show Results
-                    </button>
                 </div>
             </form>
         </div>
@@ -156,13 +145,13 @@
     <div id="confirmation-modal" class="modal-backdrop">
         <div class="modal confirmation-modal">
             <span class="green-tick">✔️</span>
-            <h2 class="modal-title">Order Confirmed</h2>
+            <h2 class="modal-title">Order Confirmed!</h2>
             <p id="confirmation-message">Thank you for your purchase. Our team will contact you shortly.</p>
-            <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Take me home</button>
+            <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Browse More</button>
         </div>
     </div>
 
-    <!-- Links to the separate JavaScript file -->
+    <!-- Linking the separate JavaScript file -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
