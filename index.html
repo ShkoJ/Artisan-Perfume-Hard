@@ -4,19 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artisan Perfumes</title>
-    <!-- We will use the Inter font for a modern feel, but keep the Playfair for headings as requested -->
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;700&display=swap"
         rel="stylesheet"
     />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <header class="header">
         <div class="container header-content">
             <div class="logo-container">
-                <!-- Using a placeholder logo for completeness -->
                 <h1 class="logo-text">Artisan</h1>
             </div>
             <nav class="navigation">
@@ -44,7 +47,7 @@
     <main class="main-content">
         <div class="container">
             <section class="perfume-catalog" id="perfume-catalog">
-                <!-- Perfume cards will be rendered here by JavaScript -->
+                <!-- Perfume cards will be rendered here -->
             </section>
         </div>
     </main>
@@ -61,60 +64,51 @@
         </div>
     </footer>
 
-    <!-- Modals -->
-
-    <!-- Product Modal (Detail View) -->
+    <!-- ✅ Modals are all kept inside the HTML for dynamic use -->
+    <!-- Product Modal -->
     <div id="product-modal" class="modal-backdrop">
         <div class="modal product-modal">
-            <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
+            <button class="modal-close-btn" data-modal="product-modal">&times;</button>
             <div class="product-modal-body">
                 <img id="modal-image" src="" alt="Perfume" class="product-modal-img" />
                 <div class="product-details">
-                    <h3 id="modal-name" class="product-modal-name"></h3>
-                    <p id="modal-description" class="product-modal-description"></p>
+                    <h3 id="modal-name"></h3>
+                    <p id="modal-description"></p>
                     <div class="product-qualities">
-                        <div class="quality-item">
-                            <span id="modal-quality" class="quality-label"></span>
-                        </div>
-                        <div class="quality-item">
-                            <span id="modal-sillage" class="quality-label"></span>
-                        </div>
+                        <span id="modal-quality"></span>
+                        <span id="modal-sillage"></span>
                     </div>
                 </div>
             </div>
             <div class="product-modal-footer">
-                <p id="modal-price" class="product-modal-price"></p>
+                <p id="modal-price"></p>
                 <button id="order-now-btn" class="modal-btn">Order Now</button>
             </div>
         </div>
     </div>
 
-    <!-- Order Modal (Form) -->
+    <!-- Order Modal -->
     <div id="order-modal" class="modal-backdrop">
         <div class="modal order-modal">
-            <button class="modal-close-btn" aria-label="Close order form" data-modal="order-modal">&times;</button>
+            <button class="modal-close-btn" data-modal="order-modal">&times;</button>
             <h2 class="modal-title">Your Order</h2>
             <div class="order-summary-item">
                 <h4 id="order-summary-name"></h4>
                 <div class="quantity-control">
-                    <button class="quantity-btn minus-btn" aria-label="Decrease quantity" id="minus-qty">-</button>
+                    <button class="quantity-btn minus-btn" id="minus-qty">-</button>
                     <span id="order-quantity" class="quantity-value">1</span>
-                    <button class="quantity-btn plus-btn" aria-label="Increase quantity" id="plus-qty">+</button>
+                    <button class="quantity-btn plus-btn" id="plus-qty">+</button>
                 </div>
             </div>
-            <p class="delivery-note">Delivery is only available for Erbil for now, but we will be in your city soon!</p>
+            <p class="delivery-note">Delivery is only available for Erbil for now.</p>
             <form id="order-form" class="order-form">
                 <input type="text" id="order-name" placeholder="Your Name" required />
                 <input type="tel" id="order-phone" placeholder="Your Phone Number" required />
-                <div class="form-group">
-                    <label for="order-city">City</label>
-                    <select id="order-city" required>
-                        <option value="Erbil">Erbil</option>
-                        <option value="" disabled>Other Cities (Coming Soon)</option>
-                    </select>
-                </div>
+                <select id="order-city" required>
+                    <option value="Erbil">Erbil</option>
+                </select>
                 <button type="submit" class="modal-btn place-order-btn">Place Order</button>
-                <p id="order-error" style="color: red; text-align: center; margin-top: 10px; display: none;">Error placing order. Please try again.</p>
+                <p id="order-error" class="error-msg">Error placing order.</p>
             </form>
         </div>
     </div>
@@ -122,30 +116,14 @@
     <!-- Quiz Modal -->
     <div id="quiz-modal" class="modal-backdrop">
         <div class="modal quiz-modal">
-            <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
+            <button class="modal-close-btn" data-modal="quiz-modal">&times;</button>
             <h2 class="modal-title">Find Your Perfect Scent</h2>
             <form id="quiz-form">
-                <div id="quiz-content">
-                    <!-- Quiz questions/results rendered here -->
-                </div>
+                <div id="quiz-content"></div>
                 <div class="quiz-controls">
-                    <button
-                        type="button"
-                        id="quiz-prev-btn"
-                        class="modal-btn ghost-btn"
-                        style="display: none;"
-                    >
-                        Previous
-                    </button>
+                    <button type="button" id="quiz-prev-btn" class="modal-btn ghost-btn">Previous</button>
                     <button type="button" id="quiz-next-btn" class="modal-btn">Next</button>
-                    <button
-                        type="button"
-                        id="quiz-submit-btn"
-                        class="modal-btn"
-                        style="display: none;"
-                    >
-                        Show Results
-                    </button>
+                    <button type="button" id="quiz-submit-btn" class="modal-btn">Show Results</button>
                 </div>
             </form>
         </div>
@@ -156,9 +134,12 @@
         <div class="modal confirmation-modal">
             <span class="green-tick">✔️</span>
             <h2 class="modal-title">Order Confirmed</h2>
-            <p id="confirmation-message">Thank you for your purchase. Our team will contact you shortly.</p>
+            <p id="confirmation-message">Thank you for your purchase!</p>
             <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Take me home</button>
         </div>
     </div>
+
+    <!-- ✅ JS at the bottom -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
