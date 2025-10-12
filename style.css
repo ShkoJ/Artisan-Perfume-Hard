@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #0A192F;
-    --secondary-color: #FFC107;
+    --primary-color: #0A192F; /* Dark Blue */
+    --secondary-color: #FFC107; /* Amber/Gold */
     --text-color: #333;
     --light-text-color: #f9f9f9;
     --bg-color: #F9F9F9;
     --card-bg-color: #FFFFFF;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --green-tick-color: #2ECC71;
+    --subtle-gray: #888;
 }
 
 * {
@@ -20,7 +20,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif; /* Using Inter as base, Playfair for titles */
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -32,10 +32,10 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 1rem; /* Better mobile padding */
 }
 
-/* Header */
+/* Header & Nav */
 .header {
     background-color: var(--card-bg-color);
     box-shadow: 0 1px 5px var(--shadow-color);
@@ -62,14 +62,13 @@ body {
 .header-right {
     display: flex;
     align-items: center;
-    order: 1;
+    order: 1; /* Puts right side elements first on mobile */
     gap: 0.75rem;
 }
 
-/* Mobile navigation */
 .navigation {
     width: 100%;
-    order: 2;
+    order: 2; /* Puts navigation below logo/search on mobile */
     margin-top: 1rem;
 }
 
@@ -87,8 +86,8 @@ body {
     color: var(--primary-color);
     font-weight: 500;
     transition: color 0.3s ease, border-bottom 0.3s ease;
-    font-size: 0.9rem;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.2rem;
     white-space: nowrap;
 }
 
@@ -100,24 +99,21 @@ body {
 .search-container {
     display: flex;
     align-items: center;
-    border: 1px solid #ddd;
     border-radius: 20px;
-    padding: 0 0.5rem;
     background-color: #f0f2f5;
 }
 
 #search-input {
     border: none;
     background: none;
-    padding: 0.6rem;
+    padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
-    width: 120px;
+    width: 100px; /* Smaller default width on mobile */
     transition: width 0.3s ease;
     outline: none;
 }
-
 #search-input:focus {
-    width: 160px;
+    width: 150px;
 }
 
 .cart-btn {
@@ -132,18 +128,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
-.cart-btn:hover {
-    transform: scale(1.05);
-}
-
 
 /* Perfume Catalog */
 .perfume-catalog {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /* Responsive grid: min of 160px per column */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
     gap: 1.5rem;
     padding: 2rem 0;
 }
@@ -152,49 +143,51 @@ body {
     background-color: var(--card-bg-color);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px var(--shadow-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .perfume-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 .perfume-card-img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain; 
     border-bottom: 1px solid #eee;
+    background-color: #F0F0F0; /* Light background for images - NO placeholder color design */
 }
 
 .perfume-card-content {
-    padding: 1rem 0.75rem;
+    padding: 1rem 0.75rem; /* Fixed padding */
 }
 
 .perfume-card-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
     color: var(--primary-color);
+}
+
+.perfume-card-notes {
+    font-size: 0.8rem;
+    color: var(--subtle-gray); /* Subtle Scent Notes */
+    margin-bottom: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .perfume-card-price {
     font-weight: 700;
-    color: var(--secondary-color);
-}
-
-.empty-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 3rem;
-    color: #888;
+    color: var(--primary-color);
     font-size: 1.1rem;
 }
 
-/* Modals (General) */
+/* --- Modals (General) --- */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -207,7 +200,7 @@ body {
     align-items: center;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease;
     z-index: 2000;
 }
 
@@ -222,7 +215,7 @@ body {
     max-width: 95%;
     width: 450px;
     position: relative;
-    padding: 1.5rem;
+    padding: 1.5rem; /* Increased padding */
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
     opacity: 0;
@@ -235,23 +228,14 @@ body {
 
 .modal-close-btn {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 15px;
+    right: 15px;
     background: none;
     border: none;
-    font-size: 2rem;
-    color: var(--text-color);
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.5rem;
-    line-height: 1;
-}
-
-.modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    text-align: center;
+    color: var(--subtle-gray);
+    z-index: 10;
 }
 
 .modal-btn {
@@ -266,361 +250,259 @@ body {
     width: 100%;
     text-align: center;
 }
-
 .modal-btn:hover {
-    background-color: #27496d;
+    background-color: #1A3052;
 }
 
-.ghost-btn {
-    background: none;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-.ghost-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-
-/* Product Modal */
+/* Product Modal specific adjustments */
 .product-modal {
-    width: 700px;
+    max-width: 95%;
+    width: 750px; /* Wider for desktop view */
+    padding: 0; /* Remove padding from modal itself, add to body/footer */
 }
 
 .product-modal-body {
-    padding: 1.5rem 1rem;
-    overflow-y: auto;
+    padding: 1.5rem; 
+    display: block; /* Default block for mobile */
+    text-align: center;
 }
 
 .product-modal-img {
-    width: 100%;
+    width: 80%;
     height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
+    margin: 0 auto 1.5rem auto;
 }
 
 .product-details {
+    padding-top: 0;
     text-align: center;
-    padding-top: 1rem;
 }
 
 .product-modal-name {
-    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-modal-notes {
+    font-size: 0.9rem;
+    color: var(--subtle-gray); /* Subtle note styling */
+    margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .product-modal-description {
     color: #555;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-size: 0.95rem;
 }
 
 .product-qualities {
     display: flex;
     gap: 1rem;
-    justify-content: center;
-    margin-top: 1.5rem;
+    justify-content: center; /* Center on mobile */
+    margin: 1rem 0;
+    font-size: 0.9rem;
 }
-
-.quality-label {
-    background-color: #eee;
-    color: var(--primary-color);
-    padding: 0.3rem 0.8rem;
+.quality-item {
+    padding: 0.4rem 0.8rem;
+    background-color: #F0F2F5;
     border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.quality-label {
-    background-color: #eee;
     color: var(--primary-color);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
 }
 
-/* Order Modal (Form and Quantity) */
-.order-form input, .order-form select {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 1rem;
+.product-modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.product-modal-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* Order Modal Styles */
+.order-modal h2, .quiz-modal h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .order-summary-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed #ddd;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
 }
-
-.order-summary-item h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-}
-
 .quantity-control {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
-
 .quantity-btn {
-    background: var(--secondary-color);
-    border: none;
+    background: var(--bg-color);
+    border: 1px solid var(--subtle-gray);
+    color: var(--primary-color);
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    color: var(--primary-color);
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.2s;
 }
-
-.quantity-btn:hover {
-    background: #ffdf7e;
-}
-
-.quantity-value {
-    font-weight: bold;
-    font-size: 1.1rem;
-    min-width: 20px;
-    text-align: center;
-}
-
 .delivery-note {
-    text-align: center;
+    font-size: 0.85rem;
     color: #e74c3c;
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem;
-    border: 1px solid #f9dcdc;
-    background-color: #fef0f0;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.order-form input, .order-form select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
     border-radius: 5px;
 }
-
-/* Form Group for City Select */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
 .order-form label {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 0.9rem;
-}
-
-.order-form select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1rem;
-}
-
-/* Confirmation Modal */
-.confirmation-modal .green-tick {
-    font-size: 4rem;
-    color: var(--green-tick-color);
     display: block;
-    text-align: center;
-    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
 }
-
-.confirmation-modal p {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.confirmation-modal .modal-btn {
-    background-color: var(--green-tick-color);
-}
-
-.confirmation-modal .modal-btn:hover {
-    background-color: #27ae60;
-}
-
 
 /* Quiz Modal Styles */
-.quiz-modal {
-    width: 550px;
-}
-
-#quiz-content {
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.quiz-question {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-    text-align: center;
-}
-
 .quiz-options {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 300px;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
-
 .quiz-option-btn {
-    padding: 0.8rem;
-    background-color: var(--bg-color);
+    padding: 0.75rem;
     border: 2px solid #ddd;
+    background-color: var(--bg-color);
     border-radius: 8px;
+    text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+    transition: all 0.2s ease;
     font-size: 1rem;
-    color: var(--text-color);
-    font-weight: 500;
 }
-
 .quiz-option-btn:hover {
-    background-color: #eee;
+    background-color: #f0f2f5;
 }
-
 .quiz-option-btn.selected {
-    background-color: var(--secondary-color);
     border-color: var(--secondary-color);
-    color: var(--primary-color);
-    font-weight: 700;
+    background-color: #FFFBEA;
+    font-weight: 600;
 }
-
 .quiz-controls {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    margin-top: 1.5rem;
 }
-
 .quiz-controls .modal-btn {
-    width: 48%;
+    width: 50%;
 }
-
-.quiz-result {
-    text-align: left;
-    padding: 1rem;
-    background-color: #f0f2f5;
-    border-radius: 8px;
-    margin-top: 1rem;
-    width: 100%;
-}
-
-.quiz-result h3 {
-    font-family: 'Playfair Display', serif;
+.ghost-btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+}
+.quiz-result-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.quiz-result-card:hover {
+    background-color: #f0f2f5;
+}
+.quiz-result-card h4 {
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.25rem;
+}
+.quiz-result-card p {
+    font-size: 0.85rem;
+    color: var(--subtle-gray);
 }
 
-.loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid var(--primary-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* Confirmation Modal */
+.confirmation-modal {
+    text-align: center;
 }
-
+.green-tick {
+    font-size: 3rem;
+    color: #2ECC71;
+    display: block;
+    margin-bottom: 1rem;
+}
 
 /* Footer */
 .footer {
+    margin-top: auto;
     background-color: var(--primary-color);
     color: var(--light-text-color);
     padding: 1.5rem 0;
-    margin-top: auto; /* Pushes footer to the bottom */
+    text-align: center;
     font-size: 0.9rem;
 }
 
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-}
-
-.footer-content h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
 
 /* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
 @media (min-width: 768px) {
     .container {
-        padding: 0 2rem;
+        padding: 0 1.5rem;
     }
 
+    /* Desktop Header Layout */
     .header-content {
         flex-wrap: nowrap;
-        padding: 1rem 0;
     }
-
     .navigation {
         width: auto;
         order: 0;
         margin-top: 0;
+        flex-grow: 1; /* Allows navigation to take up space */
+        padding: 0 2rem;
     }
-
     .nav-list {
         padding: 0;
         border-top: none;
         gap: 1.5rem;
+        justify-content: flex-start;
     }
-
     .nav-link {
         font-size: 1rem;
-        padding: 0.25rem 0;
+        padding: 0.25rem 0.5rem;
     }
-
     .header-right {
-        order: 0;
-        gap: 1rem;
+        order: 3;
     }
-
     #search-input {
-        width: 150px;
+        width: 160px;
     }
 
-    #search-input:focus {
-        width: 200px;
-    }
-
-    /* Catalog adjustments for desktop - 3 columns at 768px */
+    /* Desktop Catalog */
     .perfume-catalog {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
         padding: 3rem 0;
     }
-
-    /* Larger screens get 4 columns */
     @media (min-width: 1024px) {
         .perfume-catalog {
             grid-template-columns: repeat(4, 1fr);
         }
     }
-
     .perfume-card-img {
         height: 220px;
     }
@@ -632,55 +514,31 @@ body {
         gap: 2rem;
         align-items: flex-start;
     }
-
     .product-modal-img {
         width: 40%;
         min-width: 200px;
         height: 280px;
+        margin: 0;
     }
-
     .product-details {
         width: 60%;
         text-align: left;
-        padding-top: 0;
     }
-
-    .product-modal-name, .product-modal-description {
+    .product-modal-name, .product-modal-description, .product-modal-notes {
         text-align: left;
     }
-
     .product-qualities {
         justify-content: flex-start;
     }
 
     .product-modal-footer {
         flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 1.5rem 2rem;
     }
-
-    .product-modal-price {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-align: left;
-    }
-
     .product-modal-footer .modal-btn {
         width: auto;
         min-width: 200px;
-    }
-
-    /* Footer adjustments for desktop */
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-    }
-
-    .about-us-section {
-        margin-top: 0;
-        max-width: 50%;
-        text-align: right;
     }
 }
