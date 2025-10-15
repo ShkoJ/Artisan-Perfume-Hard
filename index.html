@@ -1,142 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artisan Perfumes</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;700&display=swap"
-        rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="logo.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent Oasis - Exclusive Fragrances</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 </head>
 <body>
+
     <header class="header">
         <div class="container header-content">
             <div class="logo-container">
-                <img src="logo.png" alt="Artisan Perfumes Logo" class="logo-image" />
+                <span class="logo-text">Scent Oasis</span>
             </div>
-            <nav class="navigation">
-                <ul class="nav-list">
-                    <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
-                    <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
-                    <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
-                    <li><a href="#" class="nav-link" id="help-me-choose-btn">Help me Choose</a></li>
-                </ul>
-            </nav>
+            
             <div class="header-right">
                 <div class="search-container">
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Search name or notes..."
-                        aria-label="Search perfumes by name or note"
-                    />
+                    <input type="text" id="search-input" placeholder="Search...">
                 </div>
-                </div>
+            </div>
+
+            <div class="filter-controls">
+                <button class="filter-button active" data-filter="all">All</button>
+                <button class="filter-button" data-filter="men">Men's</button>
+                <button class="filter-button" data-filter="women">Women's</button>
+                <select id="sort-select" class="filter-button sort-select-custom">
+                    <option value="default">Sort By...</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
+            </div>
         </div>
     </header>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="perfume-catalog" id="perfume-catalog">
-            </section>
-        </div>
+    <main class="container">
+        <section id="catalog-section">
+            <h2 class="section-title">Our Exclusive Collection</h2>
+            <div id="perfume-catalog" class="perfume-catalog">
+                </div>
+        </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Artisan Perfumes. Crafted in Erbil.</p>
-        </div>
+        <p class="footer-text">© 2024 Scent Oasis. All rights reserved.</p>
     </footer>
 
-    <div id="product-modal" class="modal-backdrop">
-        <div class="modal product-modal">
-            <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
+    <div id="product-modal-overlay" class="modal-overlay">
+        <div id="product-modal" class="product-modal">
+            <button class="close-btn" onclick="closeModal('product-modal')">&times;</button>
             <div class="product-modal-body">
-                <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
-                <div class="product-details">
-                    <h3 id="modal-name" class="product-modal-name"></h3>
-                    <p id="modal-notes" class="product-modal-notes"></p>
-                    <div class="product-qualities">
-                        <div class="quality-item">
-                            <span id="modal-longevity" class="quality-label"></span>
+                <div class="modal-img-container">
+                    <img id="modal-image" src="" alt="Perfume Bottle">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modal-name"></h2>
+                    <p class="modal-description" id="modal-description"></p>
+                    
+                    <div id="modal-notes">
                         </div>
-                        <div class="quality-item">
-                            <span id="modal-sillage" class="quality-label"></span>
-                        </div>
-                    </div>
-                    <p id="modal-description" class="product-modal-description"></p>
-                    <div class="product-modal-footer">
-                        <p id="modal-price" class="product-modal-price"></p>
-                        <button id="order-now-btn" class="modal-btn">Order Now</button>
+
+                    <p id="modal-longevity" class="modal-spec"></p>
+                    <p id="modal-sillage" class="modal-spec mb-4"></p>
+                    
+                    <div class="modal-footer-controls">
+                        <p id="modal-price" class="modal-price"></p>
+                        <button class="btn-add" onclick="openModal('order-modal')">Order Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="order-modal" class="modal-backdrop">
-        <div class="modal order-modal">
-            <button class="modal-close-btn" aria-label="Close order form" data-modal="order-modal">&times;</button>
-            <h2 class="modal-title">Confirm Your Order</h2>
-            <div class="order-summary-item">
-                <h4 id="order-summary-name"></h4>
+    <div id="order-modal-overlay" class="modal-overlay">
+        <div id="order-modal" class="product-modal small-modal">
+            <button class="close-btn" onclick="closeModal('order-modal')">&times;</button>
+            <div class="order-modal-content">
+                <h3 class="order-title">Confirm Order</h3>
+                <p id="order-item-name" class="order-item-name"></p>
+                <p id="order-total-price" class="order-total-price"></p>
+                
                 <div class="quantity-control">
-                    <button class="quantity-btn minus-btn" aria-label="Decrease quantity" id="minus-qty">-</button>
-                    <span id="order-quantity" class="quantity-value">1</span>
-                    <button class="quantity-btn plus-btn" aria-label="Increase quantity" id="plus-qty">+</button>
+                    <button class="qty-button" id="btn-decrement" disabled>-</button>
+                    <span id="order-quantity">1</span>
+                    <button class="qty-button" id="btn-increment">+</button>
                 </div>
+                
+                <button class="btn-submit" id="submit-order-btn">
+                    Place Order via Telegram
+                </button>
             </div>
-            <p class="delivery-note">Delivery is currently available only for Erbil.</p>
-            <form id="order-form" class="order-form">
-                <input type="text" id="order-name" placeholder="Your Full Name" required />
-                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 0770XXXXXXX)" required />
-                <div class="form-group">
-                    <label for="order-city">City (Erbil Only)</label>
-                    <select id="order-city" required>
-                        <option value="Erbil">Erbil</option>
-                    </select>
-                </div>
-                <button type="submit" class="modal-btn place-order-btn">Place Order</button>
-                <p id="order-error" class="error-message" style="display: none;">Could not place order. Please check inputs.</p>
-            </form>
         </div>
     </div>
+    
+    <div id="status-message" class="status-box"></div>
 
-    <div id="quiz-modal" class="modal-backdrop">
-        <div class="modal quiz-modal">
-            <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
-            <h2 class="modal-title">Find Your Perfect Scent</h2>
-            <form id="quiz-form">
-                <div id="quiz-content">
-                    </div>
-                <div class="quiz-controls" id="quiz-controls-footer">
-                    <button
-                        type="button"
-                        id="quiz-prev-btn"
-                        class="modal-btn ghost-btn"
-                        style="display: none;"
-                    >
-                        Previous
-                    </button>
-                    </div>
-            </form>
-        </div>
-    </div>
+    <script src="script.js"></script>
 
-    <div id="confirmation-modal" class="modal-backdrop">
-        <div class="modal confirmation-modal">
-            <span class="green-tick">✔️</span>
-            <h2 class="modal-title">Order Confirmed!</h2>
-            <p id="confirmation-message">Thank you for your purchase. Our team will contact you shortly.</p>
-            <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Browse More</button>
-        </div>
-    </div>
-
-    <script type="module" src="script.js"></script>
 </body>
 </html>
