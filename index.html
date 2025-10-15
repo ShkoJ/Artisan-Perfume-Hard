@@ -24,21 +24,21 @@
                     <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
                     <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
                     <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
-                    <li><a href="#" class="nav-link" id="help-me-choose-btn">Help me Choose</a></li>
+                    <li><a href="#" class="nav-link" id="help-me-choose-btn">Help Me Choose</a></li>
                 </ul>
             </nav>
             <div class="header-right">
                 <div class="search-container">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
                     <input
                         type="text"
                         id="search-input"
                         placeholder="Search"
                         aria-label="Search perfumes"
                     />
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
             <p class="delivery-note">Delivery is currently available only for Erbil.</p>
             <form id="order-form" class="order-form">
                 <input type="text" id="order-name" placeholder="Your Full Name" required />
-                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 0770XXXXXXX)" required />
+                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 0750XXXXXXX)" maxlength="11" required />
                 <div class="form-group">
                     <label for="order-city">City (Erbil Only)</label>
                     <select id="order-city" required>
