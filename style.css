@@ -151,6 +151,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 3rem 0;
+    justify-content:center;
 }
 
 .perfume-card {
@@ -346,6 +347,7 @@ body {
     color: var(--subtle-gray);
     line-height: 1.3;
     margin: 0;
+    text-align: center;
 }
 
 .product-qualities {
@@ -574,3 +576,4 @@ body {
         min-width: 200px;
     }
 }
+
