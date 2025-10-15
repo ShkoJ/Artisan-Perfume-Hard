@@ -576,4 +576,17 @@ body {
         min-width: 200px;
     }
 }
+/* =========================================================================
+   CENTER NOTES TITLES + GOLDEN BOTTOM BORDER
+   ========================================================================= */
+.note-category h4 {
+    text-align: center !important;           /* ← CENTER "Top Notes" */
+}
+
+.note-category {
+    border-left: 3px solid var(--secondary-color);   /* ← GOLDEN LEFT */
+    border-bottom: 3px solid var(--secondary-color); /* ← GOLDEN BOTTOM */
+    padding: 0.4rem 0.75rem;                         /* ← MORE SPACE */
+    margin-bottom: 0.5rem;
+}
 
