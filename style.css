@@ -35,7 +35,7 @@ body {
     padding: 0 1rem;
 }
 
-/* Header & Nav */
+/* Header & Nav - INCREASED PADDING */
 .header {
     background-color: var(--card-bg-color);
     box-shadow: 0 1px 5px var(--shadow-color);
@@ -49,31 +49,21 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 2rem 0; /* INCREASED FROM 1rem */
 }
 
 /* START: Logo Image Styling */
 .logo-container {
-    /* Set a reasonable size for the logo container */
     height: 30px; 
     display: flex;
     align-items: center;
 }
 .logo-image {
-    height: 100%; /* Make the image fill the container height */
+    height: 100%;
     width: auto;
     object-fit: contain;
 }
 /* END: Logo Image Styling */
-
-.logo-text {
-    /* Removed: This was for the text logo */
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    font-weight: 700;
-    display: none; /* Hide the original text logo */
-}
 
 .header-right {
     display: flex;
@@ -112,30 +102,53 @@ body {
     border-bottom: 2px solid var(--secondary-color);
 }
 
+/* UPDATED SEARCH BAR - SIMPLE & LUXURIOUS */
 .search-container {
     display: flex;
     align-items: center;
-    border-radius: 20px;
-    background-color: #f0f2f5;
+    border-radius: 25px;
+    background-color: var(--card-bg-color);
+    border: 2px solid #E5E5E5;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.search-container:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(10, 25, 47, 0.1);
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--subtle-gray);
+    margin-right: 0.5rem;
+    flex-shrink: 0;
 }
 
 #search-input {
     border: none;
     background: none;
-    padding: 0.6rem 0.8rem;
+    padding: 0.6rem 0.8rem 0.6rem 0;
     font-size: 0.9rem;
     width: 100px; 
     transition: width 0.3s ease;
     outline: none;
+    color: var(--primary-color);
 }
+
+#search-input::placeholder {
+    color: var(--subtle-gray);
+}
+
 #search-input:focus {
     width: 150px;
 }
 
-/* Perfume Catalog */
+/* Perfume Catalog - 3 FRAGRANCES PER ROW */
 .perfume-catalog {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 PER ROW */
     gap: 1.5rem;
     padding: 2rem 0;
 }
@@ -147,17 +160,18 @@ body {
     box-shadow: 0 4px 12px var(--shadow-color);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Smoother animation */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
+
 .perfume-card:hover {
-    transform: translateY(-8px); /* Slightly more lift */
-    box-shadow: 0 10px 25px var(--shadow-color); /* Nicer shadow */
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 .perfume-card-img {
     width: 100%;
-    height: 180px; /* Fixed image height for uniform cards */
-    object-fit: contain; /* Ensures the image fits without cropping or stretching */
+    height: 180px;
+    object-fit: contain;
     border-bottom: 1px solid #eee;
     background-color: #F0F0F0;
 }
@@ -166,12 +180,13 @@ body {
     padding: 1rem 0.75rem; 
 }
 
+/* ADDED NAME DISPLAY */
 .perfume-card-name {
-    /* Kept for modal but removed from card render in JS */
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--primary-color);
+    font-weight: 600;
 }
 
 .perfume-card-notes {
@@ -256,10 +271,10 @@ body {
     background-color: #1A3052;
 }
 
-/* Product Modal specific adjustments */
+/* PRODUCT MODAL - SMALLER WIDTH */
 .product-modal {
     max-width: 95%;
-    width: 750px; 
+    width: 500px; /* REDUCED FROM 750px */
     padding: 0; 
 }
 
@@ -272,7 +287,7 @@ body {
 .product-modal-img {
     width: 80%;
     height: 250px;
-    object-fit: contain; /* Fixed for product detail image */
+    object-fit: contain;
     margin: 0 auto 1.5rem auto;
 }
 
@@ -283,21 +298,37 @@ body {
 
 .product-modal-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.product-modal-notes {
-    font-size: 0.9rem;
-    color: var(--subtle-gray); 
+    font-size: 1.6rem;
     margin-bottom: 1rem;
-    font-style: italic;
 }
 
-.product-modal-description {
-    color: #555;
-    margin-top: 1rem;
-    font-size: 0.95rem;
+/* NEW NOTES SECTION */
+.notes-section {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.note-category {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: #F8F9FA;
+    border-radius: 8px;
+    border-left: 3px solid var(--secondary-color);
+}
+
+.note-category h4 {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+}
+
+.modal-notes {
+    font-size: 0.85rem;
+    color: var(--subtle-gray);
+    line-height: 1.4;
+    margin: 0;
 }
 
 .product-qualities {
@@ -314,6 +345,12 @@ body {
     color: var(--primary-color);
 }
 
+.product-modal-description {
+    color: #555;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
 .product-modal-footer {
     display: flex;
     flex-direction: column;
@@ -323,9 +360,8 @@ body {
     border-top: 1px solid #eee;
 }
 
-/* 4. PRICE SIZE CHANGE: Reduced product modal price size */
 .product-modal-price {
-    font-size: 1.5rem; /* Reduced from 2rem */
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--secondary-color);
 }
@@ -450,7 +486,6 @@ body {
     color: var(--subtle-gray);
 }
 
-
 /* Confirmation Modal */
 .confirmation-modal {
     text-align: center;
@@ -471,7 +506,6 @@ body {
     text-align: center;
     font-size: 0.9rem;
 }
-
 
 /* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
 @media (min-width: 768px) {
@@ -518,5 +552,4 @@ body {
         width: auto;
         min-width: 200px;
     }
-    /* Rest of the CSS remains unchanged */
 }
