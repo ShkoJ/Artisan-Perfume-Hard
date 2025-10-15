@@ -1,558 +1,522 @@
 :root {
-    --primary-color: #0A192F; /* Dark Blue */
-    --secondary-color: #FFC107; /* Amber/Gold */
-    --text-color: #333;
-    --light-text-color: #f9f9f9;
-    --bg-color: #F9F9F9;
-    --card-bg-color: #FFFFFF;
-    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
-    --subtle-gray: #888;
+    --primary-color: #0A192F; /* Dark Blue */
+    --secondary-color: #FFC107; /* Amber/Gold */
+    --text-color: #333;
+    --light-text-color: #f9f9f9;
+    --bg-color: #F9F9F9;
+    --card-bg-color: #FFFFFF;
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
+    --subtle-gray: #888;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-/* --- Header & Nav --- */
+/* Header & Nav */
 .header {
-    background-color: var(--card-bg-color);
-    box-shadow: 0 1px 5px var(--shadow-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 1px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    /* Reduced header padding for a more compact look */
-    padding: 0.75rem 0; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
 }
 
-/* Logo Image Styling */
+/* START: Logo Image Styling */
 .logo-container {
-    height: 30px; 
-    display: flex;
-    align-items: center;
+    /* Set a reasonable size for the logo container */
+    height: 30px; 
+    display: flex;
+    align-items: center;
 }
 .logo-image {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
+    height: 100%; /* Make the image fill the container height */
+    width: auto;
+    object-fit: contain;
+}
+/* END: Logo Image Styling */
+
+.logo-text {
+    /* Removed: This was for the text logo */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    display: none; /* Hide the original text logo */
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
-    order: 1; 
-    gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    order: 1; 
+    gap: 0.75rem;
 }
 
 .navigation {
-    width: 100%;
-    order: 2; 
-    margin-top: 0.75rem; 
+    width: 100%;
+    order: 2; 
+    margin-top: 1rem;
 }
 
 .nav-list {
-    display: flex;
-    list-style: none;
-    gap: 0.5rem;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    border-top: 1px solid #eee;
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-top: 1px solid #eee;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: 500;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    font-size: 0.85rem;
-    padding: 0.25rem 0.2rem;
-    white-space: nowrap;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.2rem;
+    white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--secondary-color);
-    border-bottom: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
 }
 
-/* --- Updated Search Styling --- */
 .search-container {
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    background-color: #f0f2f5;
-    padding: 0 0.5rem;
-}
-
-.search-icon {
-    color: var(--subtle-gray);
-    font-size: 1.1rem;
-    margin-right: 0.25rem;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #f0f2f5;
 }
 
 #search-input {
-    border: none;
-    background: none;
-    padding: 0.6rem 0.3rem 0.6rem 0;
-    font-size: 0.9rem;
-    width: 80px; 
-    transition: width 0.3s ease;
-    outline: none;
-}
-#search-input::placeholder {
-    color: var(--subtle-gray);
+    border: none;
+    background: none;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    width: 100px; 
+    transition: width 0.3s ease;
+    outline: none;
 }
 #search-input:focus {
-    width: 120px; 
+    width: 150px;
 }
 
-/* --- Perfume Catalog (Updated to 3 Columns on Mobile/Default) --- */
+/* Perfume Catalog */
 .perfume-catalog {
-    display: grid;
-    /* Changed to 3 columns with fixed minimum size */
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-    gap: 1rem; 
-    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+    gap: 1.5rem;
+    padding: 2rem 0;
 }
 
 .perfume-card {
-    background-color: var(--card-bg-color);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Smoother animation */
 }
 .perfume-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px var(--shadow-color);
+    transform: translateY(-8px); /* Slightly more lift */
+    box-shadow: 0 10px 25px var(--shadow-color); /* Nicer shadow */
 }
 
 .perfume-card-img {
-    width: 100%;
-    height: 180px; 
-    object-fit: contain; 
-    border-bottom: 1px solid #eee;
-    background-color: #F0F0F0;
+    width: 100%;
+    height: 180px; /* Fixed image height for uniform cards */
+    object-fit: contain; /* Ensures the image fits without cropping or stretching */
+    border-bottom: 1px solid #eee;
+    background-color: #F0F0F0;
 }
 
 .perfume-card-content {
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.75rem; 
 }
 
 .perfume-card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-    color: var(--primary-color);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* Kept for modal but removed from card render in JS */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--primary-color);
 }
 
 .perfume-card-notes {
-    font-size: 0.75rem;
-    color: var(--subtle-gray);
-    margin-bottom: 0.75rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.8rem;
+    color: var(--subtle-gray);
+    margin-bottom: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .perfume-card-price {
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
 
 /* --- Modals (General) --- */
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2000;
 }
 
 .modal-backdrop.active {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .modal {
-    background-color: var(--card-bg-color);
-    border-radius: 10px;
-    max-width: 95%;
-    width: 450px;
-    position: relative;
-    padding: 1.5rem; 
-    transform: scale(0.95);
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
-    opacity: 0;
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    max-width: 95%;
+    width: 450px;
+    position: relative;
+    padding: 1.5rem; 
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
+    opacity: 0;
 }
 
 .modal-backdrop.active .modal {
-    transform: scale(1);
-    opacity: 1;
+    transform: scale(1);
+    opacity: 1;
 }
 
 .modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--subtle-gray);
-    z-index: 10;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--subtle-gray);
+    z-index: 10;
 }
 
 .modal-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
 }
 .modal-btn:hover {
-    background-color: #1A3052;
+    background-color: #1A3052;
 }
 
-/* --- Product Modal specific adjustments --- */
+/* Product Modal specific adjustments */
 .product-modal {
-    max-width: 95%;
-    width: 750px; 
-    padding: 0; 
+    max-width: 95%;
+    width: 750px; 
+    padding: 0; 
 }
 
 .product-modal-body {
-    padding: 1.5rem; 
-    display: block; 
-    text-align: center;
+    padding: 1.5rem; 
+    display: block; 
+    text-align: center;
 }
 
 .product-modal-img {
-    width: 80%;
-    height: 250px;
-    object-fit: contain;
-    margin: 0 auto 1.5rem auto;
+    width: 80%;
+    height: 250px;
+    object-fit: contain; /* Fixed for product detail image */
+    margin: 0 auto 1.5rem auto;
 }
 
 .product-details {
-    padding-top: 0;
-    text-align: center;
+    padding-top: 0;
+    text-align: center;
 }
 
 .product-modal-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .product-modal-notes {
-    font-size: 0.9rem;
-    color: var(--subtle-gray); 
-    margin-bottom: 1rem;
-    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--subtle-gray); 
+    margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .product-modal-description {
-    color: #555;
-    margin-top: 1rem;
-    font-size: 0.95rem;
+    color: #555;
+    margin-top: 1rem;
+    font-size: 0.95rem;
 }
 
 .product-qualities {
-    display: flex;
-    gap: 1rem;
-    justify-content: center; 
-    margin: 1rem 0;
-    font-size: 0.9rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center; 
+    margin: 1rem 0;
+    font-size: 0.9rem;
 }
 .quality-item {
-    padding: 0.4rem 0.8rem;
-    background-color: #F0F2F5;
-    border-radius: 20px;
-    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    background-color: #F0F2F5;
+    border-radius: 20px;
+    color: var(--primary-color);
 }
 
 .product-modal-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem;
-    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
 }
 
+/* 4. PRICE SIZE CHANGE: Reduced product modal price size */
 .product-modal-price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--secondary-color);
+    font-size: 1.5rem; /* Reduced from 2rem */
+    font-weight: bold;
+    color: var(--secondary-color);
 }
 
-/* --- Order Modal Styles --- */
+/* Order Modal Styles */
 .order-modal h2, .quiz-modal h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .order-summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #eee;
-    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
 }
 .quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 .quantity-btn {
-    background: var(--bg-color);
-    border: 1px solid var(--subtle-gray);
-    color: var(--primary-color);
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    background: var(--bg-color);
+    border: 1px solid var(--subtle-gray);
+    color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 .quantity-btn:hover {
-    background-color: #ddd;
+    background-color: #ddd;
 }
 .delivery-note {
-    font-size: 0.85rem;
-    color: #e74c3c;
-    text-align: center;
-    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #e74c3c;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 .order-form input, .order-form select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.2s;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.2s;
 }
 .order-form input:focus, .order-form select:focus {
-    border-color: var(--secondary-color);
-    outline: none;
+    border-color: var(--secondary-color);
+    outline: none;
 }
 .order-form label {
-    display: block;
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-    font-weight: 500;
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
 }
 
-/* --- Quiz Modal Styles --- */
+/* Quiz Modal Styles */
 .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 .quiz-option-btn {
-    padding: 0.75rem;
-    border: 2px solid #ddd;
-    background-color: var(--bg-color);
-    border-radius: 8px;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
 }
 .quiz-option-btn:hover {
-    background-color: #f0f2f5;
+    background-color: #f0f2f5;
 }
 .quiz-option-btn.selected {
-    border-color: var(--secondary-color);
-    background-color: #FFFBEA;
-    font-weight: 600;
-    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+    border-color: var(--secondary-color);
+    background-color: #FFFBEA;
+    font-weight: 600;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
 }
 .quiz-controls {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 .quiz-controls .modal-btn {
-    width: 50%;
+    width: 50%;
 }
 .ghost-btn {
-    background-color: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 .quiz-result-card {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
 }
 .quiz-result-card:hover {
-    background-color: #f0f2f5;
-    transform: translateY(-2px);
+    background-color: #f0f2f5;
+    transform: translateY(-2px);
 }
 .quiz-result-card h4 {
-    color: var(--primary-color);
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 0.25rem;
+    color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.25rem;
 }
 .quiz-result-card p {
-    font-size: 0.85rem;
-    color: var(--subtle-gray);
+    font-size: 0.85rem;
+    color: var(--subtle-gray);
 }
 
 
-/* --- Confirmation Modal --- */
+/* Confirmation Modal */
 .confirmation-modal {
-    text-align: center;
+    text-align: center;
 }
 .green-tick {
-    font-size: 3rem;
-    color: #2ECC71;
-    display: block;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    color: #2ECC71;
+    display: block;
+    margin-bottom: 1rem;
 }
 
-/* --- Footer --- */
+/* Footer */
 .footer {
-    margin-top: auto;
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: 1.5rem 0;
-    text-align: center;
-    font-size: 0.9rem;
+    margin-top: auto;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
 
 /* --- DESKTOP/TABLET STYLES (Min-width: 768px) --- */
 @media (min-width: 768px) {
-    .container {
-        padding: 0 1.5rem;
-    }
+    .container {
+        padding: 0 1.5rem;
+    }
 
-    /* Desktop Header Layout */
-    .header-content {
-        flex-wrap: nowrap;
-    }
-    .navigation {
-        width: auto;
-        order: 0;
-        margin-top: 0;
-        flex-grow: 1; 
-        padding: 0 2rem;
-    }
-    .nav-list {
-        padding: 0;
-        border-top: none;
-        gap: 1.5rem;
-        justify-content: flex-start;
-    }
-    .nav-link {
-        font-size: 1rem;
-        padding: 0.25rem 0.5rem;
-    }
-    .header-right {
-        order: 3;
-    }
-    
-    /* Desktop Search Bar */
-    #search-input {
-        width: 180px; 
-        padding: 0.6rem 0.5rem 0.6rem 0;
-    }
-    #search-input:focus {
-        width: 250px; 
-    }
+    /* Desktop Header Layout */
+    .header-content {
+        flex-wrap: nowrap;
+    }
+    .navigation {
+        width: auto;
+        order: 0;
+        margin-top: 0;
+        flex-grow: 1; 
+        padding: 0 2rem;
+    }
+    .nav-list {
+        padding: 0;
+        border-top: none;
+        gap: 1.5rem;
+        justify-content: flex-start;
+    }
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+    }
+    .header-right {
+        order: 3;
+    }
+    #search-input {
+        width: 160px;
+    }
 
-    /* Desktop Catalog Layout (Increased to 4 Columns) */
-    .perfume-catalog {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-        padding: 3rem 0;
-    }
-    
-    /* Desktop Product Modal Layout */
-    .product-modal-body {
-        display: grid;
-        grid-template-columns: 2fr 3fr; /* Image takes 2 parts, details take 3 parts */
-        text-align: left;
-        padding: 2rem;
-        gap: 1.5rem;
-    }
-    .product-modal-img {
-        width: 100%;
-        height: auto; 
-        max-height: 400px;
-        margin: 0;
-    }
-    .product-details {
-        text-align: left;
-    }
-    .product-qualities {
-        justify-content: flex-start; /* Align qualities to the left */
-    }
-    
-    /* Desktop Product Modal Footer */
-    .product-modal-footer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem 2rem;
-    }
-    .product-modal-footer .modal-btn {
-        width: auto;
-        min-width: 200px;
-    }
+    /* Product Modal desktop layout */
+    .product-modal-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+    }
+    .product-modal-footer .modal-btn {
+        width: auto;
+        min-width: 200px;
+    }
+    /* Rest of the CSS remains unchanged */
 }
