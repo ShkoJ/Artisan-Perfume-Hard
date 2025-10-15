@@ -29,14 +29,18 @@
             </nav>
             <div class="header-right">
                 <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
                     <input
                         type="text"
                         id="search-input"
-                        placeholder="Search name or notes..."
-                        aria-label="Search perfumes by name or note"
+                        placeholder="Search"
+                        aria-label="Search perfumes"
                     />
                 </div>
-                </div>
+            </div>
         </div>
     </header>
 
@@ -60,7 +64,22 @@
                 <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
                 <div class="product-details">
                     <h3 id="modal-name" class="product-modal-name"></h3>
-                    <p id="modal-notes" class="product-modal-notes"></p>
+                    
+                    <div class="notes-section">
+                        <div class="note-category">
+                            <h4>Top Notes</h4>
+                            <p id="modal-top-notes" class="modal-notes"></p>
+                        </div>
+                        <div class="note-category">
+                            <h4>Middle Notes</h4>
+                            <p id="modal-middle-notes" class="modal-notes"></p>
+                        </div>
+                        <div class="note-category">
+                            <h4>Bottom Notes</h4>
+                            <p id="modal-bottom-notes" class="modal-notes"></p>
+                        </div>
+                    </div>
+                    
                     <div class="product-qualities">
                         <div class="quality-item">
                             <span id="modal-longevity" class="quality-label"></span>
