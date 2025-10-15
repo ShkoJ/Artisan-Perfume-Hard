@@ -52,9 +52,8 @@ body {
     padding: 3rem 0;
 }
 
-/* SLIGHTLY SMALLER LOGO */
 .logo-container {
-    height: 40px; /* FIXED: 40px (was 45px) */
+    height: 40px;
     display: flex;
     align-items: center;
 }
@@ -101,14 +100,13 @@ body {
     border-bottom: 2px solid var(--secondary-color);
 }
 
-/* THINNER SEARCH BAR + MAGNIFYING GLASS ON RIGHT */
 .search-container {
     display: flex;
     align-items: center;
-    border-radius: 20px; /* FIXED: Thinner */
+    border-radius: 20px;
     background-color: var(--card-bg-color);
     border: 2px solid #E5E5E5;
-    padding: 0.4rem; /* FIXED: Thinner padding */
+    padding: 0.4rem;
     transition: all 0.3s ease;
     min-width: 110px;
 }
@@ -121,13 +119,13 @@ body {
 #search-input {
     border: none;
     background: none;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem; /* FIXED: Thinner */
-    font-size: 0.85rem; /* FIXED: Slightly smaller */
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    font-size: 0.85rem;
     min-width: 75px;
     transition: min-width 0.3s ease;
     outline: none;
     color: var(--primary-color);
-    order: 1; /* FIXED: Input first */
+    order: 1;
 }
 
 #search-input::placeholder {
@@ -139,12 +137,12 @@ body {
 }
 
 .search-icon {
-    width: 16px; /* FIXED: Slightly smaller */
+    width: 16px;
     height: 16px;
     color: var(--subtle-gray);
-    margin-left: 0.4rem; /* FIXED: Right side */
+    margin-left: 0.4rem;
     flex-shrink: 0;
-    order: 2; /* FIXED: Icon last */
+    order: 2;
 }
 
 /* Perfume Catalog */
@@ -170,13 +168,12 @@ body {
     box-shadow: 0 10px 25px var(--shadow-color);
 }
 
-/* FIXED: IMAGE BACKGROUND WHITE NOT GRAY */
 .perfume-card-img {
     width: 100%;
     height: 180px;
     object-fit: contain;
     border-bottom: 1px solid #eee;
-    background-color: var(--card-bg-color); /* FIXED: WHITE */
+    background-color: var(--card-bg-color);
 }
 
 .perfume-card-content {
@@ -186,9 +183,17 @@ body {
 .perfume-card-name {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     color: var(--primary-color);
     font-weight: 600;
+}
+
+/* NEW: BRAND NAME IN CARDS */
+.perfume-card-brand {
+    font-size: 0.75rem;
+    color: var(--subtle-gray);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
 }
 
 .perfume-card-notes {
@@ -206,7 +211,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* --- Modals (General) + CLICK OUTSIDE TO CLOSE --- */
+/* --- Modals (General) --- */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -274,25 +279,24 @@ body {
     background-color: #1A3052;
 }
 
-/* FIXED PRODUCT MODAL - NO SCROLL + SMALLER IMAGE */
 .product-modal {
     max-width: 95%;
     width: 450px;
-    max-height: 80vh; /* FIXED: Tighter */
+    max-height: 80vh;
     padding: 0; 
 }
 
 .product-modal-body {
-    padding: 1rem; /* FIXED: Less padding */
+    padding: 1rem;
     display: block; 
     text-align: center;
     height: 100%;
-    overflow: hidden; /* FIXED: NO SCROLL */
+    overflow: hidden;
 }
 
 .product-modal-img {
-    width: 60%; /* FIXED: SMALLER IMAGE */
-    height: 160px; /* FIXED: Much shorter */
+    width: 60%;
+    height: 160px;
     object-fit: contain;
     margin: 0 auto 0.75rem auto;
 }
@@ -305,7 +309,15 @@ body {
 .product-modal-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+/* NEW: BRAND NAME IN MODAL */
+.brand-name {
+    font-size: 0.85rem;
+    color: var(--subtle-gray);
     margin-bottom: 0.75rem;
+    font-weight: 400;
 }
 
 .notes-section {
@@ -482,7 +494,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Footer */
+/* NEW: FOOTER WITH INSTAGRAM */
 .footer {
     margin-top: auto;
     background-color: var(--primary-color);
@@ -490,6 +502,29 @@ body {
     padding: 1.5rem 0;
     text-align: center;
     font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.instagram-link {
+    color: var(--light-text-color);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.instagram-link:hover {
+    opacity: 1;
+}
+
+.ig-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }
 
 /* DESKTOP STYLES */
