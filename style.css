@@ -576,22 +576,6 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .perfume-catalog {
-        justify-content: center;
-        gap: 1rem;
-        padding: 1rem 0.5rem;
-    }
-    
-    .notes-section {
-        margin: 1rem 0;
-    }
-    
-    .note-category {
-        margin-bottom: 0.75rem;
-    }
-}
-
 
 
 
