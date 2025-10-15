@@ -1,41 +1,104 @@
 // =========================================================================
-// --- FRAGRANCE DATA (UNCHANGED) ---
-const TEST_IMAGE_PATH = "fattan.jpeg";
-
+// --- 19 REAL FRAGRANCES - 50,000 IQD EACH --- 
 const initialPerfumes = [
-    { id: 1, name: "Midnight Bloom", priceIQD: 130000, category: "women", image: TEST_IMAGE_PATH, 
-      description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.",
-      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral",
-      topNotes: "Blackberry, Raspberry, Bergamot", middleNotes: "Jasmine, Rose, Ylang-Ylang", bottomNotes: "Vanilla, Amber, Musk"
+    { id: 1, name: "9:00 PM", brand: "AFNAN", priceIQD: 50000, category: "men", image: "9-00-pm-afnan.jpeg", 
+      description: "A magnetic evening fragrance blending apple, cinnamon, and vanilla into a warm, seductive aura. Confident, modern, and irresistibly smooth, it's made for nights that never end.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Apple, Cinnamon, Bergamot", middleNotes: "Lavender, Lily of the Valley", bottomNotes: "Vanilla, Amber, Patchouli"
     },
-    { id: 2, name: "Desert Sand", priceIQD: 115000, category: "men", image: TEST_IMAGE_PATH, 
-      description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.",
-      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody",
-      topNotes: "Saffron, Cardamom, Bergamot", middleNotes: "Cedarwood, Patchouli, Geranium", bottomNotes: "Amber, Sandalwood, Vetiver"
-    },
-    { id: 3, name: "Ocean Breeze", priceIQD: 95000, category: "women", image: TEST_IMAGE_PATH, 
-      description: "Fresh and aquatic with notes of sea salt and citrus. Ideal for daytime freshness and a clean, invigorating feeling.",
-      longevity: "Short-lived (2-4h)", sillage: "Light", profile: "Daytime_Aquatic",
-      topNotes: "Lemon, Bergamot, Mandarin", middleNotes: "Sea Salt, Jasmine, Lily", bottomNotes: "White Musk, Amber, Driftwood"
-    },
-    { id: 4, name: "Smoked Leather", priceIQD: 155000, category: "men", image: TEST_IMAGE_PATH, 
-      description: "Intense scent of tanned leather, smoky vetiver, and cardamom. Bold and distinctive, for the confident modern man.",
+    { id: 2, name: "9:00 PM Rebel", brand: "AFNAN", priceIQD: 50000, category: "men", image: "9-00-pm-rebel-afnan.jpeg", 
+      description: "A bold twist on the original. Spicy, woody, and daringly masculine, with notes of amber, tonka, and smoky woods that create a scent both unapologetic and powerfully captivating.",
       longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody",
-      topNotes: "Cardamom, Pink Pepper, Bergamot", middleNotes: "Leather, Vetiver, Sage", bottomNotes: "Oud, Patchouli, Tonka Bean"
+      topNotes: "Apple, Sage, Cardamom", middleNotes: "Lavender, Geranium", bottomNotes: "Tonka Bean, Amber, Cedarwood"
     },
-    { id: 5, name: "Spiced Vetiver", priceIQD: 140000, category: "men", image: TEST_IMAGE_PATH, 
-      description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.",
+    { id: 3, name: "Art of Arabia I", brand: "Lattafa", priceIQD: 50000, category: "men", image: "art-of-arabia-i-lattafa.jpeg", 
+      description: "Fresh bergamot and mint meet the depth of black tea and incense for a scent of pure sophistication. Elegant, clean, and quietly commanding, it embodies modern luxury in a bottle.",
+      longevity: "Long-lasting (8h+)", sillage: "Medium", profile: "Daytime_Aquatic",
+      topNotes: "Bergamot, Mint", middleNotes: "Black Tea, Jasmine", bottomNotes: "Incense, Amber, Musk"
+    },
+    { id: 4, name: "Art of Arabia III", brand: "Lattafa", priceIQD: 50000, category: "men", image: "art-of-arabia-iii-lattafa.jpeg", 
+      description: "Rich dates, tobacco, and myrrh enveloped in amber and vanilla create a deep oriental warmth. Opulent and intoxicating, it whispers luxury and lingers like a royal memory.",
+      longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Dates, Bergamot", middleNotes: "Tobacco, Myrrh", bottomNotes: "Amber, Vanilla, Oud"
+    },
+    { id: 5, name: "Asad Bourbon", brand: "Lattafa", priceIQD: 50000, category: "men", image: "asad-bourbon-lattafa.jpeg", 
+      description: "A smoky, gourmand masterpiece of vanilla bourbon, spices, and woods. Smooth, masculine, and daringly sensual, it embodies refined confidence with a hint of rebellion.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Bourbon Vanilla, Spices", middleNotes: "Tobacco, Cinnamon", bottomNotes: "Sandalwood, Amber"
+    },
+    { id: 6, name: "Atlas", brand: "Lattafa", priceIQD: 50000, category: "men", image: "atlas-lattafa.jpeg", 
+      description: "Bright citrus and pink pepper open to a heart of amber and suede, grounded by woody musk. Clean, adventurous, and endlessly versatile, it's made for those who carry the world on their shoulders.",
+      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody",
+      topNotes: "Citrus, Pink Pepper", middleNotes: "Amber, Suede", bottomNotes: "Woody Musk, Vetiver"
+    },
+    { id: 7, name: "Badee Al Oud Honor & Glory", brand: "Lattafa", priceIQD: 50000, category: "men", image: "badee-al-oud-honor-glory-lattafa.jpeg", 
+      description: "A luxurious blend of pineapple, honey, and tobacco with creamy vanilla and amber woods. Sweet yet powerful, it radiates confidence and golden sophistication.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral",
+      topNotes: "Pineapple, Honey", middleNotes: "Tobacco, Rose", bottomNotes: "Vanilla, Amber Woods"
+    },
+    { id: 8, name: "Badee Al Oud Sublime", brand: "Lattafa", priceIQD: 50000, category: "men", image: "badee-al-oud-sublime-lattafa.jpeg", 
+      description: "Citrusy bergamot and apple wrapped in amber, vanilla, and musk. Bright, elegant, and addictive, it's the perfect balance of freshness and depth.",
+      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Aquatic",
+      topNotes: "Bergamot, Apple", middleNotes: "Jasmine, Rose", bottomNotes: "Amber, Vanilla, Musk"
+    },
+    { id: 9, name: "Cassius", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "cassius-maison-alhambra.jpeg", 
+      description: "A bold, aromatic fusion of citrus, spices, and smoky woods. Charismatic and assertive, Cassius leaves an impression of timeless masculinity and effortless strength.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Citrus, Spices", middleNotes: "Lavender, Geranium", bottomNotes: "Smoky Woods, Amber"
+    },
+    { id: 10, name: "Delilah Pour Femme", brand: "Maison Alhambra", priceIQD: 50000, category: "women", image: "delilah-pour-femme-maison-alhambra.jpeg", 
+      description: "A romantic floral symphony of rose, jasmine, and creamy woods. Soft, sensual, and luminous, it captures the essence of feminine grace and allure.",
+      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Floral",
+      topNotes: "Rose, Jasmine", middleNotes: "Peony, Violet", bottomNotes: "Creamy Woods, Musk"
+    },
+    { id: 11, name: "Eclair", brand: "Lattafa", priceIQD: 50000, category: "women", image: "eclair-lattafa.jpeg", 
+      description: "Decadent caramel and vanilla meet chocolate and amber in a sweet yet elegant composition. Gourmand luxury at its finest, delicious, warm, and unforgettable.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral",
+      topNotes: "Caramel, Vanilla", middleNotes: "Chocolate, Praline", bottomNotes: "Amber, Benzoin"
+    },
+    { id: 12, name: "Emeer", brand: "Lattafa", priceIQD: 50000, category: "men", image: "emeer-lattafa.jpeg", 
+      description: "A regal blend of oud, saffron, and amber wrapped in dark woods and musk. Commanding and opulent, it's a fragrance fit for kings, rich, smoky, and powerfully magnetic.",
+      longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Oud, Saffron", middleNotes: "Amber, Rose", bottomNotes: "Dark Woods, Musk"
+    },
+    { id: 13, name: "Exclusif Tabac", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "exclusif-tabac-maison-alhambra.jpeg", 
+      description: "Deep tobacco and honey intertwined with vanilla and spice. Smooth, luxurious, and mature, it's the perfect scent for those who move through life with quiet power.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Tobacco, Honey", middleNotes: "Vanilla, Spice", bottomNotes: "Sandalwood, Amber"
+    },
+    { id: 14, name: "Fabulo Intense", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "fabulo-intense-maison-alhambra.jpeg", 
+      description: "Inspired by sophistication, it fuses lavender, leather, and tonka bean into a dark, addictive aura. Bold, mysterious, and irresistibly elegant, pure confidence in liquid form.",
+      longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Lavender, Bergamot", middleNotes: "Leather, Patchouli", bottomNotes: "Tonka Bean, Amber"
+    },
+    { id: 15, name: "Fattan", brand: "Al Rasasi", priceIQD: 50000, category: "men", image: "fattan-al-rasasi.jpeg", 
+      description: "An aromatic blend of citrus, spices, and woods that is both modern and timeless. Fresh yet deep, it speaks to the man who leads with strength and humility.",
+      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody",
+      topNotes: "Citrus, Spices", middleNotes: "Lavender, Geranium", bottomNotes: "Woods, Musk"
+    },
+    { id: 16, name: "Hawas Black", brand: "Al Rasasi", priceIQD: 50000, category: "men", image: "hawas-black-al-rasasi.jpeg", 
+      description: "Dark amber and patchouli enriched with apple and musk. Intense, seductive, and refined, it captures the scent of ambition and midnight allure.",
+      longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody",
+      topNotes: "Apple, Bergamot", middleNotes: "Patchouli, Cinnamon", bottomNotes: "Dark Amber, Musk"
+    },
+    { id: 17, name: "Hawas For Him", brand: "Al Rasasi", priceIQD: 50000, category: "men", image: "hawas-for-him-al-rasasi.jpeg", 
+      description: "A perfect balance of fresh aquatic notes, citrus, and ambergris. Energetic, confident, and effortlessly attractive, it's the signature of a modern gentleman.",
+      longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Aquatic",
+      topNotes: "Aquatic Notes, Citrus", middleNotes: "Plum, Orange Blossom", bottomNotes: "Ambergris, Musk"
+    },
+    { id: 18, name: "Hawas Ice", brand: "Al Rasasi", priceIQD: 50000, category: "men", image: "hawas-ice-al-rasasi.jpeg", 
+      description: "Crisp, invigorating citrus and mint chilled over amber and musk. Cool, dynamic, and refreshing, it captures the spirit of a man who thrives under pressure.",
+      longevity: "Short-lived (2-4h)", sillage: "Light", profile: "Daytime_Aquatic",
+      topNotes: "Citrus, Mint", middleNotes: "Apple, Ginger", bottomNotes: "Amber, Musk"
+    },
+    { id: 19, name: "Hayaati", brand: "Lattafa", priceIQD: 50000, category: "men", image: "hayaati-lattafa.jpeg", 
+      description: "A smooth blend of cinnamon, musk, and amber wrapped in subtle sweetness. Warm, elegant, and endlessly inviting, it's the scent of quiet confidence and everyday sophistication.",
       longevity: "Long-lasting (8h+)", sillage: "Medium", profile: "Anytime_Woody",
-      topNotes: "Black Pepper, Bergamot, Grapefruit", middleNotes: "Vetiver, Nutmeg, Lavender", bottomNotes: "Sandalwood, Amber, Patchouli"
-    },
-    { id: 6, name: "Lace & Lilac", priceIQD: 110000, category: "women", image: TEST_IMAGE_PATH, 
-      description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.",
-      longevity: "Moderate (4-6h)", sillage: "Light", profile: "Daytime_Floral",
-      topNotes: "Lilac, Pear, Bergamot", middleNotes: "Iris, Jasmine, Rose", bottomNotes: "Vanilla, Musk, Powder"
-    },
+      topNotes: "Cinnamon, Bergamot", middleNotes: "Jasmine, Rose", bottomNotes: "Musk, Amber"
+    }
 ];
 
-// --- STATE & SETUP ---
+// --- REST OF CODE UNCHANGED FROM LAST VERSION ---
 let currentPerfumes = [...initialPerfumes];
 let selectedPerfume = null;
 let orderQuantity = 1;
@@ -85,7 +148,6 @@ const quizQuestions = [
     }
 ];
 
-// --- UI ELEMENTS ---
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
@@ -102,12 +164,9 @@ const elements = {
     quizControlsFooter: $('#quiz-controls-footer'),
 };
 
-/**
- * NEW: Iraqi Phone Number Validation (0750 + 8 digits = 11 total)
- */
 function validatePhoneNumber(phone) {
-    const iraqiPattern = /^0750\d{7}$/; // 0750 followed by exactly 7 digits
-    return iraqiPattern.test(phone.replace(/\s/g, '')); // Remove spaces
+    const iraqiPattern = /^0750\d{7}$/;
+    return iraqiPattern.test(phone.replace(/\s/g, ''));
 }
 
 function formatCurrency(amount) {
@@ -128,9 +187,10 @@ function renderCatalog(perfumesToRender) {
         card.setAttribute('data-id', perfume.id);
         card.innerHTML = `
             <img src="${perfume.image}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
-                onerror="this.onerror=null; this.src='${TEST_IMAGE_PATH}';" /> 
+                onerror="this.onerror=null; this.src='fattan-al-rasasi.jpeg';" /> 
             <div class="perfume-card-content">
                 <h4 class="perfume-card-name">${perfume.name}</h4>
+                <p class="perfume-card-brand">${perfume.brand}</p>
                 <p class="perfume-card-notes">${perfume.topNotes}</p>
                 <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
             </div>
@@ -150,9 +210,10 @@ function closeModal(modalId) {
 
 function openProductModal(perfume) {
     selectedPerfume = perfume;
-    $('#modal-image').src = TEST_IMAGE_PATH; 
+    $('#modal-image').src = perfume.image; 
     $('#modal-image').alt = `${perfume.name} Perfume Bottle`;
     $('#modal-name').textContent = perfume.name;
+    $('#modal-brand').textContent = perfume.brand;
     
     $('#modal-top-notes').textContent = perfume.topNotes;
     $('#modal-middle-notes').textContent = perfume.middleNotes;
@@ -165,7 +226,7 @@ function openProductModal(perfume) {
     openModal('product-modal');
 }
 
-// --- QUIZ FUNCTIONS (UNCHANGED) ---
+// --- QUIZ FUNCTIONS ---
 function resetQuiz() {
     currentQuizStep = 0;
     quizAnswers = {};
@@ -255,7 +316,6 @@ function prevQuizStep() {
     }
 }
 
-// --- NEW: CLICK OUTSIDE TO CLOSE ALL MODALS ---
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal-backdrop') && e.target.classList.contains('active')) {
         const modalId = e.target.id;
@@ -265,7 +325,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// --- EVENT HANDLERS ---
 elements.navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -300,6 +359,7 @@ elements.searchInput.addEventListener('input', (e) => {
 
     const searched = initialPerfumes.filter(p =>
         p.name.toLowerCase().includes(searchTerm) ||
+        p.brand.toLowerCase().includes(searchTerm) ||
         p.topNotes.toLowerCase().includes(searchTerm) || 
         p.middleNotes.toLowerCase().includes(searchTerm) ||
         p.bottomNotes.toLowerCase().includes(searchTerm) ||
@@ -335,16 +395,12 @@ const updateQuantity = (delta) => {
 $('#minus-qty').addEventListener('click', () => updateQuantity(-1));
 $('#plus-qty').addEventListener('click', () => updateQuantity(1));
 
-/**
- * FIXED: Phone validation in form submission
- */
 elements.orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const customerName = $('#order-name').value.trim();
-    const customerPhone = $('#order-phone').value.replace(/\s/g, ''); // Remove spaces
+    const customerPhone = $('#order-phone').value.replace(/\s/g, '');
     
-    // NEW: Validate Iraqi phone number
     if (!validatePhoneNumber(customerPhone)) {
         elements.orderError.textContent = "Please enter a valid Iraqi phone number (0750XXXXXXXXX)";
         elements.orderError.style.display = 'block';
