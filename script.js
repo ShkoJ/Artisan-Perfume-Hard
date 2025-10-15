@@ -1,20 +1,97 @@
 // =========================================================================
 // --- FRAGRANCE DATA & EASY MANIPULATION ---
 // To add or remove fragrances, simply edit the objects in this array.
-// To use a custom image, replace the 'image' URL with your image path.
 // =========================================================================
 
 // --- 1. GLOBAL IMAGE REPLACEMENT ---
-const TEST_IMAGE_PATH = "fattan.jpeg"; // Use fattan.jpeg for all fragrances
+const TEST_IMAGE_PATH = "fattan.jpeg";
 
 const initialPerfumes = [
-    // Updated image property to use the test image path
-    { id: 1, name: "Midnight Bloom", priceIQD: 130000, category: "women", notes: "Dark Berries, Jasmine, Vanilla", image: TEST_IMAGE_PATH, description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.", longevity: "Long-lasting (8h+)", sillage: "Heavy", profile: "Evening_Floral" },
-    { id: 2, name: "Desert Sand", priceIQD: 115000, category: "men", notes: "Amber, Cedarwood, Spice", image: TEST_IMAGE_PATH, description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.", longevity: "Moderate (4-6h)", sillage: "Medium", profile: "Daytime_Woody" },
-    { id: 3, name: "Ocean Breeze", priceIQD: 95000, category: "women", notes: "Sea Salt, Citrus, White Musk", image: TEST_IMAGE_PATH, description: "Fresh and aquatic with notes of sea salt and citrus. Ideal for daytime freshness and a clean, invigorating feeling.", longevity: "Short-lived (2-4h)", sillage: "Light", profile: "Daytime_Aquatic" },
-    { id: 4, name: "Smoked Leather", priceIQD: 155000, category: "men", notes: "Leather, Vetiver, Cardamom", image: TEST_IMAGE_PATH, description: "Intense scent of tanned leather, smoky vetiver, and cardamom. Bold and distinctive, for the confident modern man.", longevity: "Very Long-lasting (10h+)", sillage: "Heavy", profile: "Evening_Woody" },
-    { id: 5, name: "Spiced Vetiver", priceIQD: 140000, category: "men", notes: "Vetiver, Nutmeg, Black Pepper", image: TEST_IMAGE_PATH, description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.", longevity: "Long-lasting (8h+)", sillage: "Medium", profile: "Anytime_Woody" },
-    { id: 6, name: "Lace & Lilac", priceIQD: 110000, category: "women", notes: "Lilac, Iris, Vanilla Powder", image: TEST_IMAGE_PATH, description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.", longevity: "Moderate (4-6h)", sillage: "Light", profile: "Daytime_Floral" },
+    { 
+        id: 1, 
+        name: "Midnight Bloom", 
+        priceIQD: 130000, 
+        category: "women", 
+        image: TEST_IMAGE_PATH, 
+        description: "A captivating blend of dark berries, jasmine, and vanilla. Perfect for evening wear, offering warmth and sophistication.",
+        longevity: "Long-lasting (8h+)", 
+        sillage: "Heavy", 
+        profile: "Evening_Floral",
+        // NEW: Detailed notes (max 3 per category)
+        topNotes: "Blackberry, Raspberry, Bergamot",
+        middleNotes: "Jasmine, Rose, Ylang-Ylang", 
+        bottomNotes: "Vanilla, Amber, Musk"
+    },
+    { 
+        id: 2, 
+        name: "Desert Sand", 
+        priceIQD: 115000, 
+        category: "men", 
+        image: TEST_IMAGE_PATH, 
+        description: "Warm notes of amber, cedarwood, and a hint of spice. A rugged, earthy scent that embodies freedom and adventure.",
+        longevity: "Moderate (4-6h)", 
+        sillage: "Medium", 
+        profile: "Daytime_Woody",
+        topNotes: "Saffron, Cardamom, Bergamot",
+        middleNotes: "Cedarwood, Patchouli, Geranium",
+        bottomNotes: "Amber, Sandalwood, Vetiver"
+    },
+    { 
+        id: 3, 
+        name: "Ocean Breeze", 
+        priceIQD: 95000, 
+        category: "women", 
+        image: TEST_IMAGE_PATH, 
+        description: "Fresh and aquatic with notes of sea salt and citrus. Ideal for daytime freshness and a clean, invigorating feeling.",
+        longevity: "Short-lived (2-4h)", 
+        sillage: "Light", 
+        profile: "Daytime_Aquatic",
+        topNotes: "Lemon, Bergamot, Mandarin",
+        middleNotes: "Sea Salt, Jasmine, Lily",
+        bottomNotes: "White Musk, Amber, Driftwood"
+    },
+    { 
+        id: 4, 
+        name: "Smoked Leather", 
+        priceIQD: 155000, 
+        category: "men", 
+        image: TEST_IMAGE_PATH, 
+        description: "Intense scent of tanned leather, smoky vetiver, and cardamom. Bold and distinctive, for the confident modern man.",
+        longevity: "Very Long-lasting (10h+)", 
+        sillage: "Heavy", 
+        profile: "Evening_Woody",
+        topNotes: "Cardamom, Pink Pepper, Bergamot",
+        middleNotes: "Leather, Vetiver, Sage",
+        bottomNotes: "Oud, Patchouli, Tonka Bean"
+    },
+    { 
+        id: 5, 
+        name: "Spiced Vetiver", 
+        priceIQD: 140000, 
+        category: "men", 
+        image: TEST_IMAGE_PATH, 
+        description: "A complex blend of earthy vetiver, warm nutmeg, and a touch of black pepper. Distinguished and comforting.",
+        longevity: "Long-lasting (8h+)", 
+        sillage: "Medium", 
+        profile: "Anytime_Woody",
+        topNotes: "Black Pepper, Bergamot, Grapefruit",
+        middleNotes: "Vetiver, Nutmeg, Lavender",
+        bottomNotes: "Sandalwood, Amber, Patchouli"
+    },
+    { 
+        id: 6, 
+        name: "Lace & Lilac", 
+        priceIQD: 110000, 
+        category: "women", 
+        image: TEST_IMAGE_PATH, 
+        description: "Delicate florals with a powdery finish. A classic, romantic, and beautifully soft feminine fragrance.",
+        longevity: "Moderate (4-6h)", 
+        sillage: "Light", 
+        profile: "Daytime_Floral",
+        topNotes: "Lilac, Pear, Bergamot",
+        middleNotes: "Iris, Jasmine, Rose",
+        bottomNotes: "Vanilla, Musk, Powder"
+    },
 ];
 
 // --- STATE MANAGEMENT ---
@@ -26,18 +103,14 @@ let quizAnswers = {};
 
 // =========================================================================
 // --- TELEGRAM SETUP ---
-// Configuration using your provided Bot Token and Channel ID
 // =========================================================================
 const BOT_TOKEN = '8276122717:AAG4UVrd_BgLVZDtS7UP7_jXBvSiAoHYiBk'; 
-const CHAT_ID = '-1002969971930'; // Your actual ARTISAN ORDERS channel ID
+const CHAT_ID = '-1002969971930';
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-// =========================================================================
 
 // --- ORDER TRACKING COUNTER ---
-// Retrieves the last order number or starts at 0. Stores in browser's local storage.
 let orderCounter = parseInt(localStorage.getItem('artisanOrderCounter') || 0);
 
-// --- 2. EXPANDED QUIZ DATA (Includes Gender and Season) ---
 const quizQuestions = [
     {
         question: "Is this for a Man or a Woman?",
@@ -90,12 +163,9 @@ const elements = {
     orderForm: $('#order-form'),
     orderError: $('#order-error'),
     quizContent: $('#quiz-content'),
-    // Removed quizNextBtn and quizPrevBtn from elements, but leaving the button elements in HTML for now for future re-use, just hiding 'Next'
     quizPrevBtn: $('#quiz-prev-btn'), 
     quizControlsFooter: $('#quiz-controls-footer'),
 };
-
-// --- CORE UI FUNCTIONS ---
 
 /**
  * Formats a number to English comma-separated format followed by "IQD".
@@ -107,6 +177,7 @@ function formatCurrency(amount) {
 
 /**
  * Renders the current list of perfumes to the catalog section.
+ * UPDATED: NOW SHOWS NAME + 3 PER ROW
  */
 function renderCatalog(perfumesToRender) {
     elements.catalog.innerHTML = '';
@@ -123,7 +194,8 @@ function renderCatalog(perfumesToRender) {
             <img src="${perfume.image}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
                 onerror="this.onerror=null; this.src='${TEST_IMAGE_PATH}';" /> 
             <div class="perfume-card-content">
-                <p class="perfume-card-notes">${perfume.notes}</p>
+                <h4 class="perfume-card-name">${perfume.name}</h4> <!-- ADDED NAME -->
+                <p class="perfume-card-notes">${perfume.topNotes}</p> <!-- SHOW TOP NOTES -->
                 <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
             </div>
         `;
@@ -132,50 +204,46 @@ function renderCatalog(perfumesToRender) {
     });
 }
 
-/**
- * Opens a specific modal.
- */
 function openModal(modalId) {
     document.getElementById(modalId)?.classList.add('active');
 }
 
-/**
- * Closes a specific modal.
- */
 function closeModal(modalId) {
     document.getElementById(modalId)?.classList.remove('active');
 }
 
 /**
- * Populates and opens the product detail modal.
+ * UPDATED: Shows Top/Middle/Bottom notes (max 3 each)
  */
 function openProductModal(perfume) {
     selectedPerfume = perfume;
-    // 4. MODAL IMAGE UPDATE: Ensure modal image uses the test image
     $('#modal-image').src = TEST_IMAGE_PATH; 
     $('#modal-image').alt = `${perfume.name} Perfume Bottle`;
     $('#modal-name').textContent = perfume.name;
-    $('#modal-notes').textContent = `Top Notes: ${perfume.notes}`; 
+    
+    // NEW: Detailed notes display
+    $('#modal-top-notes').textContent = perfume.topNotes;
+    $('#modal-middle-notes').textContent = perfume.middleNotes;
+    $('#modal-bottom-notes').textContent = perfume.bottomNotes;
+    
     $('#modal-description').textContent = perfume.description;
     $('#modal-longevity').textContent = `Longevity: ${perfume.longevity}`;
     $('#modal-sillage').textContent = `Sillage: ${perfume.sillage}`;
-    $('#modal-price').textContent = formatCurrency(perfume.priceIQD); // Price size is now controlled by CSS
+    $('#modal-price').textContent = formatCurrency(perfume.priceIQD);
     openModal('product-modal');
 }
 
 // --- QUIZ LOGIC FUNCTIONS ---
-
 function resetQuiz() {
     currentQuizStep = 0;
     quizAnswers = {};
     elements.quizContent.innerHTML = '';
     elements.quizPrevBtn.style.display = 'none';
     
-    // Ensure "Help me Choose" link is un-highlighted after quiz close
     const helpMeChooseLink = $('#help-me-choose-btn');
     if(helpMeChooseLink.classList.contains('active')) {
         helpMeChooseLink.classList.remove('active');
-        elements.navLinks[0].click(); // Go back to 'All' filter
+        elements.navLinks[0].click();
     }
 }
 
@@ -190,7 +258,6 @@ function renderQuizStep() {
     elements.quizContent.innerHTML = '';
     
     if (currentQuizStep >= quizQuestions.length) {
-        // Quiz is finished, show results (to be fixed after data migration)
         elements.quizContent.innerHTML = `
             <div>
                 <h3 class="modal-title" style="margin-bottom: 1rem;">Quiz Complete!</h3>
@@ -223,26 +290,20 @@ function renderQuizStep() {
         `;
         elements.quizContent.appendChild(questionHtml);
 
-        // --- 5. INTERACTIVE QUIZ LOGIC: AUTO-PROGRESSION ---
         $$('.quiz-option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const selectedValue = e.target.getAttribute('data-value');
                 const key = quizQuestions[currentQuizStep].key;
 
-                // 1. Record Answer
                 quizAnswers[key] = selectedValue;
                 
-                // Optional: Visually mark selected option
                 $$('.quiz-option-btn').forEach(o => o.classList.remove('selected'));
                 e.target.classList.add('selected');
 
-                // 2. Automatically go to the next step
-                setTimeout(nextQuizStep, 300); // Small delay for visual feedback
+                setTimeout(nextQuizStep, 300);
             });
         });
-        // End of Auto-Progression Logic
 
-        // Update control visibility
         elements.quizPrevBtn.style.display = currentQuizStep > 0 ? 'inline-block' : 'none';
     }
 }
@@ -257,15 +318,12 @@ function nextQuizStep() {
 function prevQuizStep() {
     if (currentQuizStep > 0) {
         currentQuizStep--;
-        // Remove the answer for the step we're going back from
         delete quizAnswers[quizQuestions[currentQuizStep].key]; 
         renderQuizStep();
     }
 }
 
 // --- EVENT HANDLERS ---
-
-// Filtering and Navigation
 elements.navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -274,7 +332,7 @@ elements.navLinks.forEach(link => {
             elements.navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
             elements.searchInput.value = '';
-            startQuiz(); // Start quiz instead of filtering
+            startQuiz();
             return;
         }
 
@@ -294,22 +352,21 @@ elements.navLinks.forEach(link => {
     });
 });
 
-// Search Functionality (Includes notes)
 elements.searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
     elements.navLinks.forEach(l => l.classList.remove('active')); 
 
     const searched = initialPerfumes.filter(p =>
         p.name.toLowerCase().includes(searchTerm) ||
-        p.notes.toLowerCase().includes(searchTerm) || 
+        p.topNotes.toLowerCase().includes(searchTerm) || 
+        p.middleNotes.toLowerCase().includes(searchTerm) ||
+        p.bottomNotes.toLowerCase().includes(searchTerm) ||
         p.description.toLowerCase().includes(searchTerm)
     );
     currentPerfumes = searched;
     renderCatalog(currentPerfumes);
 });
 
-
-// Modal Close Buttons 
 $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const modalId = e.target.getAttribute('data-modal') || e.target.closest('.modal-backdrop').id;
@@ -319,8 +376,6 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     });
 });
 
-
-// Product Modal to Order Modal flow
 $('#order-now-btn').addEventListener('click', () => {
     if (!selectedPerfume) return;
     orderQuantity = 1;
@@ -331,8 +386,6 @@ $('#order-now-btn').addEventListener('click', () => {
     elements.orderError.style.display = 'none';
 });
 
-
-// Order Quantity Control
 const updateQuantity = (delta) => {
     orderQuantity = Math.max(1, orderQuantity + delta);
     elements.orderQuantityValue.textContent = orderQuantity;
@@ -340,13 +393,8 @@ const updateQuantity = (delta) => {
 $('#minus-qty').addEventListener('click', () => updateQuantity(-1));
 $('#plus-qty').addEventListener('click', () => updateQuantity(1));
 
-
-/**
- * Sends the order data as a Telegram message via the Bot API.
- */
 async function sendTelegramNotification(orderData) {
     if (CHAT_ID === '-1002969971930') {
-        // This check is a safeguard, but since the user provided the ID, it should work.
         console.log("Using provided Telegram Channel ID:", CHAT_ID);
     } 
 
@@ -393,24 +441,9 @@ async function sendTelegramNotification(orderData) {
     }
 }
 
-
-// --- ORDER SUBMISSION (Now sends to Telegram) ---
-
 elements.orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Check if the chat ID is still the placeholder (if the user skipped the manual update)
-    if (CHAT_ID === '-1002969971930') {
-        // It's already the correct ID, so we proceed.
-    } else {
-        // If the ID was somehow reverted, use the error path
-        elements.orderError.textContent = "Order failed: Telegram Channel ID is incorrect or missing.";
-        elements.orderError.style.display = 'block';
-        return;
-    }
-
-
-    // Increment counter and save it immediately
     orderCounter++;
     localStorage.setItem('artisanOrderCounter', orderCounter);
 
@@ -419,7 +452,7 @@ elements.orderForm.addEventListener('submit', async (e) => {
     const totalAmount = selectedPerfume.priceIQD * orderQuantity;
 
     const orderData = {
-        orderId: orderCounter, // Added Order ID
+        orderId: orderCounter,
         timestamp: new Date().toISOString(),
         customerName,
         customerPhone,
@@ -428,11 +461,9 @@ elements.orderForm.addEventListener('submit', async (e) => {
         totalPrice: formatCurrency(totalAmount)
     };
     
-    // Attempt to send notification via Telegram API
     const notificationResult = await sendTelegramNotification(orderData);
 
     if (notificationResult.ok) {
-        // Successful notification: Show confirmation modal
         console.log(`Order #${orderCounter} Submitted and Telegram Notification Sent:`, orderData);
         closeModal('order-modal');
         $('#confirmation-message').innerHTML = `
@@ -441,25 +472,19 @@ elements.orderForm.addEventListener('submit', async (e) => {
         `;
         openModal('confirmation-modal');
 
-        // Clear form and state
         elements.orderForm.reset();
         selectedPerfume = null;
         elements.orderError.style.display = 'none';
         
     } else {
-        // Failed notification: Show error
         elements.orderError.textContent = notificationResult.error || "There was an issue placing your order. Please try again.";
         elements.orderError.style.display = 'block';
-        // Decrement counter as the order didn't go through
         orderCounter--;
         localStorage.setItem('artisanOrderCounter', orderCounter);
     }
 });
 
-
-// Quiz Previous Button Control
 elements.quizPrevBtn.addEventListener('click', prevQuizStep);
-
 
 // INITIAL LOAD
 document.addEventListener('DOMContentLoaded', () => {
