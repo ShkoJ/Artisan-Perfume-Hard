@@ -1,143 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artisan Perfumes</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;700&display=swap"
-        rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="logo.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Fragrances - Home</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container header-content">
-            <div class="logo-container">
-                <img src="logo.png" alt="Artisan Perfumes Logo" class="logo-image" />
-            </div>
-            <nav class="navigation">
-                <ul class="nav-list">
-                    <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
-                    <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
-                    <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
-                    <li><a href="#" class="nav-link" id="help-me-choose-btn">Help me Choose</a></li>
-                </ul>
-            </nav>
-            <div class="header-right">
-                <div class="search-container">
-                                        <span class="search-icon" aria-hidden="true">&#128269;</span>
-                    <input
-                        type="text"
-                        id="search-input"
-                                                placeholder="Search"
-                        aria-label="Search perfumes"
-                    />
-                </div>
-                </div>
-        </div>
-    </header>
 
-    <main class="main-content">
-        <div class="container">
-            <section class="perfume-catalog" id="perfume-catalog">
-            </section>
-        </div>
-    </main>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="fattan.jpeg" alt="Artisan Fragrances Logo" class="logo-image" onerror="this.src='fattan.jpeg';">
+            </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Artisan Perfumes. Crafted in Erbil.</p>
-        </div>
-    </footer>
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
+                    <li><a href="#" class="nav-link" data-filter="men">Men's</a></li>
+                    <li><a href="#" class="nav-link" data-filter="women">Women's</a></li>
+                    <li><a href="#" class="nav-link" id="help-me-choose-btn">Help me Choose</a></li>
+                </ul>
+            </nav>
 
-    <div id="product-modal" class="modal-backdrop">
-        <div class="modal product-modal">
-            <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
-            <div class="product-modal-body">
-                <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
-                <div class="product-details">
-                    <h3 id="modal-name" class="product-modal-name"></h3>
-                    <p id="modal-notes" class="product-modal-notes"></p>
-                    <div class="product-qualities">
-                        <div class="quality-item">
-                            <span id="modal-longevity" class="quality-label"></span>
-                        </div>
-                        <div class="quality-item">
-                            <span id="modal-sillage" class="quality-label"></span>
-                        </div>
-                    </div>
-                    <p id="modal-description" class="product-modal-description"></p>
-                    <div class="product-modal-footer">
-                        <p id="modal-price" class="product-modal-price"></p>
-                        <button id="order-now-btn" class="modal-btn">Order Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <div id="order-modal" class="modal-backdrop">
-        <div class="modal order-modal">
-            <button class="modal-close-btn" aria-label="Close order form" data-modal="order-modal">&times;</button>
-            <h2 class="modal-title">Confirm Your Order</h2>
-            <div class="order-summary-item">
-                <h4 id="order-summary-name"></h4>
-                <div class="quantity-control">
-                    <button class="quantity-btn minus-btn" aria-label="Decrease quantity" id="minus-qty">-</button>
-                    <span id="order-quantity" class="quantity-value">1</span>
-                    <button class="quantity-btn plus-btn" aria-label="Increase quantity" id="plus-qty">+</button>
-                </div>
-            </div>
-            <p class="delivery-note">Delivery is currently available only for Erbil.</p>
-            <form id="order-form" class="order-form">
-                <input type="text" id="order-name" placeholder="Your Full Name" required />
-                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 0770XXXXXXX)" required />
-                <div class="form-group">
-                    <label for="order-city">City (Erbil Only)</label>
-                    <select id="order-city" required>
-                        <option value="Erbil">Erbil</option>
-                    </select>
-                </div>
-                <button type="submit" class="modal-btn place-order-btn">Place Order</button>
-                <p id="order-error" class="error-message" style="display: none;">Could not place order. Please check inputs.</p>
-            </form>
-        </div>
-    </div>
+    <main class="container">
+        <section id="perfume-catalog" class="perfume-catalog">
+            </section>
+    </main>
 
-    <div id="quiz-modal" class="modal-backdrop">
-        <div class="modal quiz-modal">
-            <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
-            <h2 class="modal-title">Find Your Perfect Scent</h2>
-            <form id="quiz-form">
-                <div id="quiz-content">
-                    </div>
-                <div class="quiz-controls" id="quiz-controls-footer">
-                    <button
-                        type="button"
-                        id="quiz-prev-btn"
-                        class="modal-btn ghost-btn"
-                        style="display: none;"
-                    >
-                        Previous
-                    </button>
-                    </div>
-            </form>
-        </div>
-        </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year">2023</span> Artisan Fragrances. All Rights Reserved. | Designed for the Iraqi market.</p>
+        </div>
+    </footer>
 
-    <div id="confirmation-modal" class="modal-backdrop">
-        <div class="modal confirmation-modal">
-            <span class="green-tick">✔️</span>
-            <h2 class="modal-title">Order Confirmed!</h2>
-            <p id="confirmation-message">Thank you for your purchase. Our team will contact you shortly.</p>
-            <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Browse More</button>
-        </div>
-    </div>
 
-    <script type="module" src="script.js"></script>
+    <div id="product-modal" class="modal-backdrop">
+        <div class="modal product-modal">
+            <button class="modal-close-btn" data-modal="product-modal"><i class="fas fa-times"></i></button>
+            <div class="product-modal-body">
+                <img src="fattan.jpeg" id="modal-image" alt="Product Image" class="product-modal-img">
+                <div class="product-details">
+                    <h2 id="modal-name" class="product-modal-name">Perfume Name</h2>
+                    <p id="modal-notes" class="product-modal-notes">Top Notes: Citrus, Spices</p>
+                    
+                    <div class="product-qualities">
+                        <span id="modal-longevity" class="quality-item">Longevity: 8h+</span>
+                        <span id="modal-sillage" class="quality-item">Sillage: Heavy</span>
+                    </div>
+
+                    <p id="modal-description" class="product-modal-description">A rich, oriental fragrance blending smoky incense with exotic wood, designed for memorable evening occasions.</p>
+                </div>
+            </div>
+            <div class="product-modal-footer">
+                <span id="modal-price" class="product-modal-price">120,000 IQD</span>
+                <button id="order-now-btn" class="modal-btn">Order Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-modal" class="modal-backdrop">
+        <div class="modal order-modal">
+            <button class="modal-close-btn" data-modal="order-modal"><i class="fas fa-times"></i></button>
+            <h2>Confirm Your Order</h2>
+            <div class="order-summary-item">
+                <span id="order-summary-name" style="font-weight: 600;">Perfume Name</span>
+                <div class="quantity-control">
+                    <button type="button" id="minus-qty" class="quantity-btn">-</button>
+                    <span id="order-quantity">1</span>
+                    <button type="button" id="plus-qty" class="quantity-btn">+</button>
+                </div>
+            </div>
+
+            <p class="delivery-note">Delivery is fixed to Erbil and charged separately (7,000 IQD). Please provide your details.</p>
+
+            <form id="order-form" class="order-form">
+                <label for="order-name">Full Name</label>
+                <input type="text" id="order-name" required placeholder="Enter your full name">
+
+                <label for="order-phone">Phone Number</label>
+                <input type="tel" id="order-phone" required placeholder="e.g., 0750xxxxxxx">
+                
+                <p id="order-error" style="color: #e74c3c; display: none; margin-bottom: 1rem;"></p>
+                <button type="submit" class="modal-btn">Confirm Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="modal-backdrop">
+        <div class="modal quiz-modal">
+            <button class="modal-close-btn" data-modal="quiz-modal"><i class="fas fa-times"></i></button>
+            <h2>Fragrance Finder Quiz</h2>
+            <div id="quiz-content">
+                </div>
+            <div class="quiz-controls" id="quiz-controls-footer">
+                <button type="button" id="quiz-prev-btn" class="modal-btn ghost-btn" style="width: 45%; display: none;">Previous</button>
+                </div>
+        </div>
+    </div>
+
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal confirmation-modal">
+            <span class="green-tick"><i class="fas fa-check-circle"></i></span>
+            <h2>Order Placed Successfully!</h2>
+            <p id="confirmation-message" style="margin-bottom: 1.5rem;">
+                Thank you! Your order has been placed. We will contact you shortly.
+            </p>
+            <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Continue Browsing</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Set the current year in the footer dynamically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
