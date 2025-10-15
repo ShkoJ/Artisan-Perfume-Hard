@@ -147,10 +147,13 @@ body {
 
 /* Perfume Catalog */
 .perfume-catalog {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;        /* ← CENTER CARDS */
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;                 /* ← CENTER CONTAINER */
 }
 
 .perfume-card {
@@ -302,8 +305,9 @@ body {
 }
 
 .product-details {
-    padding-top: 0;
-    text-align: center;
+    text-align: center;             /* ← PERFECT CENTER */
+    flex: 1;
+    padding: 1.5rem;
 }
 
 .product-modal-name {
@@ -321,31 +325,28 @@ body {
 }
 
 .notes-section {
-    margin: 0.75rem 0;
-    text-align: left;
+    text-align: center;             /* ← CENTER ALL NOTES */
+    margin: 1.5rem 0;
 }
 
 .note-category {
-    margin-bottom: 0.5rem;
-    padding: 0.4rem;
-    background: #F8F9FA;
-    border-radius: 6px;
-    border-left: 3px solid var(--secondary-color);
+    margin-bottom: 1rem;
+    text-align: center;             /* ← CENTER EACH SECTION */
 }
 
 .note-category h4 {
-    font-size: 0.8rem;
-    color: var(--primary-color);
-    margin-bottom: 0.15rem;
-    font-weight: 600;
-    font-family: 'Playfair Display', serif;
+    text-align: center;             /* ← CENTER TITLES */
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #333;
 }
 
 .modal-notes {
-    font-size: 0.75rem;
-    color: var(--subtle-gray);
-    line-height: 1.3;
-    margin: 0;
+    text-align: center;             /* ← CENTER NOTE TEXT */
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    padding: 0 1rem;
 }
 
 .product-qualities {
@@ -574,4 +575,23 @@ body {
         min-width: 200px;
     }
 }
+
+@media (max-width: 768px) {
+    .perfume-catalog {
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+    
+    .notes-section {
+        margin: 1rem 0;
+    }
+    
+    .note-category {
+        margin-bottom: 0.75rem;
+    }
+}
+
+
+
 
