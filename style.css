@@ -521,11 +521,14 @@ body {
     opacity: 1;
 }
 
+/* ALL PREVIOUS CSS SAME, ONLY CHANGE FOOTER ICON */
 .ig-icon {
     width: 18px;
     height: 18px;
     fill: currentColor;
 }
+
+/* REST OF CSS IDENTICAL TO PREVIOUS VERSION */
 
 /* DESKTOP STYLES */
 @media (min-width: 768px) {
@@ -571,3 +574,4 @@ body {
         min-width: 200px;
     }
 }
+
