@@ -52,11 +52,27 @@ body {
     padding: 1rem 0;
 }
 
+/* START: Logo Image Styling */
+.logo-container {
+    /* Set a reasonable size for the logo container */
+    height: 30px; 
+    display: flex;
+    align-items: center;
+}
+.logo-image {
+    height: 100%; /* Make the image fill the container height */
+    width: auto;
+    object-fit: contain;
+}
+/* END: Logo Image Styling */
+
 .logo-text {
+    /* Removed: This was for the text logo */
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     color: var(--primary-color);
     font-weight: 700;
+    display: none; /* Hide the original text logo */
 }
 
 .header-right {
@@ -307,8 +323,9 @@ body {
     border-top: 1px solid #eee;
 }
 
+/* 4. PRICE SIZE CHANGE: Reduced product modal price size */
 .product-modal-price {
-    font-size: 2rem;
+    font-size: 1.5rem; /* Reduced from 2rem */
     font-weight: bold;
     color: var(--secondary-color);
 }
@@ -490,46 +507,7 @@ body {
         width: 160px;
     }
 
-    /* Desktop Catalog */
-    .perfume-catalog {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 3rem 0;
-    }
-    @media (min-width: 1024px) {
-        .perfume-catalog {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    .perfume-card-img {
-        height: 220px;
-    }
-
     /* Product Modal desktop layout */
-    .product-modal-body {
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        align-items: flex-start;
-    }
-    .product-modal-img {
-        width: 40%;
-        min-width: 200px;
-        height: 280px;
-        object-fit: contain;
-        margin: 0;
-    }
-    .product-details {
-        width: 60%;
-        text-align: left;
-    }
-    .product-modal-name, .product-modal-description, .product-modal-notes {
-        text-align: left;
-    }
-    .product-qualities {
-        justify-content: flex-start;
-    }
-
     .product-modal-footer {
         flex-direction: row;
         justify-content: space-between;
@@ -540,4 +518,5 @@ body {
         width: auto;
         min-width: 200px;
     }
+    /* Rest of the CSS remains unchanged */
 }
