@@ -7,7 +7,6 @@
     --card-bg-color: #FFFFFF;
     --shadow-color: rgba(0, 0, 0, 0.15);
     --subtle-gray: #888;
-    --gutter: 18px; /* viewport inner margin */
 }
 
 * {
@@ -28,7 +27,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: var(--gutter); /* create margin inside the viewport */
+    width: 100%;
+    padding: 0 0.25rem; /* small horizontal padding as requested */
+    padding-top: 0;
+    text-align: center; /* centers inline content by default */
 }
 
 .container {
@@ -42,7 +44,7 @@ body {
     background-color: var(--card-bg-color);
     box-shadow: 0 1px 5px var(--shadow-color);
     position: sticky;
-    top: calc(var(--gutter)); /* respect top gutter so header sits inside the viewport */
+    top: 0;
     z-index: 1000;
 }
 
@@ -242,12 +244,14 @@ body {
     max-width: 95%;
     width: 450px;
     position: relative;
-    padding: 1.5rem; 
+    padding: 1.25rem; 
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
     opacity: 0;
     max-height: 90vh;
-    font-size: 0.95rem; /* slightly smaller overall modal text */
+    /* increase modal font-size to make text noticeably larger */
+    font-size: 1.15rem; /* ~15% larger than root */
+    line-height: 1.45;
 }
 
 .modal-backdrop.active .modal {
@@ -271,46 +275,60 @@ body {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.32rem 0.5rem; /* very compact button padding */
-    font-size: 0.72rem; /* smaller buttons */
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: auto; /* don't force full-width buttons */
+    width: 100%;
     text-align: center;
 }
 .modal-btn:hover {
     background-color: #1A3052;
 }
 
-/* keep the order/place-order button full width for forms that expect it */
-.place-order-btn {
-    width: 100%;
-}
-
 .product-modal {
     max-width: 95%;
-    width: 500px;
-    max-height: 85vh;
-    padding: 0; 
+    width: 380px; /* aggressively smaller to fit at 100% zoom */
+    max-height: 86vh;
+    padding: 0;
 }
 
 .product-modal-body {
-    padding: 1.5rem;
-    display: block; 
+    padding: 0.5rem 0.55rem 0.35rem 0.55rem; /* tightened padding */
+    display: flex; 
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
     text-align: center;
     height: 100%;
     overflow-y: auto;
 }
 
 .product-modal-img {
-    width: 70%;
-    height: 200px;
+    width: 44%;
+    height: 100px;
+    max-width: 110px; /* ensure the image stays small even at high resolutions */
     object-fit: contain;
     margin: 0 auto 1rem auto;
     border-radius: 8px;
     background-color: #f8f9fa;
     padding: 0.5rem;
+}
+
+/* Specific smaller sizing for the modal's main image */
+#modal-image {
+    width: 40%;
+    max-width: 100px;
+    height: 90px;
+    padding: 0.25rem;
+}
+
+.product-details {
+    width: 100%;
+    text-align: left; /* align details to the left for better wrapping */
+    padding: 0 0.25rem;
+    box-sizing: border-box;
 }
 
 .product-details {
@@ -320,15 +338,15 @@ body {
 
 .product-modal-name {
     font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.05rem; /* smaller title */
+    margin-bottom: 0.08rem;
 }
 
 /* NEW: BRAND NAME IN MODAL */
 .brand-name {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     color: var(--subtle-gray);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.35rem;
     font-weight: 400;
 }
 
@@ -338,39 +356,45 @@ body {
 }
 
 .note-category {
-    margin-bottom: 0.75rem;
-    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    padding: 0.4rem 0.75rem;
     background: #F8F9FA;
     border-radius: 8px;
     border-left: 3px solid var(--secondary-color);
     border-bottom: 3px solid var(--secondary-color);
+    width: 100%;
+    box-sizing: border-box;
+    visibility: visible;
+    font-size: 1.05rem; /* slightly smaller to fit */
+    line-height: 1.35;
+    text-align: left;
 }
 
 .note-category h4 {
-    font-size: 0.8rem;
+    font-size: 0.85rem; /* slightly smaller heading */
     color: var(--primary-color);
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.12rem; /* controlled gap under heading */
     font-weight: 600;
     font-family: 'Cinzel', serif;
 }
 
 .modal-notes {
-    font-size: 0.75rem;
+    font-size: 0.95rem; /* slightly smaller note text */
     color: var(--subtle-gray);
-    line-height: 1.3;
+    line-height: 1.32;
     margin: 0;
     text-align: center;
 }
 
 .product-qualities {
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     justify-content: center; 
-    margin: 1rem 0;
-    font-size: 0.9rem;
+    margin: 0.6rem 0;
+    font-size: 0.85rem;
 }
 .quality-item {
-    padding: 0.5rem 0.75rem;
+    padding: 0.35rem 0.6rem;
     background-color: #F0F2F5;
     border-radius: 25px;
     color: var(--primary-color);
@@ -379,24 +403,32 @@ body {
 
 .product-modal-description {
     color: #555;
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    line-height: 1.4;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    line-height: 1.35;
 }
 
 .product-modal-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
+    gap: 0.28rem;
+    padding: 0.25rem 0.35rem; /* slightly tighter footer padding */
     border-top: 1px solid #eee;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .product-modal-price {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: var(--secondary-color);
+}
+
+.product-modal-footer .modal-btn {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.95rem;
 }
 
 /* Order Modal Styles */
@@ -583,230 +615,73 @@ body {
     color: var(--primary-color);
 }
 
-/* Simple Quiz Modal - Small White Window */
-
-/* Quiz modal uses the shared .modal and .modal-backdrop styles.
-   Make it centered and allow internal scrolling only inside the modal body. */
-.quiz-modal-content {
-    background: var(--card-bg-color);
-    border-radius: 10px;
+/* Quiz modal (uses same modal/backdrop pattern) */
+.quiz-modal {
+    /* behave like other .modal elements inside .modal-backdrop */
+    max-width: 540px;
     width: 100%;
-    max-width: 720px; /* wider window per request */
-    max-height: 84vh;
-    box-shadow: 0 12px 40px rgba(10, 25, 47, 0.14);
-    position: relative;
-    border: 1px solid #eee;
-    overflow: hidden; /* contain internal scrolling */
-    padding: 0; /* inner sections control padding */
-}
-
-.quiz-modal-content .quiz-modal-body {
-    padding: 15px; /* exact 15px gutter inside the modal */
+    /* reduced vertical padding so the modal has more usable space */
+    padding: 0.6rem 1rem;
+    /* ensure it always fits comfortably inside viewport */
+    max-height: calc(100vh - 48px);
     overflow-y: auto;
-    max-height: calc(84vh - 120px); /* leave space for header/footer */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #ddd;
+    margin: 0 0.75rem;
 }
 
-/* Prevent body from scrolling when a modal is open */
-.no-scroll {
-    height: 100%;
-    overflow: hidden;
-}
-
-.quiz-modal-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    color: #333;
-}
-
-.quiz-modal-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-    color: #333;
-}
-
-.quiz-modal-close {
-    background: none;
-    border: none;
-    color: #666;
+.quiz-modal .modal-title {
+    text-align: center;
+    margin: 0 0 0.75rem 0;
     font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.3rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
 }
 
-.quiz-modal-close:hover {
-    background-color: #f5f5f5;
+#quiz-content {
+    /* keep bottom padding small so inner lists don't push the modal beyond viewport */
+    padding: 0.15rem 0 0.4rem 0;
 }
 
-.quiz-modal-body {
-    padding: 15px; /* align general quiz modal body padding */
-    min-height: 200px;
-}
-
-.quiz-step {
-    display: none;
-}
-
-.quiz-step.active {
-    display: block;
-}
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
 
 .quiz-question {
-    font-size: 0.76rem; /* zoomed out smaller text */
+    font-size: 1rem;
     font-weight: 500;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     text-align: center;
-    line-height: 1.25;
 }
 
 .quiz-options {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
-}
-
-.quiz-option {
-    padding: 0.35rem 0.5rem; /* compact padding */
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.72rem; /* smaller text to 'zoom out' */
-    font-weight: 400;
-    text-align: center;
-    min-height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.quiz-option:hover {
-    border-color: #007bff;
-    background-color: #f8f9fa;
-}
-
-.quiz-option.selected {
-    border-color: #007bff;
-    background-color: #007bff;
-    color: white;
-}
-
-.quiz-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-}
-
-.quiz-progress {
-    font-size: 0.8rem;
-    color: #666;
-    font-weight: 400;
-}
-
-.quiz-buttons {
-    display: flex;
-    gap: 0.8rem;
-}
-
-.quiz-btn {
-    padding: 0.35rem 0.6rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 64px;
-}
-
-.quiz-btn-primary {
-    background-color: #007bff;
-    color: white;
-}
-
-.quiz-btn-primary:hover:not(:disabled) {
-    background-color: #0056b3;
-}
-
-.quiz-btn-secondary {
-    background-color: #f8f9fa;
-    color: #333;
-    border: 1px solid #ddd;
-}
-
-.quiz-btn-secondary:hover {
-    background-color: #e9ecef;
-}
-
-.quiz-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Simple Quiz Results */
-.quiz-results {
-    text-align: center;
-    padding: 0.5rem 0;
-}
-
-.quiz-results-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333;
+    gap: 0.6rem;
     margin-bottom: 0.8rem;
 }
 
-.quiz-results-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
-}
-
-.quiz-recommendations {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 0.5rem;
-}
-
-.quiz-recommendation {
-    background: white;
+.quiz-option-btn {
+    padding: 0.72rem 0.85rem;
     border: 1px solid #ddd;
     border-radius: 6px;
-    padding: 1rem;
-    transition: all 0.2s ease;
+    background: white;
     cursor: pointer;
+    transition: all 0.18s ease;
+    font-size: 0.95rem;
+    text-align: center;
 }
 
-.quiz-recommendation:hover {
-    border-color: #007bff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+.quiz-option-btn:hover { background-color: #f8f9fa; }
+.quiz-option-btn.selected { border-color: var(--secondary-color); background: #FFFBEA; color: var(--primary-color); font-weight: 600; }
 
-.quiz-recommendation-img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin: 0 auto 0.8rem auto;
-    display: block;
-}
+.quiz-controls { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.9rem; padding-top: 0.6rem; border-top: 1px solid #eee; }
+
+.quiz-recommendations { display: grid; gap: 0.8rem; margin-bottom: 0.6rem; /* reduce max height so it scrolls inside the modal */
+    max-height: calc(100vh - 360px); /* reduce visible recommendations height to free space for buttons */
+    overflow-y: auto; padding: 0.4rem 0; }
+
+.quiz-recommendation-card { border: 2px solid #FFC107; border-radius: 12px; padding: 0.6rem; background: #FFFBEA; display: flex; gap: 0.6rem; cursor: pointer; }
+
+.recommendation-image { width: 62px; height: 82px; object-fit: contain; border-radius: 6px; background-color: #f8f9fa; padding: 0.35rem; flex-shrink: 0; }
 
 .quiz-recommendation-name {
     font-size: 0.95rem;
@@ -915,7 +790,7 @@ body {
     
     .quiz-recommendations {
         gap: 0.8rem;
-        max-height: 250px;
+        max-height: 200px;
     }
     
     .quiz-recommendation {
@@ -942,6 +817,33 @@ body {
     .quiz-recommendation-price {
         font-size: 0.85rem;
     }
+}
+
+/* Quiz results action buttons: keep them compact and visible */
+.quiz-results-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    /* stick to bottom of modal so buttons are always reachable */
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(255,255,255,0.95));
+    padding: 0.22rem 0; /* reduced vertical padding */
+    margin-top: 0.18rem; /* reduced top margin */
+}
+
+.quiz-results-actions .modal-btn {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.9rem;
+    width: auto;
+    min-width: 110px;
+}
+
+/* Make modal-btns inside quiz modal slightly smaller overall */
+.quiz-modal .modal-btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.92rem;
 }
 
 /* Confirmation Modal */
