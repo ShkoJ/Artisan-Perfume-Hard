@@ -316,18 +316,20 @@ function renderCatalog(perfumesToRender) {
 }
 
 function openModal(modalId) {
-    const el = document.getElementById(modalId);
-    el?.classList.add('active');
-    // lock background scroll when any modal opens
-    document.body.classList.add('no-scroll');
+    const backdrop = document.getElementById(modalId);
+    if (!backdrop) return;
+    backdrop.classList.add('active');
+    // prevent body scrolling while modal is open
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal(modalId) {
-    const el = document.getElementById(modalId);
-    el?.classList.remove('active');
-    // if no other modals are active, restore body scroll
+    const backdrop = document.getElementById(modalId);
+    if (!backdrop) return;
+    backdrop.classList.remove('active');
+    // if no other modal is active, restore body scrolling
     const anyActive = document.querySelectorAll('.modal-backdrop.active').length > 0;
-    if (!anyActive) document.body.classList.remove('no-scroll');
+    if (!anyActive) document.body.style.overflow = '';
 }
 
 function openProductModal(perfume) {
@@ -437,7 +439,6 @@ function renderQuizStep() {
                 </div>
                 
                 <div class="quiz-results-actions">
-                    <button type="button" class="modal-btn" onclick="closeModal('quiz-modal'); resetQuiz();" style="margin-right: 0.5rem;">Browse All</button>
                     <button type="button" class="modal-btn ghost-btn" data-modal="quiz-modal">Close Quiz</button>
                 </div>
             </div>
@@ -565,6 +566,20 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
         if (modalId === 'quiz-modal') resetQuiz();
         if (modalId === 'confirmation-modal') elements.navLinks[0].click(); 
     });
+});
+
+// Delegated handler: any element with a data-modal attribute will close that modal
+document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-modal]');
+    if (!el) return;
+    // avoid double-handling elements that already have specific classes
+    if (el.classList.contains('modal-close-btn') || el.classList.contains('close-confirm-btn')) return;
+
+    const modalId = el.getAttribute('data-modal');
+    if (!modalId) return;
+    closeModal(modalId);
+    if (modalId === 'quiz-modal') resetQuiz();
+    if (modalId === 'confirmation-modal') elements.navLinks[0].click();
 });
 
 $('#order-now-btn').addEventListener('click', () => {
