@@ -79,7 +79,7 @@ const initialPerfumes = [
       shortDescription: "Rich Tobacco Osmanthus",
       topNotes: "Osmanthus, Artemisia, Citrus", middleNotes: "Tobacco, Patchouli, Guaiac Wood", bottomNotes: "Tonka Bean"
     },
-    { id: 14, name: "Fabulo Intense", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "fabulo.jpeg", 
+    { id: 14, name: "Fusion Intense", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "fabulo.jpeg", 
       description: "Dark lavender and leather with bitter almond intrigue. Mysterious masculine seduction.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
       shortDescription: "Dark Lavender Leather",
@@ -696,3 +696,4 @@ async function sendTelegramNotification(orderData) {
 document.addEventListener('DOMContentLoaded', () => {
     renderCatalog(initialPerfumes);
 });
+
