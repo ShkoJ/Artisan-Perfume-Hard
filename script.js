@@ -1,217 +1,8 @@
 // =========================================================================
-// --- FINAL 35 FRAGRANCES - ALL NEW DATA + IMAGES - REMOVED 2 FILES --- 
-const initialPerfumes = [
-    { id: 1, name: "9:00 PM Rebel", brand: "AFNAN", priceIQD: 40000, category: "men", image: "9 PM Rebel.jpeg", 
-      description: "A bold pineapple and apple opening with warm vanilla and caramel depth. Seductive and commanding.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Bold Pineapple Apple",
-      topNotes: "Pineapple, Apple, Mandarin", middleNotes: "Oakmoss, Vanilla, Cedarwood", bottomNotes: "Dry Wood, Ambergris, Caramel"
-    },
-    { id: 2, name: "9:00 PM", brand: "AFNAN", priceIQD: 40000, category: "men", image: "9 PM.jpeg", 
-      description: "Iconic apple-cinnamon warmth with creamy vanilla and amber. Timeless seduction for unforgettable nights.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Apple Cinnamon Warmth",
-      topNotes: "Apple, Cinnamon, Lavender", middleNotes: "Orange Blossom, Lily-of-the-Valley", bottomNotes: "Vanilla, Tonka Bean, Amber"
-    },
-    { id: 3, name: "Art Of Arabia I", brand: "Lattafa", priceIQD: 60000, category: "men", image: "art_1.jpeg", 
-      description: "Fresh bergamot-mint meets sophisticated black tea and incense. Elegant daily luxury.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Fresh Bergamot Mint",
-      topNotes: "Bergamot, Mint", middleNotes: "Black Tea, Ginger, Lavender", bottomNotes: "Ambroxan, Frankincense, Cinnamon"
-    },
-    { id: 4, name: "Art Of Arabia III", brand: "Lattafa", priceIQD: 60000, category: "men", image: "art_3.jpeg", 
-      description: "Rich dates and tobacco wrapped in myrrh and vanilla. Opulent oriental warmth.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Rich Dates Tobacco",
-      topNotes: "Olibanum, Davana, Bergamot", middleNotes: "Dates, Tobacco, Sandalwood", bottomNotes: "Myrrh, Vanilla, Tonka Bean"
-    },
-    { id: 5, name: "Asad Bourbon", brand: "Lattafa", priceIQD: 50000, category: "men", image: "Asad_bourbon.jpeg", 
-      description: "Smoky bourbon vanilla with cacao and warm spices. Sophisticated gourmand confidence.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Smoky Bourbon Vanilla",
-      topNotes: "Lavender, Mirabelle, Pink Pepper", middleNotes: "Cacao, Nutmeg, Davana", bottomNotes: "Bourbon Vanilla, Amber, Vetiver"
-    },
-    { id: 6, name: "Atlas", brand: "Lattafa", priceIQD: 40000, category: "men", image: "atlas.jpeg", 
-      description: "Fresh sea notes and lemon with ambergris depth. Adventurous and versatile.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Fresh Sea Lemon",
-      topNotes: "Sea Notes, Salt, Lemon", middleNotes: "Davana, Iris", bottomNotes: "Ambergris, Oakmoss, Sandalwood"
-    },
-    { id: 7, name: "Badee Al Oud Honor And Glory", brand: "Lattafa", priceIQD: 50000, category: "men", image: "badee_honor.jpeg", 
-      description: "Pineapple and creme brulee with spicy cinnamon warmth. Regal and golden sophistication.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Pineapple Creme Brulee",
-      topNotes: "Pineapple, Creme Brulee", middleNotes: "Cinnamon, Turmeric, Black Pepper", bottomNotes: "Vanilla, Sandalwood Cashmeran"
-    },
-    { id: 8, name: "Badee Al Oud Sublime", brand: "Lattafa", priceIQD: 50000, category: "men", image: "badee_sublime.jpeg", 
-      description: "Juicy apple and litchi with plush jasmine florals. Bright yet addictive elegance.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Juicy Apple Litchi",
-      topNotes: "Apple, Litchi, Rose", middleNotes: "Plum, Jasmine", bottomNotes: "Moss, Vanilla, Patchouli"
-    },
-    { id: 9, name: "Cassius", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "cassius.jpeg", 
-      description: "Spicy nutmeg and green apple with rich tonka depth. Charismatic masculine power.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Spicy Nutmeg Apple",
-      topNotes: "Nutmeg, Green Apple", middleNotes: "Tonka Bean, Rose", bottomNotes: "Patchouli, Vanilla"
-    },
-    { id: 10, name: "Delilah Pour Femme", brand: "Maison Alhambra", priceIQD: 50000, category: "women", image: "delilah.jpeg", 
-      description: "Romantic Turkish rose and peony with creamy vanilla musk. Feminine grace perfected.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Turkish Rose Peony",
-      topNotes: "Rhubarb, Litchi, Bergamot", middleNotes: "Turkish Rose, Peony, Lily", bottomNotes: "White Musk, Cashmeran, Vanilla"
-    },
-    { id: 11, name: "Eclair", brand: "Lattafa", priceIQD: 50000, category: "women", image: "eclaire.jpeg", 
-      description: "Decadent caramel and milk with honeyed florals. Irresistible gourmand luxury.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Decadent Caramel Milk",
-      topNotes: "Caramel, Milk, Sugar", middleNotes: "Honey, White Flowers", bottomNotes: "Vanilla, Praline, Musk"
-    },
-    { id: 12, name: "Emeer", brand: "Lattafa", priceIQD: 40000, category: "men", image: "emeer.jpeg", 
-      description: "Regal lemon and white tea with ambergris sophistication. Commanding oriental presence.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Regal Lemon Tea",
-      topNotes: "Lemon, Bergamot, Clary Sage", middleNotes: "White Tea, Sandalwood, Cardamom", bottomNotes: "Ambergris, Cedarwood, Cashmeran"
-    },
-    { id: 13, name: "Exclusif Tabac", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "exclusif_tabac.jpeg", 
-      description: "Rich tobacco and osmanthus with smooth tonka warmth. Mature masculine elegance.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Rich Tobacco Osmanthus",
-      topNotes: "Osmanthus, Artemisia, Citrus", middleNotes: "Tobacco, Patchouli, Guaiac Wood", bottomNotes: "Tonka Bean"
-    },
-    { id: 14, name: "Fusion Intense", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "fabulo.jpeg", 
-      description: "Dark lavender and leather with bitter almond intrigue. Mysterious masculine seduction.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Dark Lavender Leather",
-      topNotes: "Lavender, Clary Sage", middleNotes: "Bitter Almond, Vanilla, Orris Root", bottomNotes: "Leather, White Woods, Tonka Bean"
-    },
-    { id: 15, name: "Fattan", brand: "ALRASASI", priceIQD: 40000, category: "men", image: "fattan.jpeg", 
-      description: "Zesty grapefruit and pink pepper with earthy vetiver depth. Modern timeless masculinity.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Woody",
-      shortDescription: "Zesty Grapefruit Pepper",
-      topNotes: "Grapefruit, Bergamot, Pink Pepper", middleNotes: "Vetiver, Cedar, Patchouli", bottomNotes: "Oakmoss, Benzoin, Amber"
-    },
-    { id: 16, name: "Hawas Black", brand: "ALRASASI", priceIQD: 70000, category: "men", image: "hawas_black.jpeg", 
-      description: "Dark bergamot-pineapple with intense patchouli amber. Midnight masculine allure.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Dark Bergamot Pineapple",
-      topNotes: "Bergamot, Pineapple, Grapefruit", middleNotes: "Patchouli, Cedarwood, Jasmine", bottomNotes: "Oakmoss, Woody Notes, Amber"
-    },
-    { id: 17, name: "Hawas For Him", brand: "ALRASASI", priceIQD: 70000, category: "men", image: "hawas.jpeg", 
-      description: "Fresh apple and watery plum with ambergris magnetism. Ultimate modern gentleman.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Fresh Apple Plum",
-      topNotes: "Apple, Bergamot, Lemon", middleNotes: "Watery Notes, Plum, Orange Blossom", bottomNotes: "Ambergris, Musk, Patchouli"
-    },
-    { id: 18, name: "Hawas Ice", brand: "ALRASASI", priceIQD: 70000, category: "men", image: "hawas_ice.jpeg", 
-      description: "Icy lemon and apple with cool cardamom freshness. Dynamic chilled confidence.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Icy Lemon Apple",
-      topNotes: "Apple, Italian Lemon, Sicilian Bergamot", middleNotes: "Plum, Orange Blossom, Cardamom", bottomNotes: "Musk, Amber, Driftwood"
-    },
-    { id: 19, name: "Hayaati", brand: "Lattafa", priceIQD: 50000, category: "men", image: "hayaati.jpeg", 
-      description: "Warm apple-cinnamon with creamy vanilla musk. Everyday sophisticated comfort.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Anytime_Woody",
-      shortDescription: "Warm Apple Cinnamon",
-      topNotes: "Apple, Bergamot", middleNotes: "Cinnamon, Woodsy Notes", bottomNotes: "Musk, Vanilla"
-    },
-    { id: 20, name: "Her Confession", brand: "Lattafa", priceIQD: 50000, category: "women", image: "her_confession.jpeg", 
-      description: "Mystical cinnamon-tuberose with warm vanilla tonka. Romantic feminine expression.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Mystical Cinnamon Tuberose",
-      topNotes: "Mystikal, Cinnamon", middleNotes: "Tuberose, Jasmine, Incense", bottomNotes: "Vanilla Tonka, Musk"
-    },
-    { id: 21, name: "His Confession", brand: "Lattafa", priceIQD: 50000, category: "men", image: "his_confession.jpeg", 
-      description: "Spicy cinnamon-lavender with smooth amber tonka. Bold intimate masculinity.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Woody",
-      shortDescription: "Spicy Cinnamon Lavender",
-      topNotes: "Cinnamon, Lavender, Mandarin", middleNotes: "Iris, Benzoin, Cypress", bottomNotes: "Vanilla, Tonka, Amber"
-    },
-    { id: 22, name: "Jean Lowe Immortal", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "immortal.jpeg", 
-      description: "Zesty ginger-grapefruit with ambroxan amber depth. Timeless legendary power.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Zesty Ginger Grapefruit",
-      topNotes: "Ginger, Grapefruit, Bergamot", middleNotes: "Rosemary, Water Notes, Sage", bottomNotes: "Ambroxan, Amber, Labdanum"
-    },
-    { id: 23, name: "Jean Lowe Ombre", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "ombre.jpeg", 
-      description: "Deep oud-incense with raspberry rose intrigue. Sophisticated dark elegance.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Deep Oud Incense",
-      topNotes: "Oud, Incense", middleNotes: "Rose, Raspberry, Saffron", bottomNotes: "Amber, Benzoin, Geranium"
-    },
-    { id: 24, name: "Khamrah", brand: "Lattafa", priceIQD: 40000, category: "unisex", image: "Khamrah.jpeg", 
-      description: "Spiced dates and praline with creamy tuberose. Sensual oriental masterpiece.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Spiced Dates Praline",
-      topNotes: "Cinnamon, Nutmeg, Bergamot", middleNotes: "Dates, Praline, Tuberose", bottomNotes: "Vanilla, Tonka Bean, Amberwood"
-    },
-    { id: 25, name: "Khamrah Dukhan", brand: "Lattafa", priceIQD: 40000, category: "men", image: "khamrah_dukhan.jpeg", 
-      description: "Smoky incense and spicy pimento with rich tobacco depth. Dramatic oriental intensity.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Smoky Incense Pimento",
-      topNotes: "Spices, Pimento, Mandarin", middleNotes: "Incense, Labdanum, Orange Blossom", bottomNotes: "Praline, Tobacco, Amber"
-    },
-    { id: 26, name: "Khamrah Qahwa", brand: "Lattafa", priceIQD: 40000, category: "men", image: "khamra_qahwa.jpeg", 
-      description: "Rich coffee and cinnamon with candied fruit sweetness. Bold aromatic magnetism.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Rich Coffee Cinnamon",
-      topNotes: "Cinnamon, Cardamom, Ginger", middleNotes: "Praline, Candied Fruits, White Fruits", bottomNotes: "Vanilla, Coffee, Tonka Bean"
-    },
-    { id: 27, name: "Liqud Brun", brand: "FRENCH AVENUE", priceIQD: 50000, category: "unisex", image: "liquid.jpeg", 
-      description: "Warm cinnamon-cognac with buttery praline woods. Decadent French indulgence.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Warm Cinnamon Cognac",
-      topNotes: "Cinnamon, Orange Blossom, Cardamom", middleNotes: "Bourbon Vanilla, Elemi Resin", bottomNotes: "Praline, Ambroxan, Guaiac Wood"
-    },
-    { id: 28, name: "Opulence Leather", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "opulence.jpg", 
-      description: "Rich cardamom-leather with jasmine and moss depth. Luxurious masculine statement.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Rich Cardamom Leather",
-      topNotes: "Cardamom", middleNotes: "Leather, Jasmine Sambac", bottomNotes: "Amber, Moss, Patchouli"
-    },
-    { id: 29, name: "Supremacy Collector's Edition", brand: "AFNAN", priceIQD: 70000, category: "men", image: "supremacy_collector.jpeg", 
-      description: "Exclusive pineapple and white flowers with oakmoss ambergris. Regal collector's masterpiece.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Exclusive Pineapple Flowers",
-      topNotes: "Pineapple, Bergamot, White Flowers", middleNotes: "Orange Blossom, Birch, Amber", bottomNotes: "Oakmoss, Musk, Ambergris"
-    },
-    { id: 30, name: "Supremacy Not Only Intense", brand: "AFNAN", priceIQD: 70000, category: "men", image: "not_only.jpeg", 
-      description: "Bold black currant and apple with intense saffron musk. Commanding modern power.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Bold Black Currant",
-      topNotes: "Black Currant, Bergamot, Apple", middleNotes: "Oakmoss, Patchouli, Lavender", bottomNotes: "Ambergris, Musk, Saffron"
-    },
-    { id: 31, name: "Teriaq Intense", brand: "Lattafa", priceIQD: 50000, category: "men", image: "Teriaq.jpeg", 
-      description: "Luxurious saffron-plum with warm cinnamon tonka. Intense oriental sophistication.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Luxurious Saffron Plum",
-      topNotes: "Saffron, Bergamot", middleNotes: "Plum Liquor, Cinnamon", bottomNotes: "Amber, Tonka Bean, Benzoin"
-    },
-    { id: 32, name: "Tobacco Touch", brand: "Maison Alhambra", priceIQD: 50000, category: "men", image: "tobacco_touch.jpeg", 
-      description: "Smooth tobacco and spicy vanilla with dried fruit warmth. Elegant everyday signature.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Anytime_Woody",
-      shortDescription: "Smooth Tobacco Vanilla",
-      topNotes: "Tobacco, Spicy Notes", middleNotes: "Tobacco, Vanilla, Tonka Bean", bottomNotes: "Dried Fruits, Woody Notes"
-    },
-    { id: 33, name: "Turathi Blue", brand: "AFNAN", priceIQD: 50000, category: "men", image: "Turathi.jpeg", 
-      description: "Bright citrus freshness with amber-woody musk. Coastal elegant versatility.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Bright Citrus Freshness",
-      topNotes: "Citrus", middleNotes: "Amber, Woody Notes", bottomNotes: "Musk, Spices, Patchouli"
-    },
-    { id: 34, name: "Winsome", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "winsome.jpg", 
-      description: "Delicate violet-rose with bourbon vanilla warmth. Charming feminine radiance.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Delicate Violet Rose",
-      topNotes: "Violet Leaf, Coriander, Bergamot", middleNotes: "Rose, Black Pepper, Lily-of-the-Valley", bottomNotes: "Patchouli, Bourbon Vanilla, Ambergris"
-    },
-    { id: 35, name: "Yara", brand: "Lattafa", priceIQD: 40000, category: "women", image: "yara.jpeg", 
-      description: "Bright orchid-tangerine with tropical vanilla musk. Luminous feminine glow.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Bright Orchid Tangerine",
-      topNotes: "Orchid, Heliotrope, Tangerine", middleNotes: "Gourmand Accord, Tropical Fruits", bottomNotes: "Vanilla, Musk, Sandalwood"
-    }
-];
+// --- SCRIPT FILE: HANDLES LOGIC, UI, QUIZ SCORING, TELEGRAM, & FILTERS ---
+// =========================================================================
+
+import { initialPerfumes } from './data.js';
 
 let currentPerfumes = [...initialPerfumes];
 let selectedPerfume = null;
@@ -219,45 +10,57 @@ let orderQuantity = 1;
 let currentQuizStep = 0;
 let quizAnswers = {};
 
+// --- GLOBAL FILTER STATE ---
+let activeCategory = 'all'; // 'all', 'men', 'women'
+let selectedBrands = [];    // Array of strings, e.g., ['Lattafa', 'AFNAN']
+let searchTerm = '';
+
+// --- TELEGRAM CONFIGURATION ---
 const BOT_TOKEN = '8276122717:AAG4UVrd_BgLVZDtS7UP7_jXBvSiAoHYiBk'; 
 const CHAT_ID = '-1002969971930';
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 let orderCounter = parseInt(localStorage.getItem('artisanOrderCounter') || 0);
 
+// --- QUIZ QUESTIONS ---
 const quizQuestions = [
     {
-        question: "Is this for a Man or a Woman?",
+        question: "Which scent do you prefer?",
         key: "gender",
         options: [
-            { text: "Man", value: "men", profiles: initialPerfumes.filter(p => p.category === 'men').map(p => p.profile) },
-            { text: "Woman", value: "women", profiles: initialPerfumes.filter(p => p.category === 'women').map(p => p.profile) }
+            { text: "Masculine", value: "men" },
+            { text: "Feminine", value: "women" },
+            { text: "Unisex", value: "unisex" }
         ]
     },
     {
-        question: "Which Season is the Scent Intended for?",
+        question: "Which season do you plan to wear it the most?",
         key: "season",
         options: [
-            { text: "Spring/Summer (Fresh, Light)", value: "summer", profiles: ["Daytime_Woody", "Daytime_Aquatic", "Daytime_Floral"] },
-            { text: "Autumn/Winter (Warm, Heavy)", value: "winter", profiles: ["Evening_Floral", "Evening_Woody", "Anytime_Woody"] },
-            { text: "All Year Round (Versatile)", value: "all", profiles: initialPerfumes.map(p => p.profile) }
+            { text: "Summer", value: "summer" },
+            { text: "Winter", value: "winter" },
+            { text: "Autumn", value: "autumn" },
+            { text: "Spring", value: "spring" },
+            { text: "All year round", value: "all_year" }
         ]
     },
     {
-        question: "What time of day suits your preferred fragrance intensity?",
-        key: "time_of_day",
+        question: "Where do you plan to wear it the most?",
+        key: "occasion",
         options: [
-            { text: "Daytime (Light, Fresh)", value: "Daytime", profiles: ["Daytime_Woody", "Daytime_Aquatic", "Daytime_Floral"] },
-            { text: "Evening (Rich, Intense)", value: "Evening", profiles: ["Evening_Floral", "Evening_Woody"] },
-            { text: "Anytime (Versatile, Moderate)", value: "Anytime", profiles: ["Anytime_Woody"] }
+            { text: "Office / Work", value: "office" },
+            { text: "Event / Parties", value: "party" },
+            { text: "Casual", value: "casual" },
+            { text: "Signature Scent", value: "signature" }
         ]
     },
     {
-        question: "Which primary scent profile are you drawn to?",
-        key: "scent_profile",
+        question: "Which group of scents do you prefer?",
+        key: "family",
         options: [
-            { text: "Citrus/Aquatic (Clean, Zesty)", value: "Aquatic", profiles: ["Daytime_Aquatic"] },
-            { text: "Woody/Spicy (Earthy, Warm)", value: "Woody", profiles: ["Daytime_Woody", "Evening_Woody", "Anytime_Woody"] },
-            { text: "Floral/Sweet (Romantic, Soft)", value: "Floral", profiles: ["Evening_Floral", "Daytime_Floral"] }
+            { text: "🍋 Citrus, Sea & Fruits (Energetic)", value: "citrus_fruit" },
+            { text: "🍦 Vanilla, Caramel & Sweets (Gourmand)", value: "sweet" },
+            { text: "🪵 Oud, Leather & Spices (Intense)", value: "woody_spicy" },
+            { text: "🌹 Flowers & Soft Musk (Elegant)", value: "floral" }
         ]
     }
 ];
@@ -276,12 +79,15 @@ const elements = {
     quizContent: $('#quiz-content'),
     quizPrevBtn: $('#quiz-prev-btn'), 
     quizControlsFooter: $('#quiz-controls-footer'),
+    quizModalTitle: document.querySelector('.quiz-modal .modal-title'),
+    // New Filter Elements
+    filterBtn: $('#filter-btn'),
+    brandDropdown: $('#brand-dropdown')
 };
 
 function validatePhoneNumber(phone) {
-    const anyNumberPattern = /^\d{4} \d{3} \d{4}$/; // XXXX XXX XXXX format
     const cleaned = phone.replace(/\s/g, '');
-    return /^\d{11}$/.test(cleaned); // Exactly 11 digits total
+    return cleaned.length >= 10; 
 }
 
 function formatCurrency(amount) {
@@ -289,10 +95,87 @@ function formatCurrency(amount) {
     return `${formattedNumber} IQD`;
 }
 
+// --- INIT & BRAND FILTER LOGIC ---
+function initBrandFilter() {
+    // 1. Get unique brands
+    const brands = [...new Set(initialPerfumes.map(p => p.brand))].sort();
+    
+    // 2. Populate Dropdown
+    elements.brandDropdown.innerHTML = '';
+    brands.forEach(brand => {
+        const label = document.createElement('label');
+        label.className = 'brand-checkbox-label';
+        label.innerHTML = `
+            <input type="checkbox" value="${brand}" class="brand-checkbox">
+            ${brand}
+        `;
+        elements.brandDropdown.appendChild(label);
+    });
+
+    // 3. Add Event Listeners to Checkboxes
+    const checkboxes = elements.brandDropdown.querySelectorAll('.brand-checkbox');
+    checkboxes.forEach(box => {
+        box.addEventListener('change', () => {
+            // Update selected brands array
+            selectedBrands = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            applyAllFilters();
+        });
+    });
+}
+
+// --- TOGGLE DROPDOWN ---
+elements.filterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    elements.brandDropdown.classList.toggle('show');
+});
+
+// Close dropdown if clicked outside
+document.addEventListener('click', (e) => {
+    if (!elements.brandDropdown.contains(e.target) && e.target !== elements.filterBtn) {
+        elements.brandDropdown.classList.remove('show');
+    }
+});
+
+// --- MAIN FILTERING FUNCTION ---
+function applyAllFilters() {
+    // 1. Start with full list
+    let filtered = initialPerfumes;
+
+    // 2. Filter by Category (Nav Tabs)
+    if (activeCategory !== 'all') {
+        filtered = filtered.filter(p => p.category === activeCategory);
+    }
+
+    // 3. Filter by Selected Brands
+    if (selectedBrands.length > 0) {
+        filtered = filtered.filter(p => selectedBrands.includes(p.brand));
+    }
+
+    // 4. Filter by Search Term
+    if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        filtered = filtered.filter(p =>
+            p.name.toLowerCase().includes(term) ||
+            p.brand.toLowerCase().includes(term) ||
+            p.topNotes.toLowerCase().includes(term) || 
+            p.middleNotes.toLowerCase().includes(term) ||
+            p.bottomNotes.toLowerCase().includes(term) ||
+            p.description.toLowerCase().includes(term)
+        );
+    }
+
+    currentPerfumes = filtered;
+    renderCatalog(currentPerfumes);
+}
+
+// --- CATALOG RENDERING ---
 function renderCatalog(perfumesToRender) {
     elements.catalog.innerHTML = '';
     if (perfumesToRender.length === 0) {
-        elements.catalog.innerHTML = `<p class="empty-message" style="text-align: center; color: #555; padding: 40px;">No fragrances found matching your search. Try different keywords or filters.</p>`;
+        elements.catalog.innerHTML = `<p class="empty-message" style="text-align: center; color: #555; padding: 40px;">No fragrances found matching your search.</p>`;
         return;
     }
 
@@ -300,8 +183,11 @@ function renderCatalog(perfumesToRender) {
         const card = document.createElement('div');
         card.classList.add('perfume-card');
         card.setAttribute('data-id', perfume.id);
+        
+        let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
+
         card.innerHTML = `
-            <img src="${perfume.image}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
+            <img src="${imgSrc}" alt="Bottle of ${perfume.name}" class="perfume-card-img" 
                 onerror="this.onerror=null; this.src='fattan.jpeg';" /> 
             <div class="perfume-card-content">
                 <h4 class="perfume-card-name">${perfume.name}</h4>
@@ -319,7 +205,6 @@ function openModal(modalId) {
     const backdrop = document.getElementById(modalId);
     if (!backdrop) return;
     backdrop.classList.add('active');
-    // prevent body scrolling while modal is open
     document.body.style.overflow = 'hidden';
 }
 
@@ -327,14 +212,15 @@ function closeModal(modalId) {
     const backdrop = document.getElementById(modalId);
     if (!backdrop) return;
     backdrop.classList.remove('active');
-    // if no other modal is active, restore body scrolling
     const anyActive = document.querySelectorAll('.modal-backdrop.active').length > 0;
     if (!anyActive) document.body.style.overflow = '';
 }
 
 function openProductModal(perfume) {
     selectedPerfume = perfume;
-    $('#modal-image').src = perfume.image; 
+    let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
+    
+    $('#modal-image').src = imgSrc; 
     $('#modal-image').alt = `${perfume.name} Perfume Bottle`;
     $('#modal-name').textContent = perfume.name;
     $('#modal-brand').textContent = perfume.brand;
@@ -356,55 +242,89 @@ function resetQuiz() {
     quizAnswers = {};
     elements.quizContent.innerHTML = '';
     elements.quizPrevBtn.style.display = 'none';
+    if(elements.quizModalTitle) elements.quizModalTitle.style.display = 'block'; 
     
     const helpMeChooseLink = $('#help-me-choose-btn');
     if(helpMeChooseLink.classList.contains('active')) {
         helpMeChooseLink.classList.remove('active');
         elements.navLinks[0].click();
+        activeCategory = 'all'; // reset main view
+        applyAllFilters();
     }
 }
 
 function startQuiz() {
     currentQuizStep = 0;
     quizAnswers = {};
+    if(elements.quizModalTitle) elements.quizModalTitle.style.display = 'none';
     renderQuizStep();
     openModal('quiz-modal');
 }
 
 function getQuizRecommendations() {
-    const { gender, season, time_of_day, scent_profile } = quizAnswers;
+    const { gender, season, occasion, family } = quizAnswers;
     
-    // Filter perfumes based on gender
-    let filteredPerfumes = initialPerfumes.filter(p => p.category === gender || p.category === 'unisex');
-    
-    // Filter based on season preferences
-    if (season === 'summer') {
-        filteredPerfumes = filteredPerfumes.filter(p => 
-            p.profile.includes('Daytime') && (p.profile.includes('Aquatic') || p.profile.includes('Floral'))
-        );
-    } else if (season === 'winter') {
-        filteredPerfumes = filteredPerfumes.filter(p => 
-            p.profile.includes('Evening') || p.profile.includes('Anytime')
-        );
-    }
-    
-    // Filter based on time of day
-    if (time_of_day) {
-        filteredPerfumes = filteredPerfumes.filter(p => p.profile.includes(time_of_day));
-    }
-    
-    // Filter based on scent profile
-    if (scent_profile) {
-        filteredPerfumes = filteredPerfumes.filter(p => p.profile.includes(scent_profile));
-    }
-    
-    // If no matches found, return top 3 perfumes for the gender
-    if (filteredPerfumes.length === 0) {
-        filteredPerfumes = initialPerfumes.filter(p => p.category === gender || p.category === 'unisex').slice(0, 3);
-    }
-    
-    // Return top 3 recommendations
-    return filteredPerfumes.slice(0, 3);
+    let candidates = initialPerfumes.filter(p => {
+        if (gender === 'men') return p.category === 'men' || p.category === 'unisex';
+        if (gender === 'women') return p.category === 'women' || p.category === 'unisex';
+        return true; 
+    });
+
+    candidates = candidates.map(p => {
+        let score = 0;
+        const fullText = (p.description + " " + p.topNotes + " " + p.middleNotes + " " + p.bottomNotes + " " + p.shortDescription + " " + p.profile).toLowerCase();
+
+        // Season Scoring
+        if (season === 'summer' || season === 'spring') {
+            if (fullText.includes('citrus') || fullText.includes('sea') || fullText.includes('water') || fullText.includes('fresh') || fullText.includes('mint') || fullText.includes('ginger')) score += 5;
+            if (p.profile.includes('Daytime') || p.profile.includes('Aquatic')) score += 5;
+            if (fullText.includes('tobacco') || fullText.includes('incense')) score -= 2;
+        } 
+        else if (season === 'winter' || season === 'autumn') {
+            if (fullText.includes('vanilla') || fullText.includes('oud') || fullText.includes('tobacco') || fullText.includes('leather') || fullText.includes('amber') || fullText.includes('cinnamon') || fullText.includes('warm')) score += 5;
+            if (p.profile.includes('Evening') || p.profile.includes('Woody')) score += 5;
+        } 
+        else if (season === 'all_year') {
+            if (p.profile.includes('Anytime') || p.profile.includes('Daytime_Woody') || p.profile.includes('Daytime_Aquatic')) score += 5;
+            if (fullText.includes('blue') || fullText.includes('versatile')) score += 3;
+        }
+
+        // Occasion Scoring
+        if (occasion === 'office') {
+            if (fullText.includes('clean') || fullText.includes('fresh') || fullText.includes('soap') || fullText.includes('citrus') || fullText.includes('white musk')) score += 5;
+            if (fullText.includes('intense') || fullText.includes('beast')) score -= 3;
+        }
+        else if (occasion === 'party') {
+            if (fullText.includes('sweet') || fullText.includes('vanilla') || fullText.includes('bubblegum') || fullText.includes('fruit') || fullText.includes('club') || p.name.toLowerCase().includes('9 pm') || p.name.toLowerCase().includes('hawas')) score += 7;
+            if (p.sillage.includes('Strong')) score += 3;
+        }
+        else if (occasion === 'casual') {
+            if (p.profile.includes('Anytime') || p.profile.includes('Daytime')) score += 4;
+        }
+        else if (occasion === 'signature') {
+            if (fullText.includes('oud') || fullText.includes('leather') || fullText.includes('saffron') || fullText.includes('unique') || p.brand === 'Lattafa') score += 4;
+        }
+
+        // Family Scoring
+        if (family === 'citrus_fruit') {
+            if (fullText.includes('lemon') || fullText.includes('bergamot') || fullText.includes('apple') || fullText.includes('pineapple') || fullText.includes('grapefruit')) score += 8;
+            if (p.profile.includes('Aquatic')) score += 4;
+        }
+        else if (family === 'sweet') {
+            if (fullText.includes('vanilla') || fullText.includes('caramel') || fullText.includes('tonka') || fullText.includes('honey') || fullText.includes('praline') || fullText.includes('chocolate')) score += 8;
+        }
+        else if (family === 'woody_spicy') {
+            if (fullText.includes('oud') || fullText.includes('leather') || fullText.includes('tobacco') || fullText.includes('wood') || fullText.includes('incense') || fullText.includes('pepper')) score += 8;
+        }
+        else if (family === 'floral') {
+            if (fullText.includes('rose') || fullText.includes('jasmine') || fullText.includes('floral') || fullText.includes('lavender') || fullText.includes('violet')) score += 8;
+        }
+
+        return { ...p, score };
+    });
+
+    candidates.sort((a, b) => b.score - a.score);
+    return candidates.slice(0, 3);
 }
 
 function renderQuizStep() {
@@ -415,13 +335,15 @@ function renderQuizStep() {
         elements.quizContent.innerHTML = `
             <div class="quiz-results-container">
                 <h3 class="modal-title" style="margin-bottom: 1rem;">Your Perfect Match!</h3>
-                <p style="margin-bottom: 1.5rem; color: #666;">Based on your preferences, here are our top recommendations:</p>
+                <p style="margin-bottom: 1.5rem; color: #666;">Based on your choices, we recommend:</p>
                 
                 <div class="quiz-recommendations">
-                    ${recommendations.map((perfume, index) => `
+                    ${recommendations.map((perfume, index) => {
+                        let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
+                        return `
                         <div class="quiz-recommendation-card" data-perfume-id="${perfume.id}" style="cursor: pointer;">
                             <div class="recommendation-content">
-                                <img src="${perfume.image}" alt="${perfume.name}" class="recommendation-image" 
+                                <img src="${imgSrc}" alt="${perfume.name}" class="recommendation-image" 
                                      onerror="this.onerror=null; this.src='fattan.jpeg';" />
                                 <div class="recommendation-details">
                                     <h4 class="recommendation-name">${perfume.name}</h4>
@@ -429,13 +351,12 @@ function renderQuizStep() {
                                     <p class="recommendation-description">${perfume.description}</p>
                                     <div class="recommendation-specs">
                                         <span class="spec-badge">${perfume.longevity}</span>
-                                        <span class="spec-badge">${perfume.sillage}</span>
                                     </div>
                                     <p class="recommendation-price">${formatCurrency(perfume.priceIQD)}</p>
                                 </div>
                             </div>
                         </div>
-                    `).join('')}
+                    `}).join('')}
                 </div>
                 
                 <div class="quiz-results-actions">
@@ -445,7 +366,6 @@ function renderQuizStep() {
         `;
         elements.quizPrevBtn.style.display = 'none';
         
-        // Add click handlers for recommendation cards
         document.querySelectorAll('.quiz-recommendation-card').forEach(card => {
             card.addEventListener('click', () => {
                 const perfumeId = parseInt(card.getAttribute('data-perfume-id'));
@@ -462,7 +382,7 @@ function renderQuizStep() {
         const step = quizQuestions[currentQuizStep];
         const questionHtml = document.createElement('div');
         questionHtml.innerHTML = `
-            <h3 style="margin-bottom: 1.5rem;">${step.question}</h3>
+            <h3 class="quiz-question">${step.question}</h3>
             <div class="quiz-options">
                 ${step.options.map(option => `
                     <button type="button" class="quiz-option-btn" data-value="${option.value}">
@@ -506,6 +426,8 @@ function prevQuizStep() {
     }
 }
 
+// --- EVENT LISTENERS ---
+
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal-backdrop') && e.target.classList.contains('active')) {
         const modalId = e.target.id;
@@ -523,6 +445,7 @@ elements.navLinks.forEach(link => {
             elements.navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
             elements.searchInput.value = '';
+            searchTerm = '';
             startQuiz();
             return;
         }
@@ -530,33 +453,16 @@ elements.navLinks.forEach(link => {
         elements.navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         elements.searchInput.value = ''; 
-        const filter = link.getAttribute('data-filter');
-
-        let filtered;
-        if (filter === 'all') {
-            filtered = initialPerfumes;
-        } else {
-            filtered = initialPerfumes.filter(p => p.category === filter);
-        }
-        currentPerfumes = filtered;
-        renderCatalog(currentPerfumes);
+        searchTerm = '';
+        
+        activeCategory = link.getAttribute('data-filter');
+        applyAllFilters();
     });
 });
 
 elements.searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase().trim();
-    elements.navLinks.forEach(l => l.classList.remove('active')); 
-
-    const searched = initialPerfumes.filter(p =>
-        p.name.toLowerCase().includes(searchTerm) ||
-        p.brand.toLowerCase().includes(searchTerm) ||
-        p.topNotes.toLowerCase().includes(searchTerm) || 
-        p.middleNotes.toLowerCase().includes(searchTerm) ||
-        p.bottomNotes.toLowerCase().includes(searchTerm) ||
-        p.description.toLowerCase().includes(searchTerm)
-    );
-    currentPerfumes = searched;
-    renderCatalog(currentPerfumes);
+    searchTerm = e.target.value.trim();
+    applyAllFilters();
 });
 
 $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
@@ -568,11 +474,9 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     });
 });
 
-// Delegated handler: any element with a data-modal attribute will close that modal
 document.addEventListener('click', (e) => {
     const el = e.target.closest('[data-modal]');
     if (!el) return;
-    // avoid double-handling elements that already have specific classes
     if (el.classList.contains('modal-close-btn') || el.classList.contains('close-confirm-btn')) return;
 
     const modalId = el.getAttribute('data-modal');
@@ -606,7 +510,7 @@ elements.orderForm.addEventListener('submit', async (e) => {
     const customerPhone = $('#order-phone').value.trim();
     
     if (!validatePhoneNumber(customerPhone)) {
-        elements.orderError.textContent = "Please enter a valid phone number (e.g., XXXX XXX XXXX)";
+        elements.orderError.textContent = "Please enter a valid phone number.";
         elements.orderError.style.display = 'block';
         return;
     }
@@ -629,7 +533,7 @@ elements.orderForm.addEventListener('submit', async (e) => {
     const notificationResult = await sendTelegramNotification(orderData);
 
     if (notificationResult.ok) {
-        console.log(`Order #${orderCounter} Submitted and Telegram Notification Sent:`, orderData);
+        console.log(`Order #${orderCounter} Submitted:`, orderData);
         closeModal('order-modal');
         $('#confirmation-message').innerHTML = `
             Thank you, <b>${customerName}</b>! Your order **#${orderCounter}** for ${orderQuantity} x ${selectedPerfume.name} has been placed.
@@ -663,7 +567,7 @@ async function sendTelegramNotification(orderData) {
     
     Customer: ${orderData.customerName}
     Phone: **${orderData.customerPhone}**
-    City: Erbil (FIXED)
+    City: Erbil
     Time: ${new Date(orderData.timestamp).toLocaleString()}
     `;
 
@@ -694,6 +598,6 @@ async function sendTelegramNotification(orderData) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderCatalog(initialPerfumes);
+    initBrandFilter();
+    applyAllFilters();
 });
-
