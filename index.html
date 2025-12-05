@@ -28,6 +28,14 @@
                 </ul>
             </nav>
             <div class="header-right">
+                <div class="filter-dropdown-container">
+                    <button id="filter-btn" class="filter-btn">
+                        Filter by Brand <span class="arrow">▼</span>
+                    </button>
+                    <div id="brand-dropdown" class="brand-dropdown-content">
+                        </div>
+                </div>
+
                 <div class="search-container">
                     <input
                         type="text"
@@ -54,7 +62,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Artisan Perfumes. Crafted in Erbil.</p>
+                <p>&copy; 2025 Artisan Perfumes.</p>
                 <div class="social-links">
                     <a href="https://www.instagram.com/artisan.perfumes.erbil?igsh=a2xtc3ZnaDU4d3Bs" target="_blank" class="social-link" aria-label="Instagram">
                         <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -71,12 +79,11 @@
         </div>
     </footer>
 
-    <!-- ALL MODALS SAME AS BEFORE -->
     <div id="product-modal" class="modal-backdrop">
         <div class="modal product-modal">
             <button class="modal-close-btn" aria-label="Close product view" data-modal="product-modal">&times;</button>
             <div class="product-modal-body">
-                <img id="modal-image" src="https://placehold.co/200x280/F0F0F0/000000?text=Image" alt="Perfume Bottle" class="product-modal-img" />
+                <img id="modal-image" src="fattan.jpeg" alt="Perfume Bottle" class="product-modal-img" />
                 <div class="product-details">
                     <h3 id="modal-name" class="product-modal-name"></h3>
                     <div class="brand-name" id="modal-brand"></div>
@@ -129,7 +136,7 @@
             <p class="delivery-note">Delivery is currently available only for Erbil.</p>
             <form id="order-form" class="order-form">
                 <input type="text" id="order-name" placeholder="Your Full Name" required />
-                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., XXXX XXX XXXX)" maxlength="14" required />
+                <input type="tel" id="order-phone" placeholder="Your Phone Number (e.g., 07XX XXX XXXX)" maxlength="14" required />
                 <div class="form-group">
                     <label for="order-city">City (Erbil Only)</label>
                     <select id="order-city" required>
@@ -142,7 +149,6 @@
         </div>
     </div>
 
-    <!-- REST OF MODALS SAME AS BEFORE -->
     <div id="quiz-modal" class="modal-backdrop">
         <div class="modal quiz-modal">
             <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
