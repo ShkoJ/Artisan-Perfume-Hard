@@ -28,9 +28,9 @@ body {
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    padding: 0 0.25rem; /* small horizontal padding as requested */
+    padding: 0 0.25rem;
     padding-top: 0;
-    text-align: center; /* centers inline content by default */
+    text-align: center;
 }
 
 .container {
@@ -85,7 +85,7 @@ body {
     list-style: none;
     gap: 0.5rem;
     justify-content: space-between;
-    padding: 0.3rem 0; /* Reduced from 0.5rem */
+    padding: 0.3rem 0;
     border-top: 1px solid #eee;
 }
 
@@ -95,7 +95,7 @@ body {
     font-weight: 500;
     transition: color 0.3s ease, border-bottom 0.3s ease;
     font-size: 0.85rem;
-    padding: 0.15rem 0.2rem; /* Reduced from 0.25rem */
+    padding: 0.15rem 0.2rem;
     white-space: nowrap;
 }
 
@@ -193,7 +193,6 @@ body {
     font-weight: 600;
 }
 
-/* NEW: BRAND NAME IN CARDS */
 .perfume-card-brand {
     font-size: 0.75rem;
     color: var(--subtle-gray);
@@ -249,8 +248,7 @@ body {
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
     opacity: 0;
     max-height: 90vh;
-    /* increase modal font-size to make text noticeably larger */
-    font-size: 1.15rem; /* ~15% larger than root */
+    font-size: 1.15rem;
     line-height: 1.45;
 }
 
@@ -289,13 +287,13 @@ body {
 
 .product-modal {
     max-width: 95%;
-    width: 380px; /* aggressively smaller to fit at 100% zoom */
+    width: 380px; 
     max-height: 86vh;
     padding: 0;
 }
 
 .product-modal-body {
-    padding: 0.5rem 0.55rem 0.35rem 0.55rem; /* tightened padding */
+    padding: 0.5rem 0.55rem 0.35rem 0.55rem; 
     display: flex; 
     flex-direction: column;
     gap: 0.35rem;
@@ -308,7 +306,7 @@ body {
 .product-modal-img {
     width: 44%;
     height: 100px;
-    max-width: 110px; /* ensure the image stays small even at high resolutions */
+    max-width: 110px;
     object-fit: contain;
     margin: 0 auto 1rem auto;
     border-radius: 8px;
@@ -316,7 +314,6 @@ body {
     padding: 0.5rem;
 }
 
-/* Specific smaller sizing for the modal's main image */
 #modal-image {
     width: 40%;
     max-width: 100px;
@@ -326,23 +323,18 @@ body {
 
 .product-details {
     width: 100%;
-    text-align: left; /* align details to the left for better wrapping */
+    padding-top: 0;
+    text-align: center;
     padding: 0 0.25rem;
     box-sizing: border-box;
 }
 
-.product-details {
-    padding-top: 0;
-    text-align: center;
-}
-
 .product-modal-name {
     font-family: 'Cinzel', serif;
-    font-size: 1.05rem; /* smaller title */
+    font-size: 1.05rem; 
     margin-bottom: 0.08rem;
 }
 
-/* NEW: BRAND NAME IN MODAL */
 .brand-name {
     font-size: 0.72rem;
     color: var(--subtle-gray);
@@ -359,27 +351,27 @@ body {
     margin-bottom: 0.5rem;
     padding: 0.4rem 0.75rem;
     background: #F8F9FA;
-    border-radius: 8px;
     border-left: 3px solid var(--secondary-color);
     border-bottom: 3px solid var(--secondary-color);
     width: 100%;
     box-sizing: border-box;
     visibility: visible;
-    font-size: 1.05rem; /* slightly smaller to fit */
+    font-size: 1.05rem; 
     line-height: 1.35;
     text-align: left;
 }
 
 .note-category h4 {
-    font-size: 0.85rem; /* slightly smaller heading */
+    font-size: 0.85rem; 
     color: var(--primary-color);
-    margin-bottom: 0.12rem; /* controlled gap under heading */
+    margin-bottom: 0.12rem;
     font-weight: 600;
     font-family: 'Cinzel', serif;
+    text-align: center !important;
 }
 
 .modal-notes {
-    font-size: 0.95rem; /* slightly smaller note text */
+    font-size: 0.95rem; 
     color: var(--subtle-gray);
     line-height: 1.32;
     margin: 0;
@@ -413,7 +405,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 0.28rem;
-    padding: 0.25rem 0.35rem; /* slightly tighter footer padding */
+    padding: 0.25rem 0.35rem;
     border-top: 1px solid #eee;
     width: 100%;
     box-sizing: border-box;
@@ -489,140 +481,11 @@ body {
     font-weight: 500;
 }
 
-/* Quiz Results Styling */
-.quiz-results-container {
-    padding: 1rem;
-}
-
-.quiz-recommendations {
-    margin-bottom: 2rem;
-}
-
-.quiz-recommendation-card {
-    border: 2px solid #FFC107;
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-    background: #FFFBEA;
-    transition: all 0.3s ease;
-}
-
-.quiz-recommendation-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
-    border-color: #E6A700;
-}
-
-.recommendation-content {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.recommendation-image {
-    width: 70px;
-    height: 90px;
-    object-fit: contain;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    padding: 0.5rem;
-    flex-shrink: 0;
-}
-
-.recommendation-details {
-    flex: 1;
-}
-
-.recommendation-name {
-    color: #0A192F;
-    margin-bottom: 0.25rem;
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.recommendation-brand {
-    color: #888;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-}
-
-.recommendation-description {
-    color: #555;
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
-}
-
-.recommendation-specs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-}
-
-.spec-badge {
-    background: #F0F2F5;
-    padding: 0.3rem 0.6rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: #0A192F;
-    font-weight: 500;
-}
-
-.recommendation-price {
-    font-weight: bold;
-    color: #FFC107;
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-.quiz-results-actions {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-}
-.quiz-option-btn {
-    padding: 0.75rem;
-    border: 2px solid #ddd;
-    background-color: var(--bg-color);
-    border-radius: 8px;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-}
-.quiz-option-btn:hover {
-    background-color: #f0f2f5;
-}
-.quiz-option-btn.selected {
-    border-color: var(--secondary-color);
-    background-color: #FFFBEA;
-    font-weight: 600;
-    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
-}
-.quiz-controls {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-.quiz-controls .modal-btn {
-    width: 50%;
-}
-.ghost-btn {
-    background-color: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-/* Quiz modal (uses same modal/backdrop pattern) */
+/* Quiz Modal (Restored to List Style) */
 .quiz-modal {
-    /* behave like other .modal elements inside .modal-backdrop */
     max-width: 540px;
     width: 100%;
-    /* reduced vertical padding so the modal has more usable space */
     padding: 0.6rem 1rem;
-    /* ensure it always fits comfortably inside viewport */
     max-height: calc(100vh - 48px);
     overflow-y: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -637,12 +500,8 @@ body {
 }
 
 #quiz-content {
-    /* keep bottom padding small so inner lists don't push the modal beyond viewport */
     padding: 0.15rem 0 0.4rem 0;
 }
-
-.quiz-step { display: none; }
-.quiz-step.active { display: block; }
 
 .quiz-question {
     font-size: 1rem;
@@ -675,8 +534,8 @@ body {
 
 .quiz-controls { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.9rem; padding-top: 0.6rem; border-top: 1px solid #eee; }
 
-.quiz-recommendations { display: grid; gap: 0.8rem; margin-bottom: 0.6rem; /* reduce max height so it scrolls inside the modal */
-    max-height: calc(100vh - 360px); /* reduce visible recommendations height to free space for buttons */
+.quiz-recommendations { display: grid; gap: 0.8rem; margin-bottom: 0.6rem; 
+    max-height: calc(100vh - 360px); 
     overflow-y: auto; padding: 0.4rem 0; }
 
 .quiz-recommendation-card { border: 2px solid #FFC107; border-radius: 12px; padding: 0.6rem; background: #FFFBEA; display: flex; gap: 0.6rem; cursor: pointer; }
@@ -710,127 +569,16 @@ body {
     margin-bottom: 0.3rem;
 }
 
-.quiz-recommendation-qualities {
-    display: flex;
-    justify-content: center;
-    gap: 0.3rem;
-    flex-wrap: wrap;
-}
-
-.quiz-quality-badge {
-    background-color: #007bff;
-    color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 400;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .quiz-modal {
-        padding: 1rem;
-    }
-    
-    .quiz-modal-content {
-        max-width: 95%;
-        max-height: 80vh;
-    }
-    
-    .quiz-modal-header {
-        padding: 0.8rem 1rem;
-    }
-    
-    .quiz-modal-title {
-        font-size: 1rem;
-    }
-    
-    .quiz-modal-body {
-        padding: 1rem;
-    }
-    
-    .quiz-question {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-    }
-    
-    .quiz-options {
-        gap: 0.6rem;
-    }
-    
-    .quiz-option {
-        padding: 0.7rem 0.8rem;
-        font-size: 0.85rem;
-        min-height: 35px;
-    }
-    
-    .quiz-navigation {
-        flex-direction: column;
-        gap: 0.8rem;
-        align-items: stretch;
-    }
-    
-    .quiz-buttons {
-        justify-content: center;
-    }
-    
-    .quiz-btn {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.8rem;
-        min-width: 70px;
-    }
-    
-    .quiz-results-title {
-        font-size: 1.1rem;
-    }
-    
-    .quiz-results-subtitle {
-        font-size: 0.85rem;
-    }
-    
-    .quiz-recommendations {
-        gap: 0.8rem;
-        max-height: 200px;
-    }
-    
-    .quiz-recommendation {
-        padding: 0.8rem;
-    }
-    
-    .quiz-recommendation-img {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .quiz-recommendation-name {
-        font-size: 0.9rem;
-    }
-    
-    .quiz-recommendation-brand {
-        font-size: 0.75rem;
-    }
-    
-    .quiz-recommendation-description {
-        font-size: 0.75rem;
-    }
-    
-    .quiz-recommendation-price {
-        font-size: 0.85rem;
-    }
-}
-
-/* Quiz results action buttons: keep them compact and visible */
 .quiz-results-actions {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
-    /* stick to bottom of modal so buttons are always reachable */
     position: sticky;
     bottom: 0;
     background: linear-gradient(transparent, rgba(255,255,255,0.95));
-    padding: 0.22rem 0; /* reduced vertical padding */
-    margin-top: 0.18rem; /* reduced top margin */
+    padding: 0.22rem 0; 
+    margin-top: 0.18rem; 
 }
 
 .quiz-results-actions .modal-btn {
@@ -840,134 +588,148 @@ body {
     min-width: 110px;
 }
 
-/* Make modal-btns inside quiz modal slightly smaller overall */
 .quiz-modal .modal-btn {
     padding: 0.45rem 0.7rem;
     font-size: 0.92rem;
 }
+.ghost-btn { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container { padding: 0 1.5rem; }
+    .header-content { flex-wrap: nowrap; padding: 3rem 0; }
+    .navigation { width: auto; order: 0; margin-top: 0; flex-grow: 1; padding: 0 2rem; }
+    .nav-list { padding: 0; border-top: none; gap: 1.5rem; justify-content: flex-start; }
+    .nav-link { font-size: 1rem; padding: 0.15rem 0.5rem; }
+    .header-right { order: 3; }
+    #search-input { min-width: 110px; }
+    .product-modal { width: 600px; max-height: 90vh; }
+    .product-modal-body { padding: 2rem; }
+    .product-modal-img { width: 60%; height: 250px; }
+    .product-modal-footer { flex-direction: row; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; }
+    .product-modal-footer .modal-btn { width: auto; min-width: 200px; }
+    
+    .quiz-modal { padding: 1rem; }
+}
+
+/* Footer */
+.footer { margin-top: auto; background-color: var(--primary-color); color: var(--light-text-color); padding: 1.5rem 0; text-align: center; font-size: 0.9rem; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; }
+.social-links { display: flex; gap: 1rem; align-items: center; }
+.social-link { color: var(--light-text-color); text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease; }
+.social-link:hover { opacity: 1; }
+.social-icon { width: 18px; height: 18px; fill: currentColor; }
 
 /* Confirmation Modal */
-.confirmation-modal {
-    text-align: center;
-}
-.green-tick {
-    font-size: 3rem;
-    color: #2ECC71;
-    display: block;
-    margin-bottom: 1rem;
+.confirmation-modal { text-align: center; }
+.green-tick { font-size: 3rem; color: #2ECC71; display: block; margin-bottom: 1rem; }
+
+/* ... [Previous CSS Content] ... */
+/* Add this new section for the Filter Dropdown */
+
+/* Filter Dropdown Container */
+.filter-dropdown-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
 }
 
-/* NEW: FOOTER WITH INSTAGRAM */
-.footer {
-    margin-top: auto;
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: 1.5rem 0;
-    text-align: center;
+.filter-btn {
+    background-color: var(--card-bg-color);
+    border: 2px solid #E5E5E5;
+    padding: 0.5rem 1rem;
     font-size: 0.9rem;
-}
-
-.footer-content {
+    border-radius: 20px;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.social-links {
+.filter-btn:hover {
+    border-color: var(--primary-color);
+}
+
+.filter-btn .arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+/* The Dropdown Content */
+.brand-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    z-index: 2000; /* Higher than search */
+    border-radius: 8px;
+    border: 1px solid #eee;
+    padding: 0.5rem 0;
+    top: 110%; /* Slightly below button */
+    right: 0;
+}
+
+.brand-dropdown-content.show {
+    display: block;
+}
+
+/* Individual Checkbox Items */
+.brand-checkbox-label {
     display: flex;
-    gap: 1rem;
     align-items: center;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    transition: background 0.2s;
+    user-select: none;
 }
 
-.social-link {
-    color: var(--light-text-color);
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+.brand-checkbox-label:hover {
+    background-color: #f5f5f5;
 }
 
-.social-link:hover {
-    opacity: 1;
+.brand-checkbox {
+    margin-right: 0.8rem;
+    accent-color: var(--secondary-color);
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
-.social-icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
+/* Scrollbar for Dropdown */
+.brand-dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+.brand-dropdown-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.brand-dropdown-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
 }
 
-/* REST OF CSS IDENTICAL TO PREVIOUS VERSION */
-
-/* DESKTOP STYLES */
-@media (min-width: 768px) {
-    .container {
-        padding: 0 1.5rem;
-    }
-
-    .header-content {
-        flex-wrap: nowrap;
-        padding: 3rem 0;
-    }
-    .navigation {
-        width: auto;
-        order: 0;
-        margin-top: 0;
-        flex-grow: 1; 
-        padding: 0 2rem;
-    }
-    .nav-list {
-        padding: 0;
-        border-top: none;
-        gap: 1.5rem;
-        justify-content: flex-start;
-    }
-    .nav-link {
-        font-size: 1rem;
-        padding: 0.15rem 0.5rem; /* Reduced from 0.25rem */
-    }
+/* Responsive adjustment for header */
+@media (max-width: 768px) {
     .header-right {
-        order: 3;
-    }
-    #search-input {
-        min-width: 110px;
-    }
-
-    .product-modal {
-        width: 600px;
-        max-height: 90vh;
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
     }
     
-    .product-modal-body {
-        padding: 2rem;
+    .filter-dropdown-container {
+        margin-right: 0.5rem;
     }
     
-    .product-modal-img {
-        width: 60%;
-        height: 250px;
-    }
-    
-    .product-modal-footer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 1.5rem;
-    }
-    .product-modal-footer .modal-btn {
-        width: auto;
+    .brand-dropdown-content {
+        right: auto;
+        left: 0;
         min-width: 200px;
     }
 }
-/* =========================================================================
-   CENTER NOTES TITLES + GOLDEN BOTTOM BORDER
-   ========================================================================= */
-.note-category h4 {
-    text-align: center !important;           /* ← CENTER "Top Notes" */
-}
-
-.note-category {
-    border-left: 3px solid var(--secondary-color);   /* ← GOLDEN LEFT */
-    border-bottom: 3px solid var(--secondary-color); /* ← GOLDEN BOTTOM */
-    padding: 0.4rem 0.75rem;                         /* ← MORE SPACE */
-    margin-bottom: 0.5rem;
-}
-
+/* ... [Rest of CSS remains unchanged] ... */
