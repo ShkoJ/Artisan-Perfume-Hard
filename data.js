@@ -3,7 +3,7 @@
 // =========================================================================
 
 export const initialPerfumes = [
-    // --- EXISTING ITEMS (UPDATED PRICES) ---
+    // --- EXISTING ITEMS ---
     { id: 1, name: "9:00 PM Rebel", brand: "AFNAN", priceIQD: 40000, category: "men", image: "9 PM Rebel.jpeg", 
       description: "A bold pineapple and apple opening with warm vanilla and caramel depth. Seductive and commanding.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
@@ -208,148 +208,142 @@ export const initialPerfumes = [
       shortDescription: "Delicate Violet Rose",
       topNotes: "Violet Leaf, Coriander, Bergamot", middleNotes: "Rose, Black Pepper, Lily-of-the-Valley", bottomNotes: "Patchouli, Bourbon Vanilla, Ambergris"
     },
-    // Yara Removed
-    // --- NEW ITEMS ADDED BELOW ---
+    // --- UPDATED NEW ITEMS WITH FULL NOTES ---
     { id: 36, name: "Asad", brand: "Lattafa", priceIQD: 30000, category: "men", image: "Asad.jpeg", 
-      description: "A signature masculine fragrance with spicy and woody notes. Notes and description coming soon.", 
+      description: "A signature masculine fragrance blending spicy black pepper with tobacco and warm vanilla woods.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Spicy Woody Classic",
+      shortDescription: "Spicy Black Pepper Tobacco",
       topNotes: "Black Pepper, Tobacco, Pineapple", middleNotes: "Patchouli, Coffee, Iris", bottomNotes: "Vanilla, Amber, Dry Wood, Benzoin"
     },
     { id: 37, name: "Asad Elixir", brand: "Lattafa", priceIQD: 30000, category: "men", image: "AsadElixir.jpeg", 
-      description: "An intense version of Asad. Notes and description coming soon.", 
+      description: "An intense, spicy evolution of the original with saffron and leather nuances.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Intense Spicy Woods",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Intense Saffron Leather",
+      topNotes: "Pink Pepper, Saffron, Grapefruit", middleNotes: "Tobacco, Cedar, Vanilla", bottomNotes: "Frankincense, Amber, Patchouli"
     },
     { id: 38, name: "Badee Al Oud Oud For Glory", brand: "Lattafa", priceIQD: 35000, category: "unisex", image: "BadeeOudForGlory.jpeg", 
-      description: "Dark, majestic oud with sweet saffron. Notes and description coming soon.", 
+      description: "Dark, majestic oud with sweet saffron and patchouli. A powerful statement scent.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
       shortDescription: "Majestic Oud Saffron",
       topNotes: "Saffron, Nutmeg, Lavender", middleNotes: "Agarwood (Oud), Patchouli", bottomNotes: "Agarwood (Oud), Patchouli, Musk"
     },
     { id: 39, name: "Hawas Elixir", brand: "ALRASASI", priceIQD: 40000, category: "men", image: "HawasElixir.jpeg", 
-      description: "A newer, potent addition to the Hawas line. Notes and description coming soon.", 
+      description: "A rich, potent blend featuring dark chocolate nuances mixed with fresh lavender.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Potent Aquatic Freshness",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Potent Lavender Chocolate",
+      topNotes: "Mint, Bergamot, Artemisia", middleNotes: "Dark Chocolate, Lavender, Benzoin", bottomNotes: "Vanilla, Tonka Bean, Musk"
     },
     { id: 40, name: "Turathi Electric", brand: "AFNAN", priceIQD: 45000, category: "men", image: "TurathiElectric.jpeg", 
-      description: "Electrifying freshness. Notes and description coming soon.", 
+      description: "Electrifying ginger and citrus freshness inspired by high-energy summer days.", 
       longevity: "Moderate to Long", sillage: "Medium", profile: "Daytime_Aquatic",
-      shortDescription: "Electrifying Freshness",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Electrifying Ginger Citrus",
+      topNotes: "Pear, Bergamot, Mandarin, Ginger", middleNotes: "Orange Blossom, Georgywood", bottomNotes: "Musk, Ambrofix, Akigalawood"
     },
     { id: 41, name: "Mayar", brand: "Lattafa", priceIQD: 35000, category: "women", image: "Mayar.jpeg", 
-      description: "Bright and fruity feminine scent. Notes and description coming soon.", 
+      description: "A bright, joyful bouquet of lychee and white flowers. Feminine and uplifting.", 
       longevity: "Moderate", sillage: "Medium", profile: "Daytime_Floral",
-      shortDescription: "Bright Fruity Floral",
-      topNotes: "Lychee, Raspberry", middleNotes: "Rose, Peony", bottomNotes: "Musk, Vanilla"
+      shortDescription: "Bright Lychee Floral",
+      topNotes: "Lychee, Raspberry, Violet Leaf", middleNotes: "White Rose, Peony, Jasmine", bottomNotes: "Musk, Vanilla"
     },
     { id: 42, name: "Nebras", brand: "Lattafa", priceIQD: 50000, category: "unisex", image: "Nebras.jpeg", 
-      description: "Sweet vanilla and berries. Notes and description coming soon.", 
+      description: "A delicious gourmand treat of berries and cacao vanilla. Sweet and comforting.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Floral",
-      shortDescription: "Sweet Vanilla Berries",
-      topNotes: "Red Berries, Mandarin", middleNotes: "Vanilla, Cacao, Rose", bottomNotes: "Tonka Bean, Amber, Musk"
+      shortDescription: "Sweet Cacao Berries",
+      topNotes: "Red Berries, Mandarin", middleNotes: "Vanilla, Cacao, Rose", bottomNotes: "Sugar, Tonka Bean, Musk"
     },
     { id: 43, name: "Vintage Radio", brand: "Lattafa", priceIQD: 50000, category: "unisex", image: "VintageRadio.jpeg", 
-      description: "A unique blend of plum and palo santo. Notes and description coming soon.", 
+      description: "A unique, calming blend of plum and palo santo wood. Nostalgic yet modern.", 
       longevity: "Long Lasting", sillage: "Medium", profile: "Anytime_Woody",
       shortDescription: "Plum Palo Santo",
-      topNotes: "Lavender, Sage, Bergamot", middleNotes: "Plum, Palo Santo", bottomNotes: "Sandalwood, Amberwood"
+      topNotes: "Lavender, Sage, Bergamot", middleNotes: "Plum, Palo Santo", bottomNotes: "Sandalwood, Oud"
     },
     { id: 44, name: "KAAF", brand: "Ahmed Almaghribi", priceIQD: 30000, category: "unisex", image: "Kaaf.jpeg", 
-      description: "Fresh aquatic and woody. Notes and description coming soon.", 
+      description: "A refreshing aquatic fragrance with red fruits and smooth sandalwood.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Fresh Aquatic Woody",
-      topNotes: "Fresh Notes", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Fresh Red Fruits Aquatic",
+      topNotes: "Red Fruits, Watermelon, Lavender", middleNotes: "Sandalwood, Ambroxan", bottomNotes: "Lotus, Jasmine, Sea Accord"
     },
-    { id: 45, name: "Laventure", brand: "AL HARAMAIN", priceIQD: 45000, category: "men", image: "Laventure.jpeg", 
-      description: "Citrusy chypre fragrance. Notes and description coming soon.", 
+    { id: 45, name: "L'Aventure", brand: "AL HARAMAIN", priceIQD: 45000, category: "men", image: "Laventure.jpeg", 
+      description: "A legendary chypre fruity fragrance. Crisp lemon and woody depth.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Woody",
-      shortDescription: "Citrus Chypre",
-      topNotes: "Lemon, Bergamot", middleNotes: "Woody Notes, Jasmine", bottomNotes: "Musk, Patchouli, Amber"
+      shortDescription: "Crisp Lemon Woody",
+      topNotes: "Lemon, Bergamot, Elemi", middleNotes: "Woody Notes, Jasmine, Lily-of-the-Valley", bottomNotes: "Musk, Patchouli, Amber"
     },
-    { id: 46, name: "Rare", brand: "AFNAN", priceIQD: 45000, category: "men", image: "IV105606.jpg", 
-      description: "Distinctive and rare. Notes and description coming soon.", 
-      longevity: "Long Lasting", sillage: "Medium", profile: "Evening_Woody",
-      shortDescription: "Distinctive Wood",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
-    },
+    // ID 46 REMOVED (Rare Afnan)
     { id: 47, name: "Rare Carbon", brand: "AFNAN", priceIQD: 40000, category: "men", image: "RareCarbon.jpeg", 
-      description: "Leather and violet leaf. Notes and description coming soon.", 
+      description: "Deep leather and violet leaf, reminiscent of the open road. Rugged and bold.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Leather Violet Leaf",
-      topNotes: "Leather, Violet Leaf", middleNotes: "Violet, Oud", bottomNotes: "Amber, Sandalwood"
+      shortDescription: "Deep Leather Violet",
+      topNotes: "Leather, Violet Leaf, Cinnamon", middleNotes: "Violet, Rose, Oud", bottomNotes: "Amber, Sandalwood, Vetiver"
     },
     { id: 48, name: "Rare Reef", brand: "AFNAN", priceIQD: 40000, category: "men", image: "RareReef.jpeg", 
-      description: "Aquatic and fresh. Notes and description coming soon.", 
+      description: "A relaxing aquatic scent with unique fig and date nuances. Refreshingly different.", 
       longevity: "Moderate", sillage: "Medium", profile: "Daytime_Aquatic",
-      shortDescription: "Aquatic Freshness",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Aquatic Fig Dates",
+      topNotes: "Orange, Citron, Mint", middleNotes: "Apricot, Basil, Rose", bottomNotes: "Fig, Dates, Amberwood"
     },
     { id: 49, name: "Odyssey Aqua", brand: "ARMAF", priceIQD: 35000, category: "men", image: "OddyseyAqua.jpeg", 
-      description: "Fresh aquatic scent. Notes and description coming soon.", 
+      description: "A versatile aquatic fresh scent perfect for the gym or office.", 
       longevity: "Moderate", sillage: "Medium", profile: "Daytime_Aquatic",
-      shortDescription: "Fresh Aquatic",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Fresh Aquatic Herbal",
+      topNotes: "Grapefruit, Orange, Artemisia", middleNotes: "Lavender, Mint", bottomNotes: "Cypress, Patchouli, Amberwood"
     },
     { id: 50, name: "Odyssey Homme", brand: "ARMAF", priceIQD: 35000, category: "men", image: "Oddysey.jpeg", 
-      description: "Warm amber and vanilla. Notes and description coming soon.", 
+      description: "Warm amber and vanilla with a powdery iris touch. Elegant night wear.", 
       longevity: "Long Lasting", sillage: "Medium", profile: "Evening_Woody",
-      shortDescription: "Warm Amber Vanilla",
-      topNotes: "Vanilla, Amber", middleNotes: "Oriental Notes", bottomNotes: "Spices"
+      shortDescription: "Warm Iris Vanilla",
+      topNotes: "Vanilla, Amber", middleNotes: "Iris, Oriental Spices", bottomNotes: "Jasmine, Leather"
     },
     { id: 51, name: "Private Key To My Success", brand: "ARMAF", priceIQD: 70000, category: "unisex", image: "PrivateKey.jpeg", 
-      description: "Exclusive and rich. Notes and description coming soon.", 
+      description: "Exclusive and rich blend of ginger, spices and akigalawood. The scent of success.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Exclusive Rich Scent",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Ginger Spices Wood",
+      topNotes: "Bergamot, Ginger, Chilli", middleNotes: "Spices, Lavender", bottomNotes: "Akigalawood, Leather"
     },
     { id: 52, name: "Club De Nuit Iconic", brand: "ARMAF", priceIQD: 50000, category: "men", image: "Iconic.jpeg", 
-      description: "Blue fragrance with citrus and ginger. Notes and description coming soon.", 
+      description: "A blue masterpiece. Zesty grapefruit, mint and ginger with incense depth.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Blue Citrus Ginger",
+      shortDescription: "Blue Grapefruit Ginger",
       topNotes: "Grapefruit, Mint, Lemon", middleNotes: "Ginger, Melon, Jasmine", bottomNotes: "Incense, Amber, Sandalwood"
     },
     { id: 53, name: "Club De Nuit Limited Edition", brand: "ARMAF", priceIQD: 85000, category: "men", image: "LimitedEdition.jpeg", 
-      description: "Intense version of the classic. Notes and description coming soon.", 
+      description: "The ultimate intense citrus-smoky fragrance. Smoother and richer than the original.", 
       longevity: "Very Long Lasting", sillage: "Strong", profile: "Daytime_Woody",
       shortDescription: "Intense Citrus Smoky",
       topNotes: "Pineapple, Bergamot, Lemon", middleNotes: "Birch, Rose, Jasmine", bottomNotes: "Vanilla, Musk, Ambergris"
     },
     { id: 54, name: "Club De Nuit Sillage", brand: "ARMAF", priceIQD: 45000, category: "unisex", image: "Sillage.jpeg", 
-      description: "Metallic fresh citrus and musk. Notes and description coming soon.", 
+      description: "Metallic fresh citrus, black currant and musk. Sharp, clean, and professional.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Metallic Fresh Citrus",
-      topNotes: "Bergamot, Black Currant", middleNotes: "Tea, Rose", bottomNotes: "Musk, Sandalwood"
+      shortDescription: "Metallic Black Currant",
+      topNotes: "Bergamot, Black Currant, Lemon", middleNotes: "Rose, Jasmine, Iris", bottomNotes: "Musk, Ambroxan, Sandalwood"
     },
-    { id: 55, name: "Precioux", brand: "ARMAF", priceIQD: 65000, category: "unisex", image: "Precioux.jpeg", 
-      description: "Precious and elegant. Notes and description coming soon.", 
+    { id: 55, name: "Precieux 1", brand: "ARMAF", priceIQD: 65000, category: "unisex", image: "Precioux.jpeg", 
+      description: "A precious, complex blend of pineapple, caramel and anise. Luxurious extrait.", 
       longevity: "Long Lasting", sillage: "Medium", profile: "Evening_Floral",
-      shortDescription: "Precious Elegant",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Pineapple Caramel Anise",
+      topNotes: "Pineapple, Pear, Caramel", middleNotes: "Anise, White Wood, Oakmoss", bottomNotes: "Vanilla, Leather, Amber"
     },
     { id: 56, name: "Club De Nuit Milestone", brand: "ARMAF", priceIQD: 45000, category: "unisex", image: "Milestone.jpeg", 
-      description: "Salty watermelon and marine notes. Notes and description coming soon.", 
+      description: "Salty watermelon and marine notes reminiscent of gold. Vacation in a bottle.", 
       longevity: "Long Lasting", sillage: "Medium", profile: "Daytime_Aquatic",
       shortDescription: "Salty Watermelon Marine",
-      topNotes: "Sea Notes, Red Fruits", middleNotes: "Violet, White Woods", bottomNotes: "Musk, Ambroxan"
+      topNotes: "Sea Notes, Red Fruits, Bergamot", middleNotes: "Violet, White Woods", bottomNotes: "Musk, Ambroxan"
     },
-    { id: 57, name: "Sao paolo", brand: "ZODIAC", priceIQD: 55000, category: "men", image: "SaoPaolo.jpeg", 
-      description: "Vibrant and energetic. Notes and description coming soon.", 
+    { id: 57, name: "Sao Paulo", brand: "ZODIAC", priceIQD: 55000, category: "men", image: "SaoPaolo.jpeg", 
+      description: "Vibrant neroli and orange blossom. A party in a bottle.", 
       longevity: "Moderate", sillage: "Medium", profile: "Daytime_Woody",
-      shortDescription: "Vibrant Energetic",
-      topNotes: "Coming Soon", middleNotes: "Coming Soon", bottomNotes: "Coming Soon"
+      shortDescription: "Vibrant Neroli Orange",
+      topNotes: "Neroli, Bergamot", middleNotes: "Orange Blossom, Ylang Ylang", bottomNotes: "Floral Musk, Amber"
     },
     { id: 58, name: "Craze", brand: "ARMAF", priceIQD: 35000, category: "men", image: "Craze.jpeg", 
-      description: "Almond and vanilla fougere. Notes and description coming soon.", 
+      description: "Almond and vanilla fougere with metallic freshness. Distinctive and alluring.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
       shortDescription: "Almond Vanilla Fougere",
-      topNotes: "Cumin, Heliotrope", middleNotes: "Bitter Almond, Lavender", bottomNotes: "Vanilla, Amber, Sandalwood"
+      topNotes: "Cumin, Heliotrope, Bergamot", middleNotes: "Bitter Almond, Lavender, Sage", bottomNotes: "Vanilla, Amber, Sandalwood"
     },
     { id: 59, name: "Tres Nuit", brand: "ARMAF", priceIQD: 30000, category: "men", image: "TresNuit.jpeg", 
-      description: "Fresh green violet leaf. Notes and description coming soon.", 
+      description: "Fresh green violet leaf and iris. A classic gentleman's scent.", 
       longevity: "Moderate", sillage: "Medium", profile: "Daytime_Floral",
       shortDescription: "Fresh Green Violet",
       topNotes: "Lemon, Verbena, Iris", middleNotes: "Lavender, Violet, Spicy Notes", bottomNotes: "Ambergris, Sandalwood"
