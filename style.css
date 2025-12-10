@@ -1,10 +1,22 @@
+/* =======================================================
+   BRAND GUIDELINES (Reference for Future Use)
+   -------------------------------------------------------
+   Navy (Primary):   #1b263b  (Currently Active)
+   Gold (Brand):     #cfae70  (Not active - using Original #FFC107)
+   Cream (Brand):    #FDFCF9  (Not active - using Original #F9F9F9)
+   
+   Title Font:       Cinzel
+   Body Font:        Raleway
+   ======================================================= */
+
 :root {
-    --primary-color: #0A192F;
-    --secondary-color: #FFC107; /* GOLD */
+    --primary-color: #1b263b; /* Brand Navy */
+    --secondary-color: #FFC107; /* Original Bright Gold */
     --text-color: #333;
-    --bg-color: #F9F9F9;
+    --bg-color: #F9F9F9; /* Original Off-White/Cream */
     --card-bg-color: #FFFFFF;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --input-bg: #f1f3f5;
 }
 
 * {
@@ -28,6 +40,11 @@ body {
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
+}
+
+/* FIX 2: Prevent iPhone Zoom on inputs */
+input, select, textarea {
+    font-size: 16px !important; 
 }
 
 .container {
@@ -58,7 +75,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer; /* Makes it look clickable */
+    cursor: pointer; 
 }
 .logo-image {
     height: 100%;
@@ -66,21 +83,20 @@ body {
     object-fit: contain;
 }
 
+/* FIX 1: Remove horizontal scroll, center items */
 .navigation {
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
+    padding-bottom: 0;
 }
-.navigation::-webkit-scrollbar { display: none; }
 
 .nav-list {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
-    justify-content: center;
+    gap: 15px; /* Tight gap to fit on small screens */
+    justify-content: center; /* Center Items */
+    align-items: center;
     padding: 0 1rem;
+    flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .nav-link {
@@ -90,6 +106,7 @@ body {
     font-size: 0.9rem;
     padding: 0.5rem 0;
     border-bottom: 2px solid transparent;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 .nav-link.active, .nav-link:hover {
     color: var(--secondary-color);
@@ -152,16 +169,26 @@ body {
     border: none;
     background: transparent;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 16px; 
     outline: none;
     color: var(--primary-color);
+}
+.search-icon-btn { 
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 24px;
+    height: 24px;
 }
 .search-icon { width: 18px; color: #888; }
 
 /* --- PERFUME CATALOG --- */
 .perfume-catalog {
     display: grid;
-    /* MOBILE: 2 Columns */
     grid-template-columns: repeat(2, 1fr); 
     gap: 12px;
     padding: 1.5rem 0;
@@ -176,7 +203,8 @@ body {
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
-    text-align: center; /* 1. CENTER ALIGNMENT FOR PREVIEW CARDS */
+    text-align: center;
+    position: relative; /* For positioning */
 }
 
 .perfume-card:active { transform: scale(0.98); }
@@ -184,8 +212,8 @@ body {
 .perfume-card-img {
     width: 100%;
     aspect-ratio: 1 / 1;
-    object-fit: contain; /* 2. FIXES CROPPED IMAGES ON PHONE */
-    padding: 10px;       /* Adds breathing room for the bottle */
+    object-fit: contain;
+    padding: 15px;      
     background-color: #fff;
     border-bottom: 1px solid #f0f0f0;
 }
@@ -196,7 +224,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center; /* Ensures flex items are centered */
 }
 
 .perfume-card-name {
@@ -208,28 +235,53 @@ body {
     line-height: 1.3;
 }
 
+/* FIX 7: Brand Title Case */
 .perfume-card-brand {
     font-size: 0.7rem;
-    color: var(--subtle-gray);
+    color: #888;
     margin-bottom: 6px;
-    text-transform: uppercase;
+    text-transform: capitalize; 
 }
 
 .perfume-card-notes {
     font-size: 0.7rem;
     color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
+/* FIX 4: Card Footer Design (Price Left, Button Right) */
+.card-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #f5f5f5;
+}
+
 .perfume-card-price {
     font-weight: 700;
-    color: var(--secondary-color); /* GOLD PRICE */
+    color: var(--secondary-color);
     font-size: 0.95rem;
-    margin-top: auto;
+}
+
+.card-order-btn {
+    background-color: var(--primary-color); /* Brand Navy */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.card-order-btn:hover {
+    background-color: #111a2b; /* Slightly darker navy */
 }
 
 @media (min-width: 768px) {
@@ -239,14 +291,14 @@ body {
     .header-right { width: auto; gap: 15px; }
     .perfume-catalog { grid-template-columns: repeat(4, 1fr); gap: 25px; }
     .perfume-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-    .perfume-card-img { padding: 15px; }
+    .perfume-card-img { padding: 20px; }
 }
 
 /* --- MODALS --- */
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8); /* Darker backdrop */
+    background: rgba(0,0,0,0.8);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
@@ -258,17 +310,15 @@ body {
 }
 .modal-backdrop.active { opacity: 1; pointer-events: auto; }
 
-/* 4. MODAL OPTIMIZATION (No Scroll / Compact) */
 .modal {
     background: white;
     width: 90%;
-    max-width: 400px; /* Kept narrow like a phone screen */
-    /* Try to fit height, but allow scroll if screen is TINY */
+    max-width: 400px;
     max-height: 90vh; 
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Hide main scrollbar */
+    overflow: hidden;
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
@@ -291,18 +341,18 @@ body {
     align-items: center;
 }
 
-/* Product Modal Body */
+/* Product Modal Details */
 .product-modal-body {
     padding: 20px;
-    overflow-y: auto; /* Scroll ONLY inside if content is huge */
-    text-align: center; /* CENTER EVERYTHING INSIDE MODAL */
+    overflow-y: auto;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .product-modal-img {
-    height: 140px; /* Small fixed height to prevent scrolling */
+    height: 140px;
     width: auto;
     object-fit: contain;
     margin-bottom: 10px;
@@ -319,10 +369,9 @@ body {
     font-size: 0.8rem;
     color: #777;
     margin-bottom: 10px;
-    text-transform: uppercase;
+    text-transform: capitalize; 
 }
 
-/* Notes Section - Compact */
 .notes-section {
     width: 100%;
     background: #f9f9f9;
@@ -369,7 +418,7 @@ body {
 .product-modal-price {
     font-size: 1.4rem;
     font-weight: 800;
-    color: var(--secondary-color); /* GOLD IN MODAL */
+    color: var(--secondary-color);
     margin-bottom: 10px;
 }
 
@@ -385,16 +434,94 @@ body {
     cursor: pointer;
 }
 
-/* 5. QUIZ RESULT FIXES (Small Cards) */
-.quiz-results-container {
+/* FIX 3: Better Order Modal Design */
+.order-modal {
+    padding: 25px;
+}
+.modal-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-family: 'Cinzel', serif;
+}
+.order-summary-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
     text-align: center;
 }
-.quiz-recommendations {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 10px;
+.order-summary-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
 }
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.quantity-btn {
+    background: white;
+    border: 1px solid #ddd;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quantity-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    min-width: 30px;
+    text-align: center;
+}
+.delivery-note {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.order-form input, .order-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    color: #333;
+    font-family: inherit;
+    transition: border 0.3s;
+}
+.order-form input:focus, .order-form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    background: white;
+}
+.place-order-btn {
+    background: var(--primary-color);
+    color: white;
+    margin-top: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.place-order-btn:hover {
+    background: #111a2b;
+}
+
+/* QUIZ STYLES */
+.quiz-results-container { text-align: center; padding: 15px; }
+.quiz-recommendations { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
 .quiz-recommendation-card {
     border: 1px solid var(--secondary-color);
     border-radius: 8px;
@@ -407,23 +534,38 @@ body {
     cursor: pointer;
 }
 .recommendation-content { display: flex; align-items: center; gap: 10px; width: 100%; }
-
-/* Fixed Image Size for Quiz */
 .recommendation-image {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 4px;
-    background: white;
-    flex-shrink: 0; /* Prevents squishing */
+    width: 50px; height: 50px; object-fit: contain; border-radius: 4px; background: white; flex-shrink: 0;
 }
-
 .recommendation-details h4 { font-size: 0.9rem; margin-bottom: 2px; }
 .recommendation-details p { font-size: 0.75rem; margin: 0; color: #666; }
 .recommendation-price { color: var(--secondary-color) !important; font-weight: bold; margin-top: 2px !important;}
-.quiz-option-btn { width: 100%; padding: 10px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 8px; background: white; }
+.quiz-option-btn { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 8px; background: white; color: var(--primary-color); font-weight: 500; }
 .quiz-option-btn.selected { background: var(--secondary-color); border-color: var(--secondary-color); color: black; }
+.quiz-controls { padding: 10px 15px; }
 
+/* FIX: Quiz Title Smaller */
+.quiz-modal .modal-title {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* FIX: Quiz Previous Button (Navy) */
+#quiz-prev-btn { 
+    background: var(--primary-color); 
+    border: none; 
+    color: white; 
+    transition: background 0.3s;
+}
+#quiz-prev-btn:hover {
+    background: #111a2b;
+}
+
+/* FIX 9: Footer Styles */
 .footer { background: var(--primary-color); color: white; padding: 2rem 0; margin-top: auto; }
 .footer-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.social-links { display: flex; gap: 15px; }
+.social-links { display: flex; gap: 20px; justify-content: center; }
+.social-link { color: white; transition: color 0.3s; }
+.social-link:hover { color: var(--secondary-color); }
+.social-icon { width: 28px; height: 28px; }
