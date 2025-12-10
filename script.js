@@ -57,10 +57,16 @@ function formatCurrency(amount) {
 function initBrandFilter() {
     const brands = [...new Set(initialPerfumes.map(p => p.brand))].sort();
     elements.brandDropdown.innerHTML = '';
+    
     brands.forEach(brand => {
         const label = document.createElement('label');
         label.className = 'brand-checkbox-label';
-        const displayBrand = brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase();
+        
+        // FIX: Strict Title Case for Multiple Words (e.g., "Ahmed Almaghribi")
+        const displayBrand = brand.toLowerCase().split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
         label.innerHTML = `
             <input type="checkbox" value="${brand}" class="brand-checkbox">
             ${displayBrand}
@@ -82,14 +88,12 @@ elements.filterBtn.addEventListener('click', (e) => {
     elements.brandDropdown.classList.toggle('show');
 });
 
-// FIX 6: Generic Click Outside logic
+// Generic Click Outside logic
 document.addEventListener('click', (e) => {
-    // Brand dropdown close
     if (!elements.brandDropdown.contains(e.target) && e.target !== elements.filterBtn) {
         elements.brandDropdown.classList.remove('show');
     }
     
-    // Modal close when clicking backdrop
     if (e.target.classList.contains('modal-backdrop')) {
         closeModal(e.target.id);
         if(e.target.id === 'quiz-modal') resetQuiz();
@@ -137,7 +141,6 @@ function renderCatalog(perfumesToRender) {
         
         let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
 
-        // FIX 4: Layout changes - Price left, Button right
         card.innerHTML = `
             <img src="${imgSrc}" alt="${perfume.name}" class="perfume-card-img" 
                 onerror="this.onerror=null; this.src='fattan.jpeg';" /> 
@@ -149,23 +152,26 @@ function renderCatalog(perfumesToRender) {
                 </div>
                 <div class="card-footer-row">
                     <p class="perfume-card-price">${formatCurrency(perfume.priceIQD)}</p>
-                    <button class="card-order-btn" data-id="${perfume.id}">Order Now</button>
+                    <button class="card-order-btn" data-id="${perfume.id}" aria-label="Order Now">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         `;
         
-        // Add listener to the whole card for Details
         card.addEventListener('click', (e) => {
-            // Prevent opening details if Order button was clicked
-            if(!e.target.classList.contains('card-order-btn')) {
+            if(!e.target.closest('.card-order-btn')) {
                 openProductModal(perfume);
             }
         });
 
-        // Add listener specific to Order Button
         const orderBtn = card.querySelector('.card-order-btn');
         orderBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stop bubble up
+            e.stopPropagation(); 
             openOrderModalDirectly(perfume);
         });
 
@@ -207,7 +213,6 @@ function openProductModal(perfume) {
     openModal('product-modal');
 }
 
-// Helper to open order modal directly
 function openOrderModalDirectly(perfume) {
     selectedPerfume = perfume;
     orderQuantity = 1;
@@ -220,7 +225,6 @@ function openOrderModalDirectly(perfume) {
 const quizQuestions = [
     { question: "Which scent do you prefer?", key: "gender", options: [{ text: "Masculine", value: "men" }, { text: "Feminine", value: "women" }, { text: "Unisex", value: "unisex" }] },
     { question: "Which season?", key: "season", options: [{ text: "Summer", value: "summer" }, { text: "Winter", value: "winter" }, { text: "All Year", value: "all_year" }] },
-    // Updated options: Office -> Formal, Signature -> Signature Scent
     { question: "Occasion?", key: "occasion", options: [{ text: "Formal", value: "office" }, { text: "Party", value: "party" }, { text: "Signature Scent", value: "signature" }] },
     { question: "Scent Family?", key: "family", options: [{ text: "Fresh/Citrus", value: "citrus_fruit" }, { text: "Sweet/Vanilla", value: "sweet" }, { text: "Oud/Spicy", value: "woody_spicy" }] }
 ];
@@ -244,11 +248,9 @@ function startQuiz() {
     openModal('quiz-modal');
 }
 
-// NEW SCORING ALGORITHM
 function getQuizRecommendations() {
     const { gender, season, occasion, family } = quizAnswers;
 
-    // 1. Strict Filter by Gender/Category
     let candidates = initialPerfumes.filter(p => {
         if (gender === 'unisex') return true; 
         if (gender === 'men') return p.category === 'men' || p.category === 'unisex';
@@ -256,13 +258,10 @@ function getQuizRecommendations() {
         return true;
     });
 
-    // 2. Scoring System
     candidates = candidates.map(p => {
         let score = 0;
-        // Combine all text data to search for keywords
         const fullText = (p.description + " " + p.shortDescription + " " + p.topNotes + " " + p.middleNotes + " " + p.bottomNotes + " " + p.profile).toLowerCase();
 
-        // --- SCENT FAMILY SCORING ---
         if (family === 'citrus_fruit') {
             if (fullText.includes('citrus') || fullText.includes('lemon') || fullText.includes('bergamot') || fullText.includes('grapefruit') || p.profile.includes('Aquatic')) score += 10;
             if (p.profile.includes('Daytime')) score += 2;
@@ -274,7 +273,6 @@ function getQuizRecommendations() {
             if (fullText.includes('wood') || fullText.includes('oud') || fullText.includes('spice') || fullText.includes('leather') || fullText.includes('tobacco')) score += 10;
         }
 
-        // --- SEASON SCORING ---
         if (season === 'summer') {
             if (p.profile.includes('Daytime') || p.profile.includes('Aquatic')) score += 5;
             if (fullText.includes('fresh') || fullText.includes('blue') || fullText.includes('ice')) score += 3;
@@ -284,7 +282,6 @@ function getQuizRecommendations() {
             if (fullText.includes('warm') || fullText.includes('intense') || fullText.includes('dark')) score += 3;
         }
 
-        // --- OCCASION SCORING ---
         if (occasion === 'office') {
             if (p.sillage.includes('Moderate')) score += 5;
             if (fullText.includes('fresh') || fullText.includes('clean')) score += 3;
@@ -297,10 +294,7 @@ function getQuizRecommendations() {
         return { ...p, score };
     });
 
-    // 3. Sort by Score (High to Low)
     candidates.sort((a, b) => b.score - a.score);
-
-    // Return top 3
     return candidates.slice(0, 3);
 }
 
@@ -342,7 +336,6 @@ function renderQuizStep() {
             });
         });
         
-        // Listener for the close button inside results
         const closeBtn = elements.quizContent.querySelector('.ghost-btn');
         if(closeBtn) {
             closeBtn.addEventListener('click', () => {
@@ -354,7 +347,6 @@ function renderQuizStep() {
 
     } else {
         const step = quizQuestions[currentQuizStep];
-        // FIX 1: Added type="button" to prevent form submit
         const html = `
             <h3 style="text-align:center; margin-bottom:15px;">${step.question}</h3>
             <div class="quiz-options">
@@ -365,7 +357,7 @@ function renderQuizStep() {
         
         $$('.quiz-option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.preventDefault(); // Extra safety
+                e.preventDefault(); 
                 quizAnswers[step.key] = e.target.dataset.val;
                 $$('.quiz-option-btn').forEach(b => b.classList.remove('selected'));
                 e.target.classList.add('selected');
@@ -401,13 +393,10 @@ elements.navLinks.forEach(link => {
     });
 });
 
-// FIX 5: Search Input Logic (X button)
 function updateSearchIcon() {
     if (elements.searchInput.value.length > 0) {
-        // Change to X icon
         elements.searchIconSvg.innerHTML = `<path d="M18 6L6 18M6 6l12 12"></path>`;
     } else {
-        // Change back to Search icon
         elements.searchIconSvg.innerHTML = `<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path>`;
     }
 }
@@ -420,7 +409,6 @@ elements.searchInput.addEventListener('input', (e) => {
 
 elements.searchIconBtn.addEventListener('click', () => {
     if (elements.searchInput.value.length > 0) {
-        // Clear logic
         elements.searchInput.value = '';
         searchTerm = '';
         updateSearchIcon();
@@ -429,7 +417,6 @@ elements.searchIconBtn.addEventListener('click', () => {
     }
 });
 
-// Generic Close Button Listener
 $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const id = e.target.getAttribute('data-modal');
@@ -438,7 +425,6 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     });
 });
 
-// Modal "Order Now" button
 $('#order-now-btn').addEventListener('click', () => {
     if (!selectedPerfume) return;
     closeModal('product-modal');
@@ -448,7 +434,8 @@ $('#order-now-btn').addEventListener('click', () => {
 $('#minus-qty').addEventListener('click', () => { if(orderQuantity > 1) { orderQuantity--; elements.orderQuantityValue.textContent = orderQuantity; }});
 $('#plus-qty').addEventListener('click', () => { orderQuantity++; elements.orderQuantityValue.textContent = orderQuantity; });
 
-elements.orderForm.addEventListener('submit', async (e) => {
+// FIX: Instant Order Confirmation
+elements.orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = $('#order-name').value;
     const phone = $('#order-phone').value;
@@ -467,12 +454,14 @@ elements.orderForm.addEventListener('submit', async (e) => {
         totalPrice: formatCurrency(total)
     };
     
-    await sendTelegramNotification(orderData);
-    
+    // 1. Show Success immediately (don't wait for network)
     closeModal('order-modal');
-    $('#confirmation-message').innerHTML = `Order #${orderCounter} placed.<br>${orderData.perfumeName} x${orderQuantity}`;
+    $('#confirmation-message').innerHTML = `Order placed for ${orderData.perfumeName}.<br>We will contact you shortly.`;
     openModal('confirmation-modal');
     elements.orderForm.reset();
+
+    // 2. Send Telegram in background
+    sendTelegramNotification(orderData); 
 });
 
 async function sendTelegramNotification(data) {
@@ -483,7 +472,7 @@ async function sendTelegramNotification(data) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
         });
-    } catch(e) { console.error(e); }
+    } catch(e) { console.error('Telegram Error:', e); }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
