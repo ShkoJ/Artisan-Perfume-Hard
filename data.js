@@ -255,18 +255,6 @@ export const initialPerfumes = [
       shortDescription: "Spicy Cinnamon Lavender",
       topNotes: "Cinnamon, Lavender, Mandarin", middleNotes: "Iris, Benzoin, Cypress", bottomNotes: "Vanilla, Tonka, Amber"
     },
-    { id: 22, name: "Jean Lowe Immortal", brand: "Maison Alhambra", priceIQD: 30000, category: "men", image: "immortal.jpeg", 
-      description: "Zesty ginger-grapefruit with ambroxan amber depth. Timeless legendary power.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Zesty Ginger Grapefruit",
-      topNotes: "Ginger, Grapefruit, Bergamot", middleNotes: "Rosemary, Water Notes, Sage", bottomNotes: "Ambroxan, Amber, Labdanum"
-    },
-    { id: 23, name: "Jean Lowe Ombre", brand: "Maison Alhambra", priceIQD: 30000, category: "men", image: "ombre.jpeg", 
-      description: "Deep oud-incense with raspberry rose intrigue. Sophisticated dark elegance.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Deep Oud Incense",
-      topNotes: "Oud, Incense", middleNotes: "Rose, Raspberry, Saffron", bottomNotes: "Amber, Benzoin, Geranium"
-    },
     { id: 28, name: "Opulence Leather", brand: "Maison Alhambra", priceIQD: 40000, category: "men", image: "opulence.jpg", 
       description: "Rich cardamom-leather with jasmine and moss depth. Luxurious masculine statement.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
@@ -352,3 +340,4 @@ export const initialPerfumes = [
       topNotes: "Lemon, Verbena, Iris", middleNotes: "Lavender, Violet, Spicy Notes", bottomNotes: "Ambergris, Sandalwood"
     }
 ];
+
