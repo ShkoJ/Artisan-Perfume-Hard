@@ -22,7 +22,7 @@
 
             <nav class="navigation">
                 <ul class="nav-list">
-                    <li><a href="#" class="nav-link active" data-filter="all">All Fragrances</a></li>
+                    <li><a href="#" class="nav-link active" data-filter="all">All</a></li>
                     <li><a href="#" class="nav-link" data-filter="men">Men</a></li>
                     <li><a href="#" class="nav-link" data-filter="women">Women</a></li>
                     <li><a href="#" class="nav-link" id="help-me-choose-btn">Help Me Choose</a></li>
@@ -45,10 +45,12 @@
                         placeholder="Search..."
                         aria-label="Search perfumes"
                     />
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
+                    <button id="search-icon-btn" class="search-icon-btn">
+                        <svg id="search-icon-svg" class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -143,14 +145,13 @@
                     </select>
                 </div>
                 <button type="submit" class="modal-btn place-order-btn">Place Order</button>
-                <p id="order-error" class="error-message" style="display: none; color: red; margin-top: 10px;">Could not place order. Please check inputs.</p>
+                <p id="order-error" class="error-message" style="display: none; color: red; margin-top: 10px; font-size: 0.9rem; text-align: center;">Could not place order. Please check inputs.</p>
             </form>
         </div>
     </div>
 
     <div id="quiz-modal" class="modal-backdrop">
         <div class="modal quiz-modal">
-            <button class="modal-close-btn" aria-label="Close Quiz" data-modal="quiz-modal">&times;</button>
             <h2 class="modal-title">Find Your Perfect Scent</h2>
             <form id="quiz-form">
                 <div id="quiz-content"></div>
@@ -162,10 +163,10 @@
     </div>
 
     <div id="confirmation-modal" class="modal-backdrop">
-        <div class="modal confirmation-modal" style="text-align: center;">
+        <div class="modal confirmation-modal" style="text-align: center; padding: 30px;">
             <span class="green-tick" style="font-size: 3rem; color: #2ecc71;">✔️</span>
-            <h2 class="modal-title">Order Confirmed!</h2>
-            <p id="confirmation-message">Thank you for your purchase.</p>
+            <h2 class="modal-title" style="margin-top: 15px;">Order Confirmed!</h2>
+            <p id="confirmation-message" style="margin: 10px 0 20px 0; color: #555;">Thank you for your purchase.</p>
             <button class="modal-btn close-confirm-btn" data-modal="confirmation-modal">Browse More</button>
         </div>
     </div>
