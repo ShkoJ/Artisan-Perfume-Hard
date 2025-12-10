@@ -1,14 +1,14 @@
 // =========================================================================
-// --- DATA FILE: POPULARITY SORTED & UPDATED ---
+// --- DATA FILE: CUSTOM PRIORITY SORTED ---
 // =========================================================================
 
 export const initialPerfumes = [
-    // --- TOP SELLERS / HIGH DEMAND ---
-    { id: 31, name: "Teriaq Intense", brand: "Lattafa", priceIQD: 50000, category: "women", image: "Teriaq.jpeg", 
-      description: "Luxurious saffron-plum with warm cinnamon tonka. Intense oriental sophistication.", 
+    // --- TOP 6 PRIORITY (ALL & MEN'S VIEW) ---
+    { id: 29, name: "Supremacy Collector's Edition", brand: "Afnan", priceIQD: 60000, category: "men", image: "supremacy_collector.jpeg", 
+      description: "Exclusive pineapple and white flowers with oakmoss ambergris. Regal collector's masterpiece.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Luxurious Saffron Plum",
-      topNotes: "Saffron, Bergamot", middleNotes: "Plum Liquor, Cinnamon", bottomNotes: "Amber, Tonka Bean, Benzoin"
+      shortDescription: "Exclusive Pineapple Flowers",
+      topNotes: "Pineapple, Bergamot, White Flowers", middleNotes: "Orange Blossom, Birch, Amber", bottomNotes: "Oakmoss, Musk, Ambergris"
     },
     { id: 27, name: "Liquid Brun", brand: "French Avenue", priceIQD: 50000, category: "unisex", image: "liquid.jpeg", 
       description: "Warm cinnamon-cognac with buttery praline woods. Decadent French indulgence.", 
@@ -16,17 +16,76 @@ export const initialPerfumes = [
       shortDescription: "Warm Cinnamon Cognac",
       topNotes: "Cinnamon, Orange Blossom, Cardamom", middleNotes: "Bourbon Vanilla, Elemi Resin", bottomNotes: "Praline, Ambroxan, Guaiac Wood"
     },
+    { id: 33, name: "Turathi Blue", brand: "Afnan", priceIQD: 45000, category: "men", image: "Turathi.jpeg", 
+      description: "Bright citrus freshness with amber-woody musk. Coastal elegant versatility.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
+      shortDescription: "Bright Citrus Freshness",
+      topNotes: "Citrus", middleNotes: "Amber, Woody Notes", bottomNotes: "Musk, Spices, Patchouli"
+    },
+    { id: 38, name: "Badee Al Oud Oud For Glory", brand: "Lattafa", priceIQD: 35000, category: "men", image: "BadeeOudForGlory.jpeg", 
+      description: "Dark, majestic oud with sweet saffron and patchouli. A powerful statement scent.", 
+      longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
+      shortDescription: "Majestic Oud Saffron",
+      topNotes: "Saffron, Nutmeg, Lavender", middleNotes: "Agarwood (Oud), Patchouli", bottomNotes: "Agarwood (Oud), Patchouli, Musk"
+    },
+    { id: 36, name: "Asad", brand: "Lattafa", priceIQD: 30000, category: "men", image: "Asad.jpeg", 
+      description: "A signature masculine fragrance blending spicy black pepper with tobacco and warm vanilla woods.", 
+      longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
+      shortDescription: "Spicy Black Pepper",
+      topNotes: "Black Pepper, Tobacco, Pineapple", middleNotes: "Patchouli, Coffee, Iris", bottomNotes: "Vanilla, Amber, Dry Wood, Benzoin"
+    },
+    { id: 43, name: "Vintage Radio", brand: "Lattafa", priceIQD: 50000, category: "men", image: "VintageRadio.jpeg", 
+      description: "A unique, calming blend of plum and palo santo wood. Nostalgic yet modern.", 
+      longevity: "Long Lasting", sillage: "Medium", profile: "Anytime_Woody",
+      shortDescription: "Plum Palo Santo",
+      topNotes: "Lavender, Sage, Bergamot", middleNotes: "Plum, Palo Santo", bottomNotes: "Sandalwood, Oud"
+    },
+
+    // --- PRIORITY WOMEN'S (Placed here to appear early when filtering for Women) ---
+    { id: 31, name: "Teriaq Intense", brand: "Lattafa", priceIQD: 50000, category: "women", image: "Teriaq.jpeg", 
+      description: "Luxurious saffron-plum with warm cinnamon tonka. Intense oriental sophistication.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
+      shortDescription: "Luxurious Saffron Plum",
+      topNotes: "Saffron, Bergamot", middleNotes: "Plum Liquor, Cinnamon", bottomNotes: "Amber, Tonka Bean, Benzoin"
+    },
+    { id: 11, name: "Eclair", brand: "Lattafa", priceIQD: 40000, category: "women", image: "eclaire.jpeg", 
+      description: "Decadent caramel and milk with honeyed florals. Irresistible gourmand luxury.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
+      shortDescription: "Decadent Caramel Milk",
+      topNotes: "Caramel, Milk, Sugar", middleNotes: "Honey, White Flowers", bottomNotes: "Vanilla, Praline, Musk"
+    },
+    { id: 20, name: "Her Confession", brand: "Lattafa", priceIQD: 50000, category: "women", image: "her_confession.jpeg", 
+      description: "Mystical cinnamon-tuberose with warm vanilla tonka. Romantic feminine expression.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
+      shortDescription: "Mystical Cinnamon Tuberose",
+      topNotes: "Mystikal, Cinnamon", middleNotes: "Tuberose, Jasmine, Incense", bottomNotes: "Vanilla Tonka, Musk"
+    },
+    // Note: Liquid Brun is already at #2 above, so it will show up here in Women's filter automatically.
+    { id: 7, name: "Badee Al Oud Honor And Glory", brand: "Lattafa", priceIQD: 35000, category: "unisex", image: "badee_honor.jpeg", 
+      description: "Pineapple and creme brulee with spicy cinnamon warmth. Regal and golden sophistication.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
+      shortDescription: "Pineapple Creme Brulee",
+      topNotes: "Pineapple, Creme Brulee", middleNotes: "Cinnamon, Turmeric, Black Pepper", bottomNotes: "Vanilla, Sandalwood Cashmeran"
+    },
+    { id: 41, name: "Mayar", brand: "Lattafa", priceIQD: 35000, category: "women", image: "Mayar.jpeg", 
+      description: "A bright, joyful bouquet of lychee and white flowers. Feminine and uplifting.", 
+      longevity: "Moderate", sillage: "Medium", profile: "Daytime_Floral",
+      shortDescription: "Bright Lychee Floral",
+      topNotes: "Lychee, Raspberry, Violet Leaf", middleNotes: "White Rose, Peony, Jasmine", bottomNotes: "Musk, Vanilla"
+    },
+
+    // --- REST OF CATALOG ---
+    { id: 10, name: "Delilah Pour Femme", brand: "Maison Alhambra", priceIQD: 25000, category: "women", image: "delilah.jpeg", 
+      description: "Romantic Turkish rose and peony with creamy vanilla musk. Feminine grace perfected.", 
+      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
+      shortDescription: "Turkish Rose Peony",
+      topNotes: "Rhubarb, Litchi, Bergamot", middleNotes: "Turkish Rose, Peony, Lily", bottomNotes: "White Musk, Cashmeran, Vanilla"
+    },
     { id: 30, name: "Supremacy Not Only Intense", brand: "Afnan", priceIQD: 60000, category: "men", image: "not_only.jpeg", 
       description: "Bold black currant and apple with intense saffron musk. Commanding modern power.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
       shortDescription: "Bold Black Currant",
       topNotes: "Black Currant, Bergamot, Apple", middleNotes: "Oakmoss, Patchouli, Lavender", bottomNotes: "Ambergris, Musk, Saffron"
-    },
-    { id: 29, name: "Supremacy Collector's Edition", brand: "Afnan", priceIQD: 60000, category: "men", image: "supremacy_collector.jpeg", 
-      description: "Exclusive pineapple and white flowers with oakmoss ambergris. Regal collector's masterpiece.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
-      shortDescription: "Exclusive Pineapple Flowers",
-      topNotes: "Pineapple, Bergamot, White Flowers", middleNotes: "Orange Blossom, Birch, Amber", bottomNotes: "Oakmoss, Musk, Ambergris"
     },
     { id: 24, name: "Khamrah", brand: "Lattafa", priceIQD: 40000, category: "unisex", image: "Khamrah.jpeg", 
       description: "Spiced dates and praline with creamy tuberose. Sensual oriental masterpiece.", 
@@ -58,12 +117,6 @@ export const initialPerfumes = [
       shortDescription: "Apple Cinnamon Warmth",
       topNotes: "Apple, Cinnamon, Lavender", middleNotes: "Orange Blossom, Lily-of-the-Valley", bottomNotes: "Vanilla, Tonka Bean, Amber"
     },
-    { id: 36, name: "Asad", brand: "Lattafa", priceIQD: 30000, category: "men", image: "Asad.jpeg", 
-      description: "A signature masculine fragrance blending spicy black pepper with tobacco and warm vanilla woods.", 
-      longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Spicy Black Pepper",
-      topNotes: "Black Pepper, Tobacco, Pineapple", middleNotes: "Patchouli, Coffee, Iris", bottomNotes: "Vanilla, Amber, Dry Wood, Benzoin"
-    },
     { id: 37, name: "Asad Elixir", brand: "Lattafa", priceIQD: 30000, category: "men", image: "AsadElixir.jpeg", 
       description: "An intense, spicy evolution of the original with saffron and leather nuances.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
@@ -88,7 +141,6 @@ export const initialPerfumes = [
       shortDescription: "Sweet Cacao Berries",
       topNotes: "Red Berries, Mandarin", middleNotes: "Vanilla, Cacao, Rose", bottomNotes: "Sugar, Tonka Bean, Musk"
     },
-    // --- REST OF THE CATALOG ---
     { id: 52, name: "Club De Nuit Iconic", brand: "Armaf", priceIQD: 50000, category: "men", image: "Iconic.jpeg", 
       description: "A blue masterpiece. Zesty grapefruit, mint and ginger with incense depth.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
@@ -100,24 +152,6 @@ export const initialPerfumes = [
       longevity: "Very Long Lasting", sillage: "Strong", profile: "Daytime_Woody",
       shortDescription: "Intense Citrus Smoky",
       topNotes: "Pineapple, Bergamot, Lemon", middleNotes: "Birch, Rose, Jasmine", bottomNotes: "Vanilla, Musk, Ambergris"
-    },
-    { id: 7, name: "Badee Al Oud Honor And Glory", brand: "Lattafa", priceIQD: 35000, category: "unisex", image: "badee_honor.jpeg", 
-      description: "Pineapple and creme brulee with spicy cinnamon warmth. Regal and golden sophistication.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Pineapple Creme Brulee",
-      topNotes: "Pineapple, Creme Brulee", middleNotes: "Cinnamon, Turmeric, Black Pepper", bottomNotes: "Vanilla, Sandalwood Cashmeran"
-    },
-    { id: 11, name: "Eclair", brand: "Lattafa", priceIQD: 40000, category: "women", image: "eclaire.jpeg", 
-      description: "Decadent caramel and milk with honeyed florals. Irresistible gourmand luxury.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Floral",
-      shortDescription: "Decadent Caramel Milk",
-      topNotes: "Caramel, Milk, Sugar", middleNotes: "Honey, White Flowers", bottomNotes: "Vanilla, Praline, Musk"
-    },
-    { id: 38, name: "Badee Al Oud Oud For Glory", brand: "Lattafa", priceIQD: 35000, category: "unisex", image: "BadeeOudForGlory.jpeg", 
-      description: "Dark, majestic oud with sweet saffron and patchouli. A powerful statement scent.", 
-      longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
-      shortDescription: "Majestic Oud Saffron",
-      topNotes: "Saffron, Nutmeg, Lavender", middleNotes: "Agarwood (Oud), Patchouli", bottomNotes: "Agarwood (Oud), Patchouli, Musk"
     },
     { id: 15, name: "Fattan", brand: "Al Rasasi", priceIQD: 40000, category: "men", image: "fattan.jpeg", 
       description: "Zesty grapefruit and pink pepper with earthy vetiver depth. Modern timeless masculinity.", 
@@ -131,25 +165,13 @@ export const initialPerfumes = [
       shortDescription: "Electrifying Ginger Citrus",
       topNotes: "Pear, Bergamot, Mandarin, Ginger", middleNotes: "Orange Blossom, Georgywood", bottomNotes: "Musk, Ambrofix, Akigalawood"
     },
-    { id: 33, name: "Turathi Blue", brand: "Afnan", priceIQD: 45000, category: "men", image: "Turathi.jpeg", 
-      description: "Bright citrus freshness with amber-woody musk. Coastal elegant versatility.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Aquatic",
-      shortDescription: "Bright Citrus Freshness",
-      topNotes: "Citrus", middleNotes: "Amber, Woody Notes", bottomNotes: "Musk, Spices, Patchouli"
-    },
-    { id: 43, name: "Vintage Radio", brand: "Lattafa", priceIQD: 50000, category: "unisex", image: "VintageRadio.jpeg", 
-      description: "A unique, calming blend of plum and palo santo wood. Nostalgic yet modern.", 
-      longevity: "Long Lasting", sillage: "Medium", profile: "Anytime_Woody",
-      shortDescription: "Plum Palo Santo",
-      topNotes: "Lavender, Sage, Bergamot", middleNotes: "Plum, Palo Santo", bottomNotes: "Sandalwood, Oud"
-    },
-    { id: 44, name: "KAAF", brand: "Ahmed Almaghribi", priceIQD: 30000, category: "unisex", image: "Kaaf.jpeg", 
+    { id: 44, name: "KAAF", brand: "Ahmed Almaghribi", priceIQD: 30000, category: "men", image: "Kaaf.jpeg", 
       description: "A refreshing aquatic fragrance with red fruits and smooth sandalwood.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Aquatic",
       shortDescription: "Fresh Red Fruits Aquatic",
       topNotes: "Red Fruits, Watermelon, Lavender", middleNotes: "Sandalwood, Ambroxan", bottomNotes: "Lotus, Jasmine, Sea Accord"
     },
-    { id: 55, name: "Precieux 1", brand: "Armaf", priceIQD: 65000, category: "unisex", image: "Precioux.jpeg", 
+    { id: 55, name: "Precieux 1", brand: "Armaf", priceIQD: 65000, category: "men", image: "Precioux.jpeg", 
       description: "A precious, complex blend of pineapple, caramel and anise. Luxurious extrait.", 
       longevity: "Long Lasting", sillage: "Medium", profile: "Evening_Floral",
       shortDescription: "Pineapple Caramel Anise",
@@ -191,12 +213,6 @@ export const initialPerfumes = [
       shortDescription: "Spicy Nutmeg Apple",
       topNotes: "Nutmeg, Green Apple", middleNotes: "Tonka Bean, Rose", bottomNotes: "Patchouli, Vanilla"
     },
-    { id: 10, name: "Delilah Pour Femme", brand: "Maison Alhambra", priceIQD: 25000, category: "women", image: "delilah.jpeg", 
-      description: "Romantic Turkish rose and peony with creamy vanilla musk. Feminine grace perfected.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Turkish Rose Peony",
-      topNotes: "Rhubarb, Litchi, Bergamot", middleNotes: "Turkish Rose, Peony, Lily", bottomNotes: "White Musk, Cashmeran, Vanilla"
-    },
     { id: 12, name: "Emeer", brand: "Lattafa", priceIQD: 40000, category: "men", image: "emeer.jpeg", 
       description: "Regal lemon and white tea with ambergris sophistication. Commanding oriental presence.", 
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Evening_Woody",
@@ -232,12 +248,6 @@ export const initialPerfumes = [
       longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Anytime_Woody",
       shortDescription: "Warm Apple Cinnamon",
       topNotes: "Apple, Bergamot", middleNotes: "Cinnamon, Woodsy Notes", bottomNotes: "Musk, Vanilla"
-    },
-    { id: 20, name: "Her Confession", brand: "Lattafa", priceIQD: 50000, category: "women", image: "her_confession.jpeg", 
-      description: "Mystical cinnamon-tuberose with warm vanilla tonka. Romantic feminine expression.", 
-      longevity: "Long Lasting (8-10 hours)", sillage: "Medium to Strong", profile: "Daytime_Floral",
-      shortDescription: "Mystical Cinnamon Tuberose",
-      topNotes: "Mystikal, Cinnamon", middleNotes: "Tuberose, Jasmine, Incense", bottomNotes: "Vanilla Tonka, Musk"
     },
     { id: 21, name: "His Confession", brand: "Lattafa", priceIQD: 50000, category: "men", image: "his_confession.jpeg", 
       description: "Spicy cinnamon-lavender with smooth amber tonka. Bold intimate masculinity.", 
@@ -275,12 +285,6 @@ export const initialPerfumes = [
       shortDescription: "Delicate Violet Rose",
       topNotes: "Violet Leaf, Coriander, Bergamot", middleNotes: "Rose, Black Pepper, Lily-of-the-Valley", bottomNotes: "Patchouli, Bourbon Vanilla, Ambergris"
     },
-    { id: 41, name: "Mayar", brand: "Lattafa", priceIQD: 35000, category: "women", image: "Mayar.jpeg", 
-      description: "A bright, joyful bouquet of lychee and white flowers. Feminine and uplifting.", 
-      longevity: "Moderate", sillage: "Medium", profile: "Daytime_Floral",
-      shortDescription: "Bright Lychee Floral",
-      topNotes: "Lychee, Raspberry, Violet Leaf", middleNotes: "White Rose, Peony, Jasmine", bottomNotes: "Musk, Vanilla"
-    },
     { id: 45, name: "L'Aventure", brand: "Al Haramain", priceIQD: 45000, category: "men", image: "Laventure.jpeg", 
       description: "A legendary chypre fruity fragrance. Crisp lemon and woody depth.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Daytime_Woody",
@@ -311,7 +315,7 @@ export const initialPerfumes = [
       shortDescription: "Warm Iris Vanilla",
       topNotes: "Vanilla, Amber", middleNotes: "Iris, Oriental Spices", bottomNotes: "Jasmine, Leather"
     },
-    { id: 51, name: "Private Key To My Success", brand: "Armaf", priceIQD: 70000, category: "unisex", image: "PrivateKey.jpeg", 
+    { id: 51, name: "Private Key To My Success", brand: "Armaf", priceIQD: 70000, category: "men", image: "PrivateKey.jpeg", 
       description: "Exclusive and rich blend of ginger, spices and akigalawood. The scent of success.", 
       longevity: "Long Lasting", sillage: "Strong", profile: "Evening_Woody",
       shortDescription: "Ginger Spices Wood",
