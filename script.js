@@ -7,12 +7,12 @@ let currentQuizStep = 0;
 let quizAnswers = {};
 
 // --- GLOBAL FILTER STATE ---
-let activeCategory = 'all'; 
-let selectedBrands = [];    
+let activeCategory = 'all';
+let selectedBrands = [];
 let searchTerm = '';
 
 // --- CONFIG ---
-const BOT_TOKEN = '8276122717:AAG4UVrd_BgLVZDtS7UP7_jXBvSiAoHYiBk'; 
+const BOT_TOKEN = '8276122717:AAG4UVrd_BgLVZDtS7UP7_jXBvSiAoHYiBk';
 const CHAT_ID = '-1002969971930';
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 let orderCounter = parseInt(localStorage.getItem('artisanOrderCounter') || 0);
@@ -32,11 +32,73 @@ const elements = {
     orderForm: $('#order-form'),
     orderError: $('#order-error'),
     quizContent: $('#quiz-content'),
-    quizPrevBtn: $('#quiz-prev-btn'), 
+    quizPrevBtn: $('#quiz-prev-btn'),
     filterBtn: $('#filter-btn'),
     brandDropdown: $('#brand-dropdown'),
-    logoContainer: $('.logo-container')
+    logoContainer: $('.logo-container'),
+    tilesContainer: $('#tiles-container')
 };
+
+// --- INITIALIZE AOS (Animate On Scroll) ---
+// Note: Initialized in DOMContentLoaded but function defined here
+function initAOS() {
+    AOS.init({
+        duration: 800, // Animation duration
+        once: true, // Whether animation should happen only once - while scrolling down
+        offset: 50, // Offset (in px) from the original trigger point
+        easing: 'ease-out-cubic',
+    });
+}
+
+// --- TILE BACKGROUND SYSTEM (ANIMATED) ---
+let columns = 0, rows = 0;
+
+function createGrid() {
+    elements.tilesContainer.innerHTML = "";
+    const size = document.body.clientWidth > 800 ? 50 : 40; // Tile size px
+
+    columns = Math.floor(document.body.clientWidth / size);
+    rows = Math.floor(document.body.clientHeight / size);
+
+    elements.tilesContainer.style.setProperty('--columns', columns);
+    elements.tilesContainer.style.setProperty('--rows', rows);
+    elements.tilesContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    elements.tilesContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+    const totalTiles = columns * rows;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < totalTiles; i++) {
+        const tile = document.createElement('div');
+        tile.classList.add('tile');
+        // Add click listener for ripple effect
+        tile.addEventListener('click', (e) => {
+            anime({
+                targets: '.tile',
+                backgroundColor: [
+                    { value: 'rgba(27, 38, 59, 0.1)', easing: 'easeOutSine', duration: 200 },
+                    { value: 'rgba(0, 0, 0, 0)', easing: 'easeInOutQuad', duration: 500 }
+                ],
+                delay: anime.stagger(50, { grid: [columns, rows], from: i })
+            });
+        });
+        fragment.appendChild(tile);
+    }
+    elements.tilesContainer.appendChild(fragment);
+
+    // Initial Ripple Animation
+    anime({
+        targets: '.tile',
+        opacity: [0, 1],
+        delay: anime.stagger(20, { grid: [columns, rows], from: 'center' })
+    });
+}
+
+// Re-calculate grid on resize
+window.addEventListener('resize', () => {
+    createGrid();
+});
+
 
 // --- LOGO CLICK TO TOP ---
 elements.logoContainer.addEventListener('click', () => {
@@ -45,7 +107,7 @@ elements.logoContainer.addEventListener('click', () => {
 
 function validatePhoneNumber(phone) {
     const cleaned = phone.replace(/\s/g, '');
-    return cleaned.length >= 10; 
+    return cleaned.length >= 10;
 }
 
 function formatCurrency(amount) {
@@ -57,11 +119,11 @@ function formatCurrency(amount) {
 function initBrandFilter() {
     const brands = [...new Set(initialPerfumes.map(p => p.brand))].sort();
     elements.brandDropdown.innerHTML = '';
-    
+
     brands.forEach(brand => {
         const label = document.createElement('label');
         label.className = 'brand-checkbox-label';
-        
+
         // FIX: Strict Title Case for Multiple Words (e.g., "Ahmed Almaghribi")
         const displayBrand = brand.toLowerCase().split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -85,18 +147,46 @@ function initBrandFilter() {
 
 elements.filterBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    elements.brandDropdown.classList.toggle('show');
+    const dropdown = elements.brandDropdown;
+    if (dropdown.classList.contains('show')) {
+        // Fade out
+        anime({
+            targets: dropdown,
+            opacity: 0,
+            duration: 200,
+            easing: 'easeInQuad',
+            complete: () => dropdown.classList.remove('show')
+        });
+    } else {
+        dropdown.classList.add('show');
+        // Fade in
+        anime({
+            targets: dropdown,
+            opacity: [0, 1],
+            translateY: [-10, 0],
+            duration: 300,
+            easing: 'easeOutQuad'
+        });
+    }
 });
 
 // Generic Click Outside logic
 document.addEventListener('click', (e) => {
     if (!elements.brandDropdown.contains(e.target) && e.target !== elements.filterBtn) {
-        elements.brandDropdown.classList.remove('show');
+        if (elements.brandDropdown.classList.contains('show')) {
+            anime({
+                targets: elements.brandDropdown,
+                opacity: 0,
+                duration: 200,
+                easing: 'easeInQuad',
+                complete: () => elements.brandDropdown.classList.remove('show')
+            });
+        }
     }
-    
+
     if (e.target.classList.contains('modal-backdrop')) {
         closeModal(e.target.id);
-        if(e.target.id === 'quiz-modal') resetQuiz();
+        if (e.target.id === 'quiz-modal') resetQuiz();
     }
 });
 
@@ -108,7 +198,7 @@ function applyAllFilters() {
         filtered = filtered.filter(p => p.category === 'men' || p.category === 'unisex');
     } else if (activeCategory === 'women') {
         filtered = filtered.filter(p => p.category === 'women' || p.category === 'unisex');
-    } 
+    }
 
     if (selectedBrands.length > 0) {
         filtered = filtered.filter(p => selectedBrands.includes(p.brand));
@@ -127,7 +217,7 @@ function applyAllFilters() {
     renderCatalog(currentPerfumes);
 }
 
-// --- RENDER CATALOG ---
+// --- RENDER CATALOG (Updated for AOS) ---
 function renderCatalog(perfumesToRender) {
     elements.catalog.innerHTML = '';
     if (perfumesToRender.length === 0) {
@@ -135,10 +225,18 @@ function renderCatalog(perfumesToRender) {
         return;
     }
 
-    perfumesToRender.forEach(perfume => {
+    perfumesToRender.forEach((perfume, index) => {
         const card = document.createElement('div');
         card.classList.add('perfume-card');
-        
+
+        // AOS Attributes
+        card.setAttribute('data-aos', 'fade-up');
+        // Stagger effect: (index % column_count) roughly. 
+        // We'll just stagger a bit based on index to look cool.
+        // Cap delay at 400ms so the user doesn't wait too long for lower items.
+        const delay = (index % 10) * 50;
+        card.setAttribute('data-aos-delay', delay);
+
         let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
 
         card.innerHTML = `
@@ -162,50 +260,96 @@ function renderCatalog(perfumesToRender) {
                 </div>
             </div>
         `;
-        
+
         card.addEventListener('click', (e) => {
-            if(!e.target.closest('.card-order-btn')) {
+            if (!e.target.closest('.card-order-btn')) {
                 openProductModal(perfume);
             }
         });
 
         const orderBtn = card.querySelector('.card-order-btn');
         orderBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); 
+            e.stopPropagation();
             openOrderModalDirectly(perfume);
         });
 
         elements.catalog.appendChild(card);
     });
+
+    // REFRESH AOS whenever catalog is re-rendered (filtered)
+    setTimeout(() => {
+        AOS.refresh();
+    }, 100);
 }
 
-// --- MODAL FUNCTIONS ---
+// --- MODAL FUNCTIONS (Smoother with Anime.js) ---
 function openModal(modalId) {
     const backdrop = document.getElementById(modalId);
+    const modalBox = backdrop.querySelector('.modal');
+
     if (!backdrop) return;
+
     backdrop.classList.add('active');
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
+
+    // Animate Backdrop
+    anime({
+        targets: backdrop,
+        opacity: [0, 1],
+        duration: 300,
+        easing: 'linear'
+    });
+
+
+
+    // Animate Modal Pop-up - INSTANT/FAST FADE (User Requested Removal of Laggy Animation)
+    anime({
+        targets: modalBox,
+        opacity: [0, 1],
+        duration: 200, // Very fast fade
+        easing: 'linear'
+    });
 }
 
 function closeModal(modalId) {
     const backdrop = document.getElementById(modalId);
+    const modalBox = backdrop.querySelector('.modal');
     if (!backdrop) return;
-    backdrop.classList.remove('active');
-    document.body.style.overflow = ''; 
+
+    // Reverse Animations
+    anime({
+        targets: modalBox,
+        opacity: 0,
+        scale: 0.8,
+        translateY: 20,
+        duration: 300,
+        easing: 'easeInQuad'
+    });
+
+    anime({
+        targets: backdrop,
+        opacity: 0,
+        duration: 300,
+        easing: 'linear',
+        complete: () => {
+            backdrop.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 }
 
 function openProductModal(perfume) {
     selectedPerfume = perfume;
     let imgSrc = perfume.image && perfume.image.trim() !== "" ? perfume.image : "fattan.jpeg";
-    
-    $('#modal-image').src = imgSrc; 
+
+    $('#modal-image').src = imgSrc;
     $('#modal-name').textContent = perfume.name;
     $('#modal-brand').textContent = perfume.brand;
-    
+
     $('#modal-top-notes').textContent = perfume.topNotes;
     $('#modal-middle-notes').textContent = perfume.middleNotes;
     $('#modal-bottom-notes').textContent = perfume.bottomNotes;
-    
+
     $('#modal-description').textContent = perfume.description;
     $('#modal-longevity').textContent = perfume.longevity;
     $('#modal-sillage').textContent = perfume.sillage;
@@ -235,7 +379,7 @@ function resetQuiz() {
     elements.quizContent.innerHTML = '';
     elements.quizPrevBtn.style.display = 'none';
     const helpMeChooseLink = $('#help-me-choose-btn');
-    if(helpMeChooseLink.classList.contains('active')) {
+    if (helpMeChooseLink.classList.contains('active')) {
         helpMeChooseLink.classList.remove('active');
         elements.navLinks[0].click();
     }
@@ -252,7 +396,7 @@ function getQuizRecommendations() {
     const { gender, season, occasion, family } = quizAnswers;
 
     let candidates = initialPerfumes.filter(p => {
-        if (gender === 'unisex') return true; 
+        if (gender === 'unisex') return true;
         if (gender === 'men') return p.category === 'men' || p.category === 'unisex';
         if (gender === 'women') return p.category === 'women' || p.category === 'unisex';
         return true;
@@ -290,7 +434,7 @@ function getQuizRecommendations() {
             if (p.sillage.includes('Strong')) score += 5;
             if (fullText.includes('club') || fullText.includes('party') || fullText.includes('sexy')) score += 3;
         }
-        
+
         return { ...p, score };
     });
 
@@ -300,7 +444,7 @@ function getQuizRecommendations() {
 
 function renderQuizStep() {
     elements.quizContent.innerHTML = '';
-    
+
     if (currentQuizStep >= quizQuestions.length) {
         const recommendations = getQuizRecommendations();
         elements.quizContent.innerHTML = `
@@ -323,27 +467,35 @@ function renderQuizStep() {
                 <button type="button" class="modal-btn ghost-btn" style="margin-top:15px;" data-modal="quiz-modal">Close</button>
             </div>
         `;
-        
+
         $$('.quiz-recommendation-card').forEach(card => {
             card.addEventListener('click', () => {
                 const pid = parseInt(card.dataset.id);
                 const p = initialPerfumes.find(x => x.id === pid);
-                if(p) {
+                if (p) {
                     closeModal('quiz-modal');
                     resetQuiz();
                     openProductModal(p);
                 }
             });
         });
-        
+
         const closeBtn = elements.quizContent.querySelector('.ghost-btn');
-        if(closeBtn) {
+        if (closeBtn) {
             closeBtn.addEventListener('click', () => {
                 closeModal('quiz-modal');
                 resetQuiz();
             });
         }
         elements.quizPrevBtn.style.display = 'none';
+
+        // Animate Results
+        anime({
+            targets: '.quiz-recommendation-card',
+            translateX: [20, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(100)
+        });
 
     } else {
         const step = quizQuestions[currentQuizStep];
@@ -354,10 +506,18 @@ function renderQuizStep() {
             </div>
         `;
         elements.quizContent.innerHTML = html;
-        
+
+        // Animate Options In
+        anime({
+            targets: '.quiz-option-btn',
+            translateY: [10, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(50)
+        });
+
         $$('.quiz-option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.preventDefault(); 
+                e.preventDefault();
                 quizAnswers[step.key] = e.target.dataset.val;
                 $$('.quiz-option-btn').forEach(b => b.classList.remove('selected'));
                 e.target.classList.add('selected');
@@ -372,7 +532,7 @@ function renderQuizStep() {
 }
 
 elements.quizPrevBtn.addEventListener('click', () => {
-    if(currentQuizStep > 0) {
+    if (currentQuizStep > 0) {
         currentQuizStep--;
         renderQuizStep();
     }
@@ -382,7 +542,7 @@ elements.quizPrevBtn.addEventListener('click', () => {
 elements.navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        if(link.id === 'help-me-choose-btn') {
+        if (link.id === 'help-me-choose-btn') {
             startQuiz();
             return;
         }
@@ -421,7 +581,7 @@ $$('.modal-close-btn, .close-confirm-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const id = e.target.getAttribute('data-modal');
         closeModal(id);
-        if(id === 'quiz-modal') resetQuiz();
+        if (id === 'quiz-modal') resetQuiz();
     });
 });
 
@@ -431,7 +591,7 @@ $('#order-now-btn').addEventListener('click', () => {
     openOrderModalDirectly(selectedPerfume);
 });
 
-$('#minus-qty').addEventListener('click', () => { if(orderQuantity > 1) { orderQuantity--; elements.orderQuantityValue.textContent = orderQuantity; }});
+$('#minus-qty').addEventListener('click', () => { if (orderQuantity > 1) { orderQuantity--; elements.orderQuantityValue.textContent = orderQuantity; } });
 $('#plus-qty').addEventListener('click', () => { orderQuantity++; elements.orderQuantityValue.textContent = orderQuantity; });
 
 // FIX: Instant Order Confirmation
@@ -439,11 +599,11 @@ elements.orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = $('#order-name').value;
     const phone = $('#order-phone').value;
-    if(!validatePhoneNumber(phone)) { elements.orderError.style.display='block'; elements.orderError.textContent = 'Invalid Phone'; return; }
-    
+    if (!validatePhoneNumber(phone)) { elements.orderError.style.display = 'block'; elements.orderError.textContent = 'Invalid Phone'; return; }
+
     orderCounter++;
     localStorage.setItem('artisanOrderCounter', orderCounter);
-    
+
     const total = selectedPerfume.priceIQD * orderQuantity;
     const orderData = {
         orderId: orderCounter,
@@ -453,7 +613,7 @@ elements.orderForm.addEventListener('submit', (e) => {
         quantity: orderQuantity,
         totalPrice: formatCurrency(total)
     };
-    
+
     // 1. Show Success immediately (don't wait for network)
     closeModal('order-modal');
     $('#confirmation-message').innerHTML = `Order placed for ${orderData.perfumeName}.<br>We will contact you shortly.`;
@@ -461,7 +621,7 @@ elements.orderForm.addEventListener('submit', (e) => {
     elements.orderForm.reset();
 
     // 2. Send Telegram in background
-    sendTelegramNotification(orderData); 
+    sendTelegramNotification(orderData);
 });
 
 async function sendTelegramNotification(data) {
@@ -469,13 +629,15 @@ async function sendTelegramNotification(data) {
     try {
         await fetch(TELEGRAM_API_URL, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
         });
-    } catch(e) { console.error('Telegram Error:', e); }
+    } catch (e) { console.error('Telegram Error:', e); }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    createGrid(); // Initial Tile Grid
+    initAOS(); // Initialize Scroll Animation
     initBrandFilter();
     applyAllFilters();
 });
